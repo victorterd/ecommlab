@@ -313,7 +313,6 @@
           <input type="hidden" name="_subject" value="Mesaj nou de pe site-ul Ecomlab">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_next" value="">
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">
 
           <div class="field">
@@ -336,6 +335,10 @@
             <span data-submit-label>Trimite</span>
           </button>
           <p class="contact__status" data-form-status role="status" aria-live="polite"></p>
+          <div class="contact__fallback" data-form-fallback hidden>
+            <a data-fallback-mail href="mailto:office.ecomlab@gmail.com">Trimite mesajul din aplicația de email</a>
+            <a data-fallback-wa href="https://wa.me/40728541017" target="_blank" rel="noopener">Trimite-l pe WhatsApp</a>
+          </div>
         </form>
       </div>
     </section>

@@ -117,12 +117,20 @@
     }
   }
 
-  /* ── Formular contact → FormSubmit (office.ecomlab@gmail.com) ─ */
+  /* ── Formular contact → email office.ecomlab@gmail.com ───────
+     Provider principal: Web3Forms (dacă e setată cheia de mai jos),
+     altfel FormSubmit. Cheia se obține gratuit pe https://web3forms.com
+     cu adresa office.ecomlab@gmail.com. */
+  const WEB3FORMS_ACCESS_KEY = "";
+
   const form = document.getElementById("contact-form");
   if (form) {
     const status = form.querySelector("[data-form-status]");
     const submitBtn = form.querySelector(".contact__submit");
     const submitLabel = form.querySelector("[data-submit-label]");
+    const fallback = form.querySelector("[data-form-fallback]");
+    const fallbackMail = form.querySelector("[data-fallback-mail]");
+    const fallbackWa = form.querySelector("[data-fallback-wa]");
 
     const setError = (input, message) => {
       const errorEl = document.getElementById(`${input.id}-error`);
@@ -134,16 +142,6 @@
     const emailInput = form.querySelector("#f-email");
     const messageInput = form.querySelector("#f-message");
     const honeyInput = form.querySelector('[name="_honey"]');
-
-    // Fallback fără JS/fetch: după POST-ul nativ, FormSubmit redirecționează aici
-    const nextInput = form.querySelector('[name="_next"]');
-    if (nextInput) {
-      nextInput.value = `${location.origin}${location.pathname}?trimis=1#contact`;
-    }
-    if (new URLSearchParams(location.search).has("trimis")) {
-      status.textContent = "Mulțumim! Mesajul a fost trimis — revenim în cel mai scurt timp.";
-      status.classList.add("is-ok");
-    }
 
     const validators = [
       {
@@ -189,38 +187,64 @@
       submitBtn.disabled = true;
       submitLabel.textContent = "Se trimite...";
 
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      const message = messageInput.value.trim();
+
+      const request = WEB3FORMS_ACCESS_KEY
+        ? {
+            url: "https://api.web3forms.com/submit",
+            body: {
+              access_key: WEB3FORMS_ACCESS_KEY,
+              subject: "Mesaj nou de pe site-ul Ecomlab",
+              name,
+              email,
+              message,
+              botcheck: honeyInput ? honeyInput.value : "",
+            },
+          }
+        : {
+            url: "https://formsubmit.co/ajax/office.ecomlab@gmail.com",
+            body: {
+              name,
+              email,
+              message,
+              _subject: "Mesaj nou de pe site-ul Ecomlab",
+              _template: "table",
+              _captcha: "false",
+              _honey: honeyInput ? honeyInput.value : "",
+            },
+          };
+
       try {
-        const response = await fetch("https://formsubmit.co/ajax/office.ecomlab@gmail.com", {
+        const response = await fetch(request.url, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            name: nameInput.value.trim(),
-            email: emailInput.value.trim(),
-            message: messageInput.value.trim(),
-            _subject: "Mesaj nou de pe site-ul Ecomlab",
-            _template: "table",
-            _captcha: "false",
-            _honey: honeyInput ? honeyInput.value : "",
-          }),
+          body: JSON.stringify(request.body),
         });
         const data = await response.json().catch(() => ({}));
         const ok = response.ok && (data.success === true || data.success === "true");
         if (!ok) throw new Error(data.message || `HTTP ${response.status}`);
         form.reset();
         validators.forEach(({ input }) => setError(input, ""));
+        if (fallback) fallback.hidden = true;
         status.textContent = "Mulțumim! Mesajul a fost trimis — revenim în cel mai scurt timp.";
         status.classList.add("is-ok");
       } catch (error) {
-        // Fetch blocat sau răspuns invalid: trimite formularul nativ (fără CORS),
-        // FormSubmit redirecționează înapoi prin _next
-        try {
-          form.submit();
-          return;
-        } catch (submitError) {
-          status.textContent =
-            "Ceva n-a mers. Încearcă din nou sau scrie-ne direct la office.ecomlab@gmail.com.";
-          status.classList.add("is-err");
+        // Serviciul de email e indisponibil: nu pierdem mesajul — îl oferim
+        // precompletat pe email și WhatsApp, fără să părăsim pagina.
+        status.textContent =
+          "Serviciul de trimitere e momentan indisponibil. Mesajul tău e păstrat mai jos — trimite-l cu un click:";
+        status.classList.add("is-err");
+        const subject = encodeURIComponent("Mesaj de pe site-ul Ecomlab");
+        const bodyText = encodeURIComponent(`Nume: ${name}\nEmail: ${email}\n\n${message}`);
+        if (fallbackMail) {
+          fallbackMail.href = `mailto:office.ecomlab@gmail.com?subject=${subject}&body=${bodyText}`;
         }
+        if (fallbackWa) {
+          fallbackWa.href = `https://wa.me/40728541017?text=${bodyText}`;
+        }
+        if (fallback) fallback.hidden = false;
       } finally {
         submitBtn.disabled = false;
         submitLabel.textContent = "Trimite";

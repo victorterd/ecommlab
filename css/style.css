@@ -804,6 +804,23 @@ button { font: inherit; }
 .contact__status.is-ok { color: var(--green); }
 .contact__status.is-err { color: #ff8d84; }
 
+.contact__fallback { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.contact__fallback[hidden] { display: none; }
+
+.contact__fallback a {
+  width: fit-content;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.25s;
+}
+
+.contact__fallback a:hover { color: var(--green); }
+
 /* ── Footer ────────────────────────────────────────────────────── */
 .footer { padding-top: clamp(2rem, 4vw, 3rem); }
 
