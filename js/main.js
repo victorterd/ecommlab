@@ -121,7 +121,7 @@
      Provider principal: Web3Forms (dacă e setată cheia de mai jos),
      altfel FormSubmit. Cheia se obține gratuit pe https://web3forms.com
      cu adresa office.ecomlab@gmail.com. */
-  const WEB3FORMS_ACCESS_KEY = "";
+  const WEB3FORMS_ACCESS_KEY = "84e49df0-ad20-4c5c-bcd6-d8776a1a3275";
 
   const form = document.getElementById("contact-form");
   if (form) {
