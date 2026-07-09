@@ -117,12 +117,8 @@
     }
   }
 
-  /* ── Formular contact → email office.ecomlab@gmail.com ───────
-     Provider principal: Web3Forms (dacă e setată cheia de mai jos),
-     altfel FormSubmit. Cheia se obține gratuit pe https://web3forms.com
-     cu adresa office.ecomlab@gmail.com. */
-  const WEB3FORMS_ACCESS_KEY = "84e49df0-ad20-4c5c-bcd6-d8776a1a3275";
-
+  /* ── Formular contact → trimite.php (mail de pe serverul propriu,
+     către office.ecomlab@gmail.com) ─────────────────────────────── */
   const form = document.getElementById("contact-form");
   if (form) {
     const status = form.querySelector("[data-form-status]");
@@ -142,6 +138,17 @@
     const emailInput = form.querySelector("#f-email");
     const messageInput = form.querySelector("#f-message");
     const honeyInput = form.querySelector('[name="_honey"]');
+
+    // Confirmare după trimiterea fără JavaScript (redirect din trimite.php)
+    const urlParams = new URLSearchParams(location.search);
+    if (urlParams.has("trimis")) {
+      status.textContent = "Mulțumim! Mesajul a fost trimis — revenim în cel mai scurt timp.";
+      status.classList.add("is-ok");
+    } else if (urlParams.has("eroare")) {
+      status.textContent =
+        "Mesajul nu a putut fi trimis. Scrie-ne direct la office.ecomlab@gmail.com.";
+      status.classList.add("is-err");
+    }
 
     const validators = [
       {
@@ -191,39 +198,20 @@
       const email = emailInput.value.trim();
       const message = messageInput.value.trim();
 
-      const request = WEB3FORMS_ACCESS_KEY
-        ? {
-            url: "https://api.web3forms.com/submit",
-            body: {
-              access_key: WEB3FORMS_ACCESS_KEY,
-              subject: "Mesaj nou de pe site-ul Ecomlab",
-              name,
-              email,
-              message,
-              botcheck: honeyInput ? honeyInput.value : "",
-            },
-          }
-        : {
-            url: "https://formsubmit.co/ajax/office.ecomlab@gmail.com",
-            body: {
-              name,
-              email,
-              message,
-              _subject: "Mesaj nou de pe site-ul Ecomlab",
-              _template: "table",
-              _captcha: "false",
-              _honey: honeyInput ? honeyInput.value : "",
-            },
-          };
-
       try {
-        const response = await fetch(request.url, {
+        const body = new URLSearchParams({
+          name,
+          email,
+          message,
+          _honey: honeyInput ? honeyInput.value : "",
+        });
+        const response = await fetch(form.action, {
           method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(request.body),
+          headers: { Accept: "application/json", "X-Requested-With": "fetch" },
+          body,
         });
         const data = await response.json().catch(() => ({}));
-        const ok = response.ok && (data.success === true || data.success === "true");
+        const ok = response.ok && data.success === true;
         if (!ok) throw new Error(data.message || `HTTP ${response.status}`);
         form.reset();
         validators.forEach(({ input }) => setError(input, ""));

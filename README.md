@@ -27,11 +27,17 @@ Clipul pornește automat (mut, în buclă) când intră în viewport; imaginea e
 
 ## Formular de contact
 
-Trimite emailuri către **office.ecomlab@gmail.com** prin [FormSubmit](https://formsubmit.co) (gratuit, fără cont).
+Formularul trimite prin **`trimite.php`** — emailul pleacă direct de pe serverul de
+hosting către **office.ecomlab@gmail.com**, fără servicii externe.
 
-> **Important:** la prima trimitere, FormSubmit trimite un email de activare către
-> office.ecomlab@gmail.com — dă click pe linkul din el o singură dată, apoi formularul
-> livrează mesajele normal.
+Cerințe: hosting cu PHP (orice cPanel standard) și funcția `mail()` activă.
+Expeditorul e `formular@<domeniul site-ului>`, iar `Reply-To` e adresa vizitatorului,
+deci poți răspunde direct din inbox. Dacă mesajele nu ajung, verifică Spam la primul
+test; dacă hostingul are `mail()` dezactivat, soluția e trimiterea prin SMTP
+(necesită o căsuță de email pe domeniu).
+
+Dacă serverul nu răspunde, vizitatorul primește automat linkuri precompletate
+(email + WhatsApp) cu mesajul lui — niciun lead nu se pierde.
 
 ## Butonul „Programează o întâlnire”
 
