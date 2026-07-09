@@ -42,30 +42,6 @@
     .querySelectorAll(".marquee__track, .ribbon__track, .footer__marquee-track")
     .forEach(fillTrack);
 
-  /* ── Video hero: pornește doar când e vizibil ───────────────── */
-  const heroVideo = document.querySelector(".hero__video");
-  if (heroVideo) {
-    if (reducedMotion) {
-      heroVideo.setAttribute("controls", "");
-    } else if ("IntersectionObserver" in window) {
-      const vio = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              heroVideo.play().catch(() => heroVideo.setAttribute("controls", ""));
-            } else {
-              heroVideo.pause();
-            }
-          });
-        },
-        { threshold: 0.25 }
-      );
-      vio.observe(heroVideo);
-    } else {
-      heroVideo.play().catch(() => {});
-    }
-  }
-
   /* ── Proiecte: sloturi pregătite pentru clipuri ──────────────
      Adaugă data-video="assets/clips/nume.mp4" pe <figure class="project">
      și clipul pornește automat (mut, în buclă) când intră în viewport. */

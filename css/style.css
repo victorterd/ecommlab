@@ -203,17 +203,6 @@ button { font: inherit; }
 
 .hero .btn { margin-top: 2.2rem; }
 
-.hero__panel {
-  margin: clamp(3rem, 7vw, 5.5rem) auto 0;
-  max-width: 1520px;
-  border-radius: var(--radius-panel);
-  overflow: hidden;
-  background: url("../assets/hero-wall.webp") center / cover no-repeat, var(--dark-panel);
-  aspect-ratio: 16 / 8.2;
-}
-
-.hero__video { width: 100%; height: 100%; object-fit: cover; }
-
 /* ── Logo-uri clienți ──────────────────────────────────────────── */
 .clients { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(2rem, 4vw, 3rem); }
 
@@ -941,7 +930,6 @@ button { font: inherit; }
   .site-header__cta { display: none; }
 
   .hero { padding-top: 8.5rem; }
-  .hero__panel { aspect-ratio: 4 / 3; }
 
   .projects__grid { grid-template-columns: 1fr; }
   .faq__grid { grid-template-columns: 1fr; }
@@ -954,10 +942,9 @@ button { font: inherit; }
 @media (max-width: 640px) {
   .topbar { padding: 0.6rem 1.1rem; font-size: 0.85rem; }
 
-  /* Pe mobil: hero doar cu text, fără imagini inline și fără panoul video */
+  /* Pe mobil: hero doar cu text, fără imagini inline */
   .hero__title { font-size: clamp(2.1rem, 10vw, 2.9rem); max-width: 13ch; }
   .hero__chip { display: none; }
-  .hero__panel { display: none; }
   .hero__sub { font-size: 1.02rem; }
 
   .stats { flex-direction: column; }
