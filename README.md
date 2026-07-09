@@ -6,7 +6,7 @@ Site static (HTML + CSS + JS, fără build tools). Deschide `index.html` sau gă
 
 ```
 index.html        — pagina completă (toate secțiunile)
-css/fonts.css     — fonturi self-hosted (Poppins + Hanken Grotesk)
+css/fonts.css     — fonturi self-hosted (Cal Sans + Hanken Grotesk)
 css/style.css     — design system + stiluri
 js/main.js        — interacțiuni (reveal, marquee, slider, formular)
 assets/           — imagini, logo-uri, video, fonturi

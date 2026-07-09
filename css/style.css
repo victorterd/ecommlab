@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════════════════
    Ecomlab — design system
-   Verde brand #1DDA0F · Ink #131313 · Poppins / Hanken Grotesk
+   Verde brand #1DDA0F · Ink #131313 · Cal Sans / Hanken Grotesk
    ════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -15,7 +15,7 @@
   --muted-2: #9ca0a6;
   --dark-panel: #0d0d0d;
 
-  --font-display: "Poppins", "Hanken Grotesk", sans-serif;
+  --font-display: "Cal Sans", "Hanken Grotesk", sans-serif;
   --font-body: "Hanken Grotesk", "Segoe UI", sans-serif;
 
   --radius-card: 28px;
@@ -70,9 +70,10 @@ button { font: inherit; }
   min-height: 48px;
   border: 0;
   border-radius: 999px;
-  font-family: var(--font-display);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 500;
   font-size: 1rem;
+  letter-spacing: 0.01em;
   line-height: 1;
   cursor: pointer;
   white-space: nowrap;
@@ -172,8 +173,8 @@ button { font: inherit; }
   margin: 1.6rem auto 0;
   font-size: clamp(2.6rem, 7.6vw, 6.9rem);
   font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
   max-width: 18ch;
 }
 
@@ -298,7 +299,7 @@ button { font: inherit; }
   font-weight: 600;
   font-size: clamp(4rem, 12vw, 11rem);
   line-height: 0.95;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   background: linear-gradient(180deg, #d4d4d2 4%, rgba(212, 212, 210, 0));
   -webkit-background-clip: text;
@@ -322,8 +323,8 @@ button { font: inherit; }
   font-family: var(--font-display);
   font-weight: 600;
   font-size: clamp(1.75rem, 3.6vw, 3.1rem);
-  line-height: 1.28;
-  letter-spacing: -0.02em;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .mission__fade { color: var(--muted-2); }
@@ -407,7 +408,7 @@ button { font: inherit; }
 .service__name {
   font-size: clamp(1.6rem, 3.4vw, 2.6rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.005em;
   line-height: 1.1;
 }
 
@@ -621,7 +622,7 @@ button { font: inherit; }
   text-align: center;
   font-size: clamp(2.6rem, 6vw, 4.6rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   margin-top: 0.5rem;
 }
 
@@ -739,7 +740,7 @@ button { font: inherit; }
 .contact__info h3 {
   font-size: clamp(2.4rem, 4.6vw, 3.8rem);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
   line-height: 1.1;
 }
 
@@ -950,11 +951,14 @@ button { font: inherit; }
   .slider { min-height: 0; }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
   .topbar { padding: 0.6rem 1.1rem; font-size: 0.85rem; }
 
-  .hero__title { font-size: clamp(2.35rem, 11.5vw, 3.2rem); max-width: 12ch; }
-  .hero__chip--wide { display: none; }
+  /* Pe mobil: hero doar cu text, fără imagini inline și fără panoul video */
+  .hero__title { font-size: clamp(2.1rem, 10vw, 2.9rem); max-width: 13ch; }
+  .hero__chip { display: none; }
+  .hero__panel { display: none; }
+  .hero__sub { font-size: 1.02rem; }
 
   .stats { flex-direction: column; }
 
