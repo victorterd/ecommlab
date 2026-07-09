@@ -130,20 +130,35 @@
       if (errorEl) errorEl.textContent = message || "";
     };
 
+    const nameInput = form.querySelector("#f-name");
+    const emailInput = form.querySelector("#f-email");
+    const messageInput = form.querySelector("#f-message");
+    const honeyInput = form.querySelector('[name="_honey"]');
+
+    // Fallback fără JS/fetch: după POST-ul nativ, FormSubmit redirecționează aici
+    const nextInput = form.querySelector('[name="_next"]');
+    if (nextInput) {
+      nextInput.value = `${location.origin}${location.pathname}?trimis=1#contact`;
+    }
+    if (new URLSearchParams(location.search).has("trimis")) {
+      status.textContent = "Mulțumim! Mesajul a fost trimis — revenim în cel mai scurt timp.";
+      status.classList.add("is-ok");
+    }
+
     const validators = [
       {
-        input: form.querySelector("#f-name"),
+        input: nameInput,
         check: (v) => (v.trim().length >= 2 ? "" : "Te rugăm să ne spui numele tău."),
       },
       {
-        input: form.querySelector("#f-email"),
+        input: emailInput,
         check: (v) =>
           /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())
             ? ""
             : "Adresa de e-mail nu pare corectă.",
       },
       {
-        input: form.querySelector("#f-message"),
+        input: messageInput,
         check: (v) => (v.trim().length >= 10 ? "" : "Spune-ne în câteva cuvinte cum te putem ajuta."),
       },
     ];
@@ -179,24 +194,33 @@
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
-            name: form.name.value.trim(),
-            email: form.email.value.trim(),
-            message: form.message.value.trim(),
+            name: nameInput.value.trim(),
+            email: emailInput.value.trim(),
+            message: messageInput.value.trim(),
             _subject: "Mesaj nou de pe site-ul Ecomlab",
             _template: "table",
             _captcha: "false",
-            _honey: form._honey.value,
+            _honey: honeyInput ? honeyInput.value : "",
           }),
         });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json().catch(() => ({}));
+        const ok = response.ok && (data.success === true || data.success === "true");
+        if (!ok) throw new Error(data.message || `HTTP ${response.status}`);
         form.reset();
         validators.forEach(({ input }) => setError(input, ""));
         status.textContent = "Mulțumim! Mesajul a fost trimis — revenim în cel mai scurt timp.";
         status.classList.add("is-ok");
       } catch (error) {
-        status.textContent =
-          "Ceva n-a mers. Încearcă din nou sau scrie-ne direct la office.ecomlab@gmail.com.";
-        status.classList.add("is-err");
+        // Fetch blocat sau răspuns invalid: trimite formularul nativ (fără CORS),
+        // FormSubmit redirecționează înapoi prin _next
+        try {
+          form.submit();
+          return;
+        } catch (submitError) {
+          status.textContent =
+            "Ceva n-a mers. Încearcă din nou sau scrie-ne direct la office.ecomlab@gmail.com.";
+          status.classList.add("is-err");
+        }
       } finally {
         submitBtn.disabled = false;
         submitLabel.textContent = "Trimite";
