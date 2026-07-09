@@ -27,17 +27,18 @@ Clipul pornește automat (mut, în buclă) când intră în viewport; imaginea e
 
 ## Formular de contact
 
-Formularul trimite prin **`trimite.php`** — emailul pleacă direct de pe serverul de
-hosting către **office.ecomlab@gmail.com**, fără servicii externe.
+Formularul trimite prin **Web3Forms** (client-side, merge pe Vercel sau orice hosting
+static) către **office.ecomlab@gmail.com**. Cheia de acces e în `index.html` și
+`js/main.js` — cheile Web3Forms sunt gândite să fie publice, nu e o problemă.
 
-Cerințe: hosting cu PHP (orice cPanel standard) și funcția `mail()` activă.
-Expeditorul e `formular@<domeniul site-ului>`, iar `Reply-To` e adresa vizitatorului,
-deci poți răspunde direct din inbox. Dacă mesajele nu ajung, verifică Spam la primul
-test; dacă hostingul are `mail()` dezactivat, soluția e trimiterea prin SMTP
-(necesită o căsuță de email pe domeniu).
-
-Dacă serverul nu răspunde, vizitatorul primește automat linkuri precompletate
+Dacă serviciul nu răspunde, vizitatorul primește automat linkuri precompletate
 (email + WhatsApp) cu mesajul lui — niciun lead nu se pierde.
+
+> **Notă Vercel:** fiecare deploy primește și un URL unic „înghețat”
+> (`ecommlab-xxxx.vercel.app`) care rămâne pe versiunea aceea și are de obicei
+> Deployment Protection (403 pentru vizitatori). Site-ul public și testele se fac
+> pe domeniul de producție al proiectului (ex. `ecommlab.vercel.app` sau domeniul
+> propriu), care se actualizează la fiecare push.
 
 ## Butonul „Programează o întâlnire”
 
