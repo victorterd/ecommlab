@@ -26,6 +26,40 @@
     });
   }
 
+  /* ── Smooth scroll cu easing pentru ancore ───────────────────── */
+  if (!reducedMotion) {
+    // dezactivăm smooth-ul nativ ca să nu se suprapună cu animația noastră
+    document.documentElement.style.scrollBehavior = "auto";
+    const NAV_OFFSET = 100;
+    const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest('a[href^="#"]');
+      if (!link || link.getAttribute("href").length < 2) return;
+      const target = document.querySelector(link.getAttribute("href"));
+      if (!target) return;
+      event.preventDefault();
+
+      const startY = window.scrollY;
+      const endY =
+        link.getAttribute("href") === "#top"
+          ? 0
+          : target.getBoundingClientRect().top + startY - NAV_OFFSET;
+      const dist = endY - startY;
+      const duration = Math.min(1300, Math.max(550, Math.abs(dist) * 0.45));
+      let start = null;
+
+      const tick = (ts) => {
+        if (start === null) start = ts;
+        const progress = Math.min(1, (ts - start) / duration);
+        window.scrollTo(0, startY + dist * easeOutQuart(progress));
+        if (progress < 1) requestAnimationFrame(tick);
+        else history.replaceState(null, "", link.getAttribute("href"));
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+
   /* ── Reveal on scroll ──────────────────────────────────────── */
   const revealEls = document.querySelectorAll("[data-reveal]");
   if (reducedMotion || !("IntersectionObserver" in window)) {
