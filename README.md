@@ -21,9 +21,9 @@ grila `.reel-grid` din `index.html`:
 <figure class="reel" data-video="assets/clips/nume.mp4"></figure>
 ```
 
-Clipul pornește automat (fără sunet, în buclă) când intră în viewport și are
-controale native — vizitatorul poate porni sunetul sau opri redarea; pauza dată
-manual e respectată (nu repornește singur).
+Clipul stă pe poster (generează unul cu ffmpeg și pune-l în `data-poster`) și
+pornește doar la play — cu sunet. Rulează un singur clip odată, se oprește când
+iese din ecran, iar butonul rotund din colț comută sunetul.
 
 ## Formular de contact
 

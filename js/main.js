@@ -95,11 +95,12 @@
       Array.from(track.children).forEach((node) => track.appendChild(node.cloneNode(true)));
     });
 
-  /* ── Clipuri: autoplay mut + controale pentru sunet/pauză ────
+  /* ── Clipuri: video normal, cu sunet la play ─────────────────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
-     Clipul pornește automat (fără sunet) când intră în viewport;
-     vizitatorul poate porni sunetul sau opri clipul din controale,
-     iar pauza dată manual e respectată. */
+     Clipul stă pe poster și pornește DOAR când apasă vizitatorul
+     play — cu sunet. Rulează un singur clip odată, iar la scroll
+     în afara ecranului se oprește. */
+  const allClipVideos = [];
   document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");
     if (!src) return;
@@ -107,7 +108,6 @@
     const poster = card.querySelector("img");
     const video = document.createElement("video");
     video.src = src;
-    video.muted = true;
     video.loop = true;
     video.playsInline = true;
     video.controls = true;
@@ -149,32 +149,27 @@
     video.addEventListener("volumechange", syncSound);
     card.appendChild(soundBtn);
 
-    if (reducedMotion || !("IntersectionObserver" in window)) return;
+    allClipVideos.push(video);
 
-    let ioPausing = false;
-    let userPaused = false;
-    video.addEventListener("pause", () => {
-      if (!ioPausing) userPaused = true;
-    });
+    // un singur clip rulează odată
     video.addEventListener("play", () => {
-      userPaused = false;
+      allClipVideos.forEach((other) => {
+        if (other !== video && !other.paused) other.pause();
+      });
     });
 
-    const cio = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (!userPaused) video.play().catch(() => {});
-          } else if (!video.paused) {
-            ioPausing = true;
-            video.pause();
-            ioPausing = false;
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    cio.observe(video);
+    // ieșit din ecran = pauză
+    if ("IntersectionObserver" in window) {
+      const cio = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting && !video.paused) video.pause();
+          });
+        },
+        { threshold: 0.2 }
+      );
+      cio.observe(video);
+    }
   });
 
   /* ── Slider testimoniale ─────────────────────────────────────── */
