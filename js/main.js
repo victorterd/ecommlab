@@ -79,22 +79,6 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  /* ── Marquee: simplu și determinist ──────────────────────────
-     Conținutul se clonează de un număr FIX de ori (fără măsurători,
-     fără durate calculate): 3 seturi = o jumătate suficient de lată
-     pentru orice ecran, apoi jumătatea se dublează pentru bucla
-     translateX(-50%). Durata vine doar din CSS. */
-  document
-    .querySelectorAll(".marquee__track, .ribbon__track, .footer__marquee-track")
-    .forEach((track) => {
-      const originals = Array.from(track.children);
-      if (!originals.length) return;
-      for (let i = 0; i < 2; i += 1) {
-        originals.forEach((node) => track.appendChild(node.cloneNode(true)));
-      }
-      Array.from(track.children).forEach((node) => track.appendChild(node.cloneNode(true)));
-    });
-
   /* ── Clipuri: video normal, cu sunet la play ─────────────────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
      Clipul stă pe poster și pornește DOAR când apasă vizitatorul

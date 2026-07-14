@@ -245,15 +245,23 @@ button { font: inherit; }
 }
 
 .marquee__track {
+  --mq-gap: clamp(4rem, 8.5vw, 8rem);
   display: flex;
-  align-items: center;
-  gap: clamp(4rem, 8.5vw, 8rem);
   width: max-content;
-  padding-inline: clamp(2rem, 4vw, 4rem);
-  animation: marquee 42s linear infinite;
+  animation: marquee 45s linear infinite;
 }
 
 .marquee__track img { height: clamp(34px, 4.6vw, 50px); width: auto; }
+
+/* un grup de conținut; fiecare marquee are exact două grupuri identice,
+   scrise static în HTML — nimic calculat, nimic clonat */
+.mq {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--mq-gap);
+  padding-right: var(--mq-gap);
+}
 
 @keyframes marquee {
   to { transform: translateX(-50%); }
@@ -278,11 +286,10 @@ button { font: inherit; }
 .ribbon--black { background: var(--ink); transform: rotate(3.8deg); margin-top: clamp(-2.6rem, -2vw, -1.4rem); }
 
 .ribbon__track {
+  --mq-gap: clamp(1.6rem, 3vw, 2.75rem);
   display: flex;
-  align-items: center;
-  gap: clamp(1.6rem, 3vw, 2.75rem);
   width: max-content;
-  animation: marquee 30s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .ribbon__track--reverse { animation-direction: reverse; }
@@ -1150,11 +1157,10 @@ button { font: inherit; }
 }
 
 .footer__marquee-track {
+  --mq-gap: clamp(2rem, 4vw, 3.5rem);
   display: flex;
-  align-items: center;
-  gap: clamp(2rem, 4vw, 3.5rem);
   width: max-content;
-  animation: marquee 26s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 
 .footer__marquee-track span {
