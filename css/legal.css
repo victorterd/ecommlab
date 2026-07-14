@@ -1,0 +1,109 @@
+/* Ecomlab — pagini legale */
+
+.legal-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem var(--gutter);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(19, 19, 19, 0.08);
+}
+
+.legal-header__brand img { width: 132px; height: auto; display: block; }
+
+.legal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-weight: 400;
+  color: var(--ink-2);
+  transition: color 0.2s;
+}
+
+.legal-back:hover { color: var(--green); }
+
+.legal {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) var(--gutter) clamp(4rem, 8vw, 6rem);
+}
+
+.legal__kicker {
+  color: var(--green);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legal__title {
+  margin-top: 0.6rem;
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+}
+
+.legal__updated {
+  margin-top: 1rem;
+  color: var(--muted-2);
+  font-size: 0.95rem;
+}
+
+.legal__intro {
+  margin-top: 2rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: var(--ink-2);
+}
+
+.legal h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 0.9rem;
+  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.legal h3 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.legal p { margin-top: 0.9rem; color: var(--ink-2); }
+
+.legal ul { margin-top: 0.9rem; padding-left: 1.3rem; list-style: disc; display: grid; gap: 0.5rem; }
+
+.legal li { color: var(--ink-2); }
+
+.legal li::marker { color: var(--green); }
+
+.legal a:not(.legal-back) { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.legal a:not(.legal-back):hover { color: var(--green); }
+
+.legal__box {
+  margin-top: 1.5rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
+.legal__box p { margin-top: 0.4rem; }
+.legal__box p:first-child { margin-top: 0; }
+
+.legal__foot {
+  margin-top: 3.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}

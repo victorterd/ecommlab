@@ -316,6 +316,30 @@
     });
   }
 
+  /* ── Popup cookies ───────────────────────────────────────────── */
+  const cookie = document.querySelector("[data-cookie]");
+  if (cookie) {
+    let stored = null;
+    try {
+      stored = localStorage.getItem("ecomlab-cookies");
+    } catch (e) {
+      stored = null;
+    }
+    if (!stored) {
+      cookie.hidden = false;
+    }
+    const decide = (value) => {
+      try {
+        localStorage.setItem("ecomlab-cookies", value);
+      } catch (e) {
+        /* localStorage indisponibil — închidem oricum popup-ul */
+      }
+      cookie.hidden = true;
+    };
+    cookie.querySelector("[data-cookie-accept]")?.addEventListener("click", () => decide("all"));
+    cookie.querySelector("[data-cookie-decline]")?.addEventListener("click", () => decide("necessary"));
+  }
+
   /* ── Anul curent în footer ───────────────────────────────────── */
   const yearEl = document.querySelector("[data-year]");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
