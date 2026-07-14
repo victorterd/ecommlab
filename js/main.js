@@ -79,41 +79,21 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  /* ── Marquee: umple banda și dublează conținutul pentru loop ─
-     Așteaptă întâi încărcarea imaginilor (altfel pe mobil banda se
-     măsoară la lățime 0, se clonează excesiv și rulează haotic),
-     apoi setează durata proporțional cu lățimea = viteză constantă. */
-  const PX_PE_SECUNDA = { "marquee__track": 55, "ribbon__track": 95, "footer__marquee-track": 80 };
-
-  const fillTrack = async (track) => {
-    const originals = Array.from(track.children);
-    if (!originals.length) return;
-
-    await Promise.all(
-      Array.from(track.querySelectorAll("img")).map((img) =>
-        img.complete ? Promise.resolve() : img.decode().catch(() => {})
-      )
-    );
-
-    const target = window.innerWidth * 1.2;
-    let guard = 0;
-    while (track.scrollWidth < target && guard < 10) {
-      const before = track.scrollWidth;
-      originals.forEach((node) => track.appendChild(node.cloneNode(true)));
-      guard += 1;
-      if (track.scrollWidth === before) break; // nimic măsurabil — nu clona la nesfârșit
-    }
-    // A doua jumătate identică — necesară pentru bucla translateX(-50%)
-    Array.from(track.children).forEach((node) => track.appendChild(node.cloneNode(true)));
-
-    const cls = Object.keys(PX_PE_SECUNDA).find((c) => track.classList.contains(c));
-    const speed = PX_PE_SECUNDA[cls] || 70;
-    track.style.animationDuration = `${Math.max(12, Math.round(track.scrollWidth / 2 / speed))}s`;
-  };
-
+  /* ── Marquee: simplu și determinist ──────────────────────────
+     Conținutul se clonează de un număr FIX de ori (fără măsurători,
+     fără durate calculate): 3 seturi = o jumătate suficient de lată
+     pentru orice ecran, apoi jumătatea se dublează pentru bucla
+     translateX(-50%). Durata vine doar din CSS. */
   document
     .querySelectorAll(".marquee__track, .ribbon__track, .footer__marquee-track")
-    .forEach(fillTrack);
+    .forEach((track) => {
+      const originals = Array.from(track.children);
+      if (!originals.length) return;
+      for (let i = 0; i < 2; i += 1) {
+        originals.forEach((node) => track.appendChild(node.cloneNode(true)));
+      }
+      Array.from(track.children).forEach((node) => track.appendChild(node.cloneNode(true)));
+    });
 
   /* ── Clipuri: autoplay mut + controale pentru sunet/pauză ────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
@@ -133,8 +113,11 @@
     video.controls = true;
     video.preload = "metadata";
     video.setAttribute("controlslist", "nodownload");
+    if (card.getAttribute("data-poster")) {
+      video.poster = card.getAttribute("data-poster");
+    }
     if (poster) {
-      video.poster = poster.currentSrc || poster.src;
+      if (!video.poster) video.poster = poster.currentSrc || poster.src;
       video.setAttribute("aria-label", poster.alt || "Clip proiect");
       poster.replaceWith(video);
     } else {
