@@ -126,6 +126,29 @@
       card.appendChild(video);
     }
 
+    // Buton propriu de sunet — controalele native își ascund volumul
+    // pe playere înguste (mobil), așa că oferim mereu unul vizibil.
+    const ICON_MUTED =
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6.5 9H3v6h3.5L11 19V5z" fill="currentColor"/><path d="m16 9.5 5 5m0-5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+    const ICON_SOUND =
+      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6.5 9H3v6h3.5L11 19V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+
+    const soundBtn = document.createElement("button");
+    soundBtn.type = "button";
+    soundBtn.className = "reel__sound";
+    const syncSound = () => {
+      soundBtn.innerHTML = video.muted ? ICON_MUTED : ICON_SOUND;
+      soundBtn.setAttribute("aria-label", video.muted ? "Pornește sunetul" : "Oprește sunetul");
+    };
+    syncSound();
+    soundBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      if (!video.muted && video.paused) video.play().catch(() => {});
+    });
+    video.addEventListener("volumechange", syncSound);
+    card.appendChild(soundBtn);
+
     if (reducedMotion || !("IntersectionObserver" in window)) return;
 
     let ioPausing = false;
