@@ -79,19 +79,36 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  /* ── Marquee: umple banda și dublează conținutul pentru loop ─ */
-  const fillTrack = (track) => {
+  /* ── Marquee: umple banda și dublează conținutul pentru loop ─
+     Așteaptă întâi încărcarea imaginilor (altfel pe mobil banda se
+     măsoară la lățime 0, se clonează excesiv și rulează haotic),
+     apoi setează durata proporțional cu lățimea = viteză constantă. */
+  const PX_PE_SECUNDA = { "marquee__track": 55, "ribbon__track": 95, "footer__marquee-track": 80 };
+
+  const fillTrack = async (track) => {
     const originals = Array.from(track.children);
     if (!originals.length) return;
-    const width = () => track.scrollWidth;
+
+    await Promise.all(
+      Array.from(track.querySelectorAll("img")).map((img) =>
+        img.complete ? Promise.resolve() : img.decode().catch(() => {})
+      )
+    );
+
     const target = window.innerWidth * 1.2;
     let guard = 0;
-    while (width() < target && guard < 10) {
+    while (track.scrollWidth < target && guard < 10) {
+      const before = track.scrollWidth;
       originals.forEach((node) => track.appendChild(node.cloneNode(true)));
       guard += 1;
+      if (track.scrollWidth === before) break; // nimic măsurabil — nu clona la nesfârșit
     }
     // A doua jumătate identică — necesară pentru bucla translateX(-50%)
     Array.from(track.children).forEach((node) => track.appendChild(node.cloneNode(true)));
+
+    const cls = Object.keys(PX_PE_SECUNDA).find((c) => track.classList.contains(c));
+    const speed = PX_PE_SECUNDA[cls] || 70;
+    track.style.animationDuration = `${Math.max(12, Math.round(track.scrollWidth / 2 / speed))}s`;
   };
 
   document
@@ -195,9 +212,6 @@
     const emailInput = form.querySelector("#f-email");
     const phoneInput = form.querySelector("#f-phone");
     const shopInput = form.querySelector("#f-shop");
-    const salesInput = form.querySelector("#f-sales");
-    const budgetInput = form.querySelector("#f-budget");
-    const messageInput = form.querySelector("#f-message");
     const honeyInput = form.querySelector('[name="botcheck"]');
 
     const validators = [
@@ -213,8 +227,11 @@
             : "Adresa de e-mail nu pare corectă.",
       },
       {
-        input: messageInput,
-        check: (v) => (v.trim().length >= 10 ? "" : "Spune-ne în câteva cuvinte cum te putem ajuta."),
+        input: phoneInput,
+        check: (v) =>
+          v.trim().replace(/[^0-9+]/g, "").length >= 9
+            ? ""
+            : "Lasă-ne un număr de telefon la care te găsim.",
       },
     ];
 
@@ -246,7 +263,8 @@
 
       const name = nameInput.value.trim();
       const email = emailInput.value.trim();
-      const message = messageInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const shop = shopInput ? shopInput.value.trim() : "";
 
       try {
         const response = await fetch("https://api.web3forms.com/submit", {
@@ -258,11 +276,8 @@
             from_name: "Formular Ecomlab",
             name,
             email,
-            telefon: phoneInput ? phoneInput.value.trim() : "",
-            magazin: shopInput ? shopInput.value.trim() : "",
-            vanzari_lunare: salesInput ? salesInput.value : "",
-            buget_reclame: budgetInput ? budgetInput.value : "",
-            message,
+            telefon: phone,
+            magazin: shop,
             botcheck: honeyInput ? honeyInput.value : "",
           }),
         });
@@ -282,7 +297,7 @@
         status.classList.add("is-err");
         const subject = encodeURIComponent("Cerere analiză gratuită — site Ecomlab");
         const bodyText = encodeURIComponent(
-          `Nume: ${name}\nEmail: ${email}\nTelefon: ${phoneInput ? phoneInput.value.trim() : ""}\nMagazin: ${shopInput ? shopInput.value.trim() : ""}\nVânzări lunare: ${salesInput ? salesInput.value : ""}\nBuget reclame: ${budgetInput ? budgetInput.value : ""}\n\n${message}`
+          `Nume: ${name}\nEmail: ${email}\nTelefon: ${phone}\nMagazin: ${shop}`
         );
         if (fallbackMail) {
           fallbackMail.href = `mailto:office.ecomlab@gmail.com?subject=${subject}&body=${bodyText}`;

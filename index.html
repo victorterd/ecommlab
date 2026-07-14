@@ -106,7 +106,6 @@
         <h3 class="media-block__title" data-reveal>
           Reclame video
         </h3>
-        <p class="media-block__sub" data-reveal>Filmate cu actori reali. Scenariu, filmare, montaj — totul făcut de noi.</p>
         <!-- Pentru clipuri: adaugă data-video="assets/clips/nume.mp4" pe .reel — pornește automat, fără sunet. -->
         <div class="reel-grid" data-reveal>
           <figure class="reel" data-video=""><span class="reel__soon">Clip în curând</span></figure>
@@ -121,12 +120,12 @@
       <!-- Reclame foto -->
       <div class="media-block">
         <h3 class="media-block__title" data-reveal>
-          Reclame foto
+          Reclame statice
         </h3>
         <!-- Înlocuiește .shot-urile cu <img> cu formatele reale de reclamă -->
         <div class="shot-grid" data-reveal>
-          <figure class="shot"><span class="reel__soon">În curând</span></figure>
-          <figure class="shot"><span class="reel__soon">În curând</span></figure>
+          <figure class="shot"><img src="assets/ads/static-1.webp" alt="Reclamă statică VitaRise — proteina care nu balonează" loading="lazy" width="1200" height="1200"></figure>
+          <figure class="shot"><img src="assets/ads/static-2.webp" alt="Reclamă statică VitaRise — proteină cu certificare bio" loading="lazy" width="1200" height="1200"></figure>
           <figure class="shot"><span class="reel__soon">În curând</span></figure>
           <figure class="shot"><span class="reel__soon">În curând</span></figure>
           <figure class="shot"><span class="reel__soon">În curând</span></figure>
@@ -172,8 +171,6 @@
     <section class="services" id="servicii">
       <p class="kicker" data-reveal>(Ce facem)</p>
       <h2 class="ghost" aria-label="Ce facem" data-reveal>Ce facem</h2>
-      <p class="section-lead" data-reveal>Reclama îl oprește. Brandul îl face să aibă încredere.
-        Site-ul îl face să cumpere. <span class="lead-fade">Dacă una dintre ele e slabă, clientul se pierde pe drum.</span></p>
 
       <ol class="services__list" role="list">
         <li class="service" data-reveal>
@@ -430,6 +427,7 @@
             <li>ce ai putea schimba, chiar dacă nu lucrezi cu noi</li>
           </ul>
           <p class="contact__promise"><strong>Gratuit. Fără prezentare de vânzare. Primești analiza în 3 zile.</strong></p>
+          <a class="contact__phone" href="tel:+40728541017">0728 541 017</a>
         </div>
 
         <form class="contact__form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
@@ -450,7 +448,7 @@
           </div>
           <div class="field">
             <label for="f-phone">Telefon</label>
-            <input id="f-phone" name="phone" type="tel" placeholder="07xx xxx xxx" autocomplete="tel">
+            <input id="f-phone" name="phone" type="tel" placeholder="07xx xxx xxx" autocomplete="tel" required>
             <p class="field__error" id="f-phone-error" aria-live="polite"></p>
           </div>
           <div class="field">
@@ -458,32 +456,6 @@
             <input id="f-shop" name="shop" type="text" placeholder="www.magazinultau.ro (sau „încă nu am magazin”)">
             <p class="field__error" id="f-shop-error" aria-live="polite"></p>
           </div>
-          <div class="field">
-            <label for="f-sales">Cât vinzi lunar?</label>
-            <select id="f-sales" name="sales">
-              <option value="" selected>Alege...</option>
-              <option>Încă nu am pornit</option>
-              <option>Sub 10.000 €</option>
-              <option>10.000–50.000 €</option>
-              <option>Peste 50.000 €</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-budget">Cât investești lunar în reclame?</label>
-            <select id="f-budget" name="budget">
-              <option value="" selected>Alege...</option>
-              <option>Nimic momentan</option>
-              <option>Sub 3.000 lei</option>
-              <option>3.000–10.000 lei</option>
-              <option>Peste 10.000 lei</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-message">Cum te putem ajuta?</label>
-            <textarea id="f-message" name="message" rows="4" placeholder="Scrie aici..." required></textarea>
-            <p class="field__error" id="f-message-error" aria-live="polite"></p>
-          </div>
-
           <button class="btn btn--light btn--lg contact__submit" type="submit">
             <span data-submit-label>Trimite</span>
           </button>
