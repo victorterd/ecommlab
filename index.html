@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecomlab — Creștem Vânzările Magazinelor Online</title>
-  <meta name="description" content="De la produs la brand: creștem vânzările magazinelor online prin Meta Ads, reclame video, branding și site-uri orientate pe conversie. Audit de magazin gratuit.">
-  <meta property="og:title" content="Ecomlab — Creștem Vânzările Magazinelor Online">
-  <meta property="og:description" content="De la produs la brand: Meta Ads, reclame video, branding și site-uri orientate pe conversie pentru magazine online. Audit de magazin gratuit.">
+  <title>Ecomlab — Creștem vânzările magazinelor online</title>
+  <meta name="description" content="Reclame care aduc profit. Design care vinde. Reclame video cu actori reali, branding, site-uri și campanii pentru magazine online. Analiză gratuită.">
+  <meta property="og:title" content="Ecomlab — Creștem vânzările magazinelor online">
+  <meta property="og:description" content="Reclame care aduc profit. Design care vinde. Pentru magazine online care vor să crească serios. Analiză gratuită.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://ecomlab.ro/assets/social.png">
   <meta property="og:image:width" content="1200">
@@ -15,60 +15,57 @@
   <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
   <link rel="preload" href="assets/fonts/calsans-regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/hankengrotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/outfit-300.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ── Pastilă anunț ─────────────────────────────────────────── -->
-  <a class="topbar" href="#contact">
-    <span class="topbar__dot" aria-hidden="true"></span>
-    Audit de magazin GRATUIT
-  </a>
+  <!-- ── Meniu fix ─────────────────────────────────────────────── -->
+  <header class="nav" data-nav>
+    <a class="nav__brand" href="#top" aria-label="Ecomlab — înapoi sus">
+      <img src="assets/logo.svg" alt="Ecomlab" width="132" height="30">
+    </a>
 
-  <!-- ── Header ────────────────────────────────────────────────── -->
-  <header class="site-header">
-    <a class="site-header__brand" href="#top" aria-label="Ecomlab — înapoi sus">
-      <img src="assets/logo.svg" alt="Ecomlab" width="150" height="34">
-    </a>
-    <a class="btn btn--primary site-header__cta" href="https://wa.me/40728541017?text=Salut!%20A%C8%99%20vrea%20s%C4%83%20programez%20o%20%C3%AEnt%C3%A2lnire%20cu%20echipa%20Ecomlab%20pentru%20magazinul%20meu%20online." target="_blank" rel="noopener">
-      Programează o întâlnire
-      <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <nav class="nav__links" id="nav-links" aria-label="Navigație principală">
+      <a href="#proiecte">Proiecte</a>
+      <a href="#servicii">Servicii</a>
+      <a href="#cum-lucram">Cum lucrăm</a>
+      <a href="#rezultate">Rezultate</a>
+      <a href="#pachete">Pachete</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn--primary nav__cta-mobile" href="#contact">Vreau analiza gratuită</a>
+    </nav>
+
+    <a class="btn btn--primary nav__cta" href="#contact">Vreau analiza gratuită</a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Deschide meniul" data-nav-toggle>
+      <span></span><span></span>
+    </button>
   </header>
 
   <main id="top">
 
-    <!-- ── Hero ──────────────────────────────────────────────── -->
+    <!-- ── 1. Hero ───────────────────────────────────────────── -->
     <section class="hero" id="hero">
-      <div class="hero__social" data-reveal>
-        <span class="hero__avatars">
-          <img src="assets/avatar-1.webp" alt="" width="44" height="44" loading="eager">
-          <img src="assets/avatar-2.webp" alt="" width="44" height="44" loading="eager">
-          <img src="assets/avatar-3.webp" alt="" width="44" height="44" loading="eager">
-        </span>
-        <span>50+ Clienți mulțumiți</span>
-      </div>
-
-      <h1 class="hero__title" data-reveal style="--d:.08s">
+      <h1 class="hero__title" data-reveal>
         <span class="hero__line">Creștem
           <img class="hero__chip" src="assets/inline-phone.webp" alt="" width="82" height="64" loading="eager">
-          <em>Vânzările</em></span>
+          <em>vânzările</em></span>
         <span class="hero__line"><img class="hero__chip hero__chip--wide" src="assets/inline-desk.webp" alt="" width="325" height="256" loading="eager">
-          Magazinelor Online</span>
+          magazinelor online.</span>
       </h1>
 
-      <p class="hero__sub" data-reveal style="--d:.16s">Ajutăm magazinele online să lanseze și să scaleze cu reclame profitabile
-        și design care vinde — rapid, clar și fără complicații.</p>
+      <p class="hero__sub" data-reveal style="--d:.08s">Reclame care aduc profit. Design care vinde.
+        Pentru magazine online care vor să crească serios.</p>
 
-      <div data-reveal style="--d:.24s">
-        <a class="btn btn--primary btn--lg" href="https://wa.me/40728541017?text=Salut!%20A%C8%99%20vrea%20s%C4%83%20programez%20o%20%C3%AEnt%C3%A2lnire%20cu%20echipa%20Ecomlab%20pentru%20magazinul%20meu%20online." target="_blank" rel="noopener">
-          Programează o întâlnire
+      <div data-reveal style="--d:.16s">
+        <a class="btn btn--primary btn--lg" href="#contact">
+          Vreau analiza gratuită
           <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
+        <p class="hero__note">Gratuit. Fără obligații. Primești analiza chiar dacă nu lucrăm împreună.</p>
       </div>
-
     </section>
 
     <!-- ── Logo-uri clienți ──────────────────────────────────── -->
@@ -76,12 +73,10 @@
       <div class="marquee" data-marquee>
         <div class="marquee__track">
           <img src="assets/clients/thehive.svg" alt="The Hive" height="44">
-          <img src="assets/clients/vitarise.svg" alt="VitaRise" height="44">
-          <img src="assets/clients/biovicta.png" alt="Biovicta" height="44">
           <img src="assets/clients/piky.svg" alt="Piky" height="44">
-          <img src="assets/clients/thelex.svg" alt="The Lex" height="44">
-          <img src="assets/clients/dingaraj.svg" alt="DIN GARAJ" height="40">
           <img src="assets/clients/porcelux.svg" alt="Porcelux" height="40">
+          <img src="assets/clients/dingaraj.svg" alt="DIN GARAJ" height="40">
+          <img src="assets/clients/vitarise.svg" alt="VitaRise" height="44">
         </div>
       </div>
     </section>
@@ -90,131 +85,189 @@
     <div class="ribbons" aria-hidden="true">
       <div class="ribbon ribbon--green">
         <div class="ribbon__track">
-          <span>Brand Design</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>50+ Branduri</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i>
+          <span>Reclame Video</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i>
         </div>
       </div>
       <div class="ribbon ribbon--black">
         <div class="ribbon__track ribbon__track--reverse">
-          <span>Vânzări Crescute</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>50+ Branduri</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Web Design</span><i class="spark"></i>
+          <span>Vânzări Crescute</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Web Design</span><i class="spark"></i>
         </div>
       </div>
     </div>
 
-    <!-- ── Misiune ───────────────────────────────────────────── -->
-    <section class="mission" id="misiune">
-      <p class="mission__statement" data-reveal>Construim branduri memorabile și sisteme de reclame
-        care aduc clienți constant. Totul cu focus pe vânzări,
-        claritate <span class="mission__fade">și execuție rapidă.</span></p>
-
-      <ul class="mission__tags" data-reveal style="--d:.12s" role="list">
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4L12 3z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Branding</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="m4.5 7 7.5 5.5L19.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Email Marketing</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.75" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>Meta Ads</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20c1-4.5 3-9.5 8.5-13.5M14 4.5 19.5 10M14 4.5c2.5-1 5-1 5.5.5s-.5 3-1.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Web Design</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="6.5" width="12" height="11" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 10.5 5-2.5v8l-5-2.5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Reclame Video</li>
-        <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Strategie</li>
-      </ul>
-
-      <div data-reveal style="--d:.2s">
-        <a class="btn btn--primary btn--lg" href="https://wa.me/40728541017?text=Salut!%20A%C8%99%20vrea%20s%C4%83%20programez%20o%20%C3%AEnt%C3%A2lnire%20cu%20echipa%20Ecomlab%20pentru%20magazinul%20meu%20online." target="_blank" rel="noopener">
-          Programează o întâlnire
-          <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </section>
-
-    <!-- ── Proiecte recente ──────────────────────────────────── -->
+    <!-- ── 2. Proiecte recente ───────────────────────────────── -->
     <section class="projects" id="proiecte">
-      <p class="kicker" data-reveal>(Cum lucrăm?)</p>
+      <p class="kicker" data-reveal>(Uită-te și judecă singur)</p>
       <h2 class="ghost ghost--xl" aria-label="Proiecte recente" data-reveal>Proiecte recente</h2>
+      <p class="section-lead" data-reveal>Reclame, branduri și site-uri construite de noi.</p>
 
-      <div class="projects__grid">
-        <!-- Pentru clipuri: adaugă data-video="assets/clips/nume.mp4" pe .project — playerul pornește automat. -->
-        <figure class="project" data-reveal>
-          <img src="assets/project-thehive.webp" alt="The Hive — magazin online de miere naturală" loading="lazy" width="1400" height="1400">
-        </figure>
-        <figure class="project" data-reveal style="--d:.08s">
-          <img src="assets/project-piky.webp" alt="Piky — produse pentru animale de companie" loading="lazy" width="1400" height="1400">
-        </figure>
-        <figure class="project" data-reveal>
-          <img src="assets/project-racebox.webp" alt="Racebox — performance center auto" loading="lazy" width="1400" height="1400">
-        </figure>
-        <figure class="project" data-reveal style="--d:.08s">
-          <img src="assets/project-porcelux.webp" alt="Porcelux — gresie și piatră naturală" loading="lazy" width="1400" height="1400">
-        </figure>
+      <!-- Reclame video -->
+      <div class="media-block">
+        <h3 class="media-block__title" data-reveal>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="5.5" width="13" height="13" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 10 6-3v10l-6-3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          Reclame video
+        </h3>
+        <p class="media-block__sub" data-reveal>Filmate cu actori reali. Scenariu, filmare, montaj — totul făcut de noi.</p>
+        <!-- Pentru clipuri: adaugă data-video="assets/clips/nume.mp4" pe .reel — pornește automat, fără sunet. -->
+        <div class="reel-grid" data-reveal>
+          <figure class="reel" data-video=""><span class="reel__soon">Clip în curând</span></figure>
+          <figure class="reel" data-video=""><span class="reel__soon">Clip în curând</span></figure>
+          <figure class="reel" data-video=""><span class="reel__soon">Clip în curând</span></figure>
+          <figure class="reel" data-video=""><span class="reel__soon">Clip în curând</span></figure>
+          <figure class="reel" data-video=""><span class="reel__soon">Clip în curând</span></figure>
+          <figure class="reel" data-video=""><span class="reel__soon">Clip în curând</span></figure>
+        </div>
+      </div>
+
+      <!-- Reclame foto -->
+      <div class="media-block">
+        <h3 class="media-block__title" data-reveal>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="10" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="m4.5 17 4.5-4 3.5 3 3-2.5 4 3.5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          Reclame foto
+        </h3>
+        <!-- Înlocuiește .shot-urile cu <img> cu formatele reale de reclamă -->
+        <div class="shot-grid" data-reveal>
+          <figure class="shot"><span class="reel__soon">În curând</span></figure>
+          <figure class="shot"><span class="reel__soon">În curând</span></figure>
+          <figure class="shot"><span class="reel__soon">În curând</span></figure>
+          <figure class="shot"><span class="reel__soon">În curând</span></figure>
+          <figure class="shot"><span class="reel__soon">În curând</span></figure>
+          <figure class="shot"><span class="reel__soon">În curând</span></figure>
+        </div>
+      </div>
+
+      <!-- Site-uri -->
+      <div class="media-block">
+        <h3 class="media-block__title" data-reveal>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="13" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 20.5h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Site-uri
+        </h3>
+        <div class="projects__grid">
+          <!-- Adaugă la fiecare o linie reală de rezultat, ex: „Site nou. Comenzi cu 40% mai multe în 3 luni.” -->
+          <figure class="project" data-reveal>
+            <img src="assets/project-thehive.webp" alt="The Hive — magazin online de miere naturală" loading="lazy" width="1400" height="1400">
+            <figcaption class="project__caption"><strong>The Hive</strong> — magazin de miere naturală, site orientat pe conversie</figcaption>
+          </figure>
+          <figure class="project" data-reveal style="--d:.08s">
+            <img src="assets/project-piky.webp" alt="Piky — produse pentru animale de companie" loading="lazy" width="1400" height="1400">
+            <figcaption class="project__caption"><strong>Piky</strong> — produse pentru animale, pagini de produs care vând</figcaption>
+          </figure>
+          <figure class="project" data-reveal>
+            <img src="assets/project-racebox.webp" alt="Racebox — performance center auto" loading="lazy" width="1400" height="1400">
+            <figcaption class="project__caption"><strong>Racebox</strong> — performance center auto, site nou cap-coadă</figcaption>
+          </figure>
+          <figure class="project" data-reveal style="--d:.08s">
+            <img src="assets/project-porcelux.webp" alt="Porcelux — gresie și piatră naturală" loading="lazy" width="1400" height="1400">
+            <figcaption class="project__caption"><strong>Porcelux</strong> — gresie și piatră naturală, catalog clar și rapid</figcaption>
+          </figure>
+        </div>
       </div>
 
       <div class="section-cta" data-reveal>
-        <a class="btn btn--primary btn--lg" href="https://wa.me/40728541017?text=Salut!%20A%C8%99%20vrea%20s%C4%83%20programez%20o%20%C3%AEnt%C3%A2lnire%20cu%20echipa%20Ecomlab%20pentru%20magazinul%20meu%20online." target="_blank" rel="noopener">
-          Programează o întâlnire
+        <a class="btn btn--primary btn--lg" href="#contact">
+          Vreau analiza gratuită
           <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </section>
 
-    <!-- ── Servicii (fără imagini) ───────────────────────────── -->
+    <!-- ── 3. Ce facem ───────────────────────────────────────── -->
     <section class="services" id="servicii">
-      <p class="kicker" data-reveal>(Ce facem?)</p>
-      <h2 class="ghost" aria-label="Servicii" data-reveal>Servicii</h2>
+      <p class="kicker" data-reveal>(Ce facem)</p>
+      <h2 class="ghost" aria-label="Ce facem" data-reveal>Ce facem</h2>
+      <p class="section-lead" data-reveal>Reclama îl oprește. Brandul îl face să aibă încredere.
+        Site-ul îl face să cumpere. <span class="lead-fade">Dacă una dintre ele e slabă, clientul se pierde pe drum.</span></p>
 
       <ol class="services__list" role="list">
         <li class="service" data-reveal>
           <span class="service__index" aria-hidden="true">01</span>
-          <h3 class="service__name">Branding</h3>
-          <p class="service__desc">Poziționare, identitate vizuală și mesaje care fac brandul tău imposibil de confundat.</p>
+          <h3 class="service__name">Reclame video și foto</h3>
+          <p class="service__desc">Filmăm, montăm și scriem reclame gândite pentru un singur lucru: să aducă vânzări. Cu actori reali, nu cu clipuri luate de pe internet. Testăm continuu, ca să știm sigur ce merge.</p>
           <svg class="service__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="service" data-reveal style="--d:.05s">
           <span class="service__index" aria-hidden="true">02</span>
-          <h3 class="service__name">Web Design</h3>
-          <p class="service__desc">Site-uri și pagini de produs orientate pe conversie: rapide, clare, construite să vândă.</p>
+          <h3 class="service__name">Branding</h3>
+          <p class="service__desc">Logo, culori, mesaj, poziționare. Ca omul să simtă că are de-a face cu un brand serios, nu cu un magazin oarecare.</p>
           <svg class="service__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="service" data-reveal style="--d:.1s">
           <span class="service__index" aria-hidden="true">03</span>
-          <h3 class="service__name">Meta Ads</h3>
-          <p class="service__desc">Campanii Facebook &amp; Instagram testate și scalate pe date, nu pe presupuneri.</p>
+          <h3 class="service__name">Site și pagini de produs</h3>
+          <p class="service__desc">Site rapid și clar, construit ca omul să ajungă ușor la butonul de comandă. Fără pași inutili.</p>
           <svg class="service__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="service" data-reveal style="--d:.15s">
           <span class="service__index" aria-hidden="true">04</span>
-          <h3 class="service__name">Reclame Video</h3>
-          <p class="service__desc">Scriem, filmăm și edităm reclame care opresc scroll-ul și aduc comenzi.</p>
+          <h3 class="service__name">Campanii pe Facebook, Instagram și TikTok</h3>
+          <p class="service__desc">Setăm și administrăm campaniile. Mutăm bugetul zilnic spre ce vinde.</p>
           <svg class="service__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="service" data-reveal style="--d:.2s">
           <span class="service__index" aria-hidden="true">05</span>
-          <h3 class="service__name">Email Marketing</h3>
-          <p class="service__desc">Fluxuri și campanii care transformă abonații în clienți fideli, pe repeat.</p>
+          <h3 class="service__name">E-mail marketing</h3>
+          <p class="service__desc">Mesaje automate care îi aduc înapoi pe cei care au vizitat, dar n-au cumpărat.</p>
           <svg class="service__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
         <li class="service" data-reveal style="--d:.25s">
           <span class="service__index" aria-hidden="true">06</span>
           <h3 class="service__name">Strategie</h3>
-          <p class="service__desc">Plan clar pe 90 de zile: obiective, unghiuri de comunicare și pași de execuție.</p>
+          <p class="service__desc">Un plan clar pe 90 de zile. Ce facem, în ce ordine și de ce.</p>
           <svg class="service__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
       </ol>
     </section>
 
-    <!-- ── Testimoniale ──────────────────────────────────────── -->
-    <section class="testimonials" id="testimoniale">
-      <p class="kicker" data-reveal>(De ce clienții iubesc Ecomlab)</p>
-      <h2 class="ghost ghost--xl" aria-label="Testimoniale" data-reveal>Testimoniale</h2>
+    <!-- ── 4. Cum lucrăm ─────────────────────────────────────── -->
+    <section class="process" id="cum-lucram">
+      <p class="kicker" data-reveal>(Pas cu pas)</p>
+      <h2 class="ghost" aria-label="Cum lucrăm" data-reveal>Cum lucrăm</h2>
+
+      <ol class="process__grid" role="list">
+        <li class="step" data-reveal>
+          <span class="step__num" aria-hidden="true">Pasul 1</span>
+          <h3>Analizăm</h3>
+          <p>Ne uităm la reclamele tale, la site și la ce fac concurenții. Îți spunem exact unde pierzi bani.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.06s">
+          <span class="step__num" aria-hidden="true">Pasul 2</span>
+          <h3>Facem planul</h3>
+          <p>Stabilim ce mesaje folosim, cui ne adresăm și ce testăm în primele 90 de zile.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.12s">
+          <span class="step__num" aria-hidden="true">Pasul 3</span>
+          <h3>Producem</h3>
+          <p>Scriem scenariile, filmăm și montăm reclamele. Refacem ce trebuie refăcut la brand și la site.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.18s">
+          <span class="step__num" aria-hidden="true">Pasul 4</span>
+          <h3>Testăm și creștem</h3>
+          <p>Ce merge, creștem. Ce nu merge, oprim. Iar când o reclamă începe să obosească, următoarea e deja pregătită.</p>
+        </li>
+      </ol>
+
+      <p class="process__note" data-reveal>Ne vedem de două ori pe lună. Primești un raport clar, cu cifrele care contează:
+        cât ai investit, cât ai vândut, cât te costă un client.</p>
+    </section>
+
+    <!-- ── 5. Rezultate ──────────────────────────────────────── -->
+    <section class="testimonials" id="rezultate">
+      <p class="kicker" data-reveal>(De ce clienții rămân)</p>
+      <h2 class="ghost ghost--xl" aria-label="Rezultate" data-reveal>Rezultate</h2>
 
       <div class="testimonials__layout">
         <aside class="stats" data-reveal>
           <div class="stat">
+            <strong>500+</strong>
+            <span>reclame filmate</span>
+          </div>
+          <div class="stat">
             <strong>15+</strong>
-            <span>Proiecte finalizate</span>
+            <span>branduri construite</span>
           </div>
           <div class="stat">
             <strong>7%</strong>
-            <span>Rata de Conversie Medie pe site</span>
-          </div>
-          <div class="stat">
-            <strong>500+</strong>
-            <span>Reclame filmate</span>
+            <span>rată medie de conversie pe site-urile făcute de noi</span>
           </div>
         </aside>
 
@@ -227,10 +280,10 @@
               <p class="slide__quote">„Nu a fost doar marketing. A fost un upgrade real de brand și vânzări.”</p>
               <footer>
                 <strong>Mihnea Turloiu-Firica</strong>
-                <span>Founder, dingaraj.ro</span>
+                <span>Fondator, dingaraj.ro</span>
               </footer>
             </blockquote>
-            <!-- PLACEHOLDER: înlocuiește cu testimoniale reale când le ai -->
+            <!-- PLACEHOLDER: înlocuiește cu al doilea testimonial real (nume complet + poză) -->
             <blockquote class="slide">
               <p class="slide__brand">THE HIVE</p>
               <p class="slide__quote">„Reclamele și site-ul nou au transformat un produs local într-un brand care vinde în toată țara.”</p>
@@ -239,6 +292,7 @@
                 <span>Miere naturală</span>
               </footer>
             </blockquote>
+            <!-- PLACEHOLDER: înlocuiește cu al treilea testimonial real (nume complet + poză) -->
             <blockquote class="slide">
               <p class="slide__brand">PIKY</p>
               <p class="slide__quote">„Execuție rapidă, comunicare clară și campanii care și-au atins targetul lună de lună.”</p>
@@ -261,69 +315,173 @@
       </div>
     </section>
 
-    <!-- ── FAQ ───────────────────────────────────────────────── -->
+    <!-- ── 6. Pachete ────────────────────────────────────────── -->
+    <section class="packs" id="pachete">
+      <p class="kicker" data-reveal>(Cum putem lucra împreună)</p>
+      <h2 class="ghost" aria-label="Pachete" data-reveal>Pachete</h2>
+
+      <div class="packs__grid">
+        <article class="pack pack--featured" data-reveal>
+          <h3 class="pack__name">Growth Pack</h3>
+          <p class="pack__tagline">Reclame care vând, produse lună de lună.</p>
+          <p class="pack__label">Ce primești în fiecare lună:</p>
+
+          <div class="pack__item">
+            <h4><i class="spark spark--green" aria-hidden="true"></i>Strategie</h4>
+            <p>Analizăm magazinul, piața și concurența. Stabilim ce mesaje folosim și cui ne adresăm.</p>
+          </div>
+          <div class="pack__item">
+            <h4><i class="spark spark--green" aria-hidden="true"></i>20 de reclame video</h4>
+            <ul>
+              <li><strong>Filmate cu actori reali</strong>, nu clipuri luate de pe internet</li>
+              <li>Scenariu scris de noi pentru fiecare clip</li>
+              <li>Filmare, montaj, subtitrare, muzică</li>
+              <li>Formate adaptate pentru Facebook, Instagram și TikTok</li>
+              <li>Mai multe începuturi testate pe același clip</li>
+            </ul>
+          </div>
+          <div class="pack__item">
+            <h4><i class="spark spark--green" aria-hidden="true"></i>10 reclame foto</h4>
+            <ul>
+              <li>Grafică făcută pentru reclame, nu pentru feed</li>
+              <li>Mesaje și oferte diferite, ca să vedem ce prinde</li>
+            </ul>
+          </div>
+          <div class="pack__item">
+            <h4><i class="spark spark--green" aria-hidden="true"></i>Administrarea paginilor de social media</h4>
+            <p>Postări, descrieri și publicare. Pagina ta rămâne activă și arată a brand serios.</p>
+          </div>
+          <div class="pack__item">
+            <h4><i class="spark spark--green" aria-hidden="true"></i>Monitorizare și raportare</h4>
+            <ul>
+              <li>Două întâlniri lunare de analiză</li>
+              <li>Raport lunar cu cifrele care contează</li>
+            </ul>
+          </div>
+
+          <a class="btn btn--primary btn--lg pack__cta" href="#contact">
+            Vreau Growth Pack
+            <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+
+        <article class="pack" data-reveal style="--d:.08s">
+          <h3 class="pack__name">Ofertă personalizată</h3>
+          <p class="pack__tagline">Pentru cine are nevoie de mai mult.</p>
+
+          <p class="pack__text">Branding, site nou, optimizarea paginilor de produs, setarea și administrarea campaniilor,
+            e-mail marketing — le facem pe toate. Dar le construim în jurul tău, nu într-un pachet fix.</p>
+          <p class="pack__text">Poate pornești de la zero și ai nevoie de brand și site înainte de reclame.<br>
+            Poate ai deja reclame și îți trebuie doar cineva care să administreze campaniile.<br>
+            Poate le vrei pe toate.</p>
+          <p class="pack__text"><strong>Vorbim 30 de minute și îți facem o ofertă exactă.</strong></p>
+
+          <a class="btn btn--dark btn--lg pack__cta" href="#contact">
+            Cere o ofertă personalizată
+            <svg class="btn__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ── 7. Întrebări frecvente ────────────────────────────── -->
     <section class="faq" id="faq">
       <p class="kicker" data-reveal>(FAQs)</p>
-      <h2 class="faq__title" data-reveal>Ai întrebări?</h2>
-      <p class="faq__sub" data-reveal style="--d:.08s">Avem răspunsuri pentru toate neclaritățile tale</p>
+      <h2 class="faq__title" data-reveal>Întrebări frecvente</h2>
 
       <div class="faq__grid">
         <details class="faq__item" data-reveal>
-          <summary>Cu ce tip de business-uri lucrați?<span class="faq__icon" aria-hidden="true"></span></summary>
-          <p>Lucrăm exclusiv cu magazine online și branduri eCommerce care au deja un produs valid și își doresc să atragă mai mulți clienți prin reclame. Ne adresăm brandurilor care vor să crească structurat, nu celor care caută soluții rapide fără o strategie clară.</p>
+          <summary>În cât timp văd rezultate?<span class="faq__icon" aria-hidden="true"></span></summary>
+          <p>Primele semnale apar de obicei în 30-60 de zile. În prima lună testăm intens, ca să găsim rapid reclamele care merg. Cine îți promite rezultate în două săptămâni, te minte.</p>
         </details>
         <details class="faq__item" data-reveal style="--d:.05s">
-          <summary>În cât timp pot apărea rezultatele?<span class="faq__icon" aria-hidden="true"></span></summary>
-          <p>Rezultatele diferă de la un brand la altul, însă în majoritatea cazurilor primele semnale apar în 30–60 de zile. În această perioadă testăm, optimizăm și ajustăm strategia de reclame și conversie pentru a construi o bază solidă de creștere.</p>
+          <summary>Ce buget de reclame îmi trebuie?<span class="faq__icon" aria-hidden="true"></span></summary>
+          <p>Depinde de produs și de obiective. Îl stabilim împreună la prima discuție.</p>
         </details>
         <details class="faq__item" data-reveal style="--d:.1s">
-          <summary>Oferiți doar reclame sau și brand &amp; website?<span class="faq__icon" aria-hidden="true"></span></summary>
-          <p>Nu ne limităm doar la reclame. Construim un sistem complet care include poziționare de brand, website orientat pe conversii, reclame plătite și email marketing, astfel încât toate elementele să lucreze împreună pentru vânzări.</p>
+          <summary>Trebuie să semnez pe termen lung?<span class="faq__icon" aria-hidden="true"></span></summary>
+          <p>Nu. Preferăm să rămâi pentru că funcționează, nu pentru că ești obligat prin contract.</p>
         </details>
         <details class="faq__item" data-reveal style="--d:.15s">
-          <summary>Există un contract pe termen lung?<span class="faq__icon" aria-hidden="true"></span></summary>
-          <p>Nu lucrăm cu contracte rigide sau obligații pe termen lung de la început. Preferăm să construim colaborarea pe bază de rezultate și încredere, cu posibilitatea de a continua dacă există potrivire și progres real.</p>
+          <summary>Fac deja campanii cu altcineva. Merge?<span class="faq__icon" aria-hidden="true"></span></summary>
+          <p>Da. Mulți dintre clienții noștri au deja pe cineva care le administrează campaniile. Noi îi dăm materialele cu care să lucreze.</p>
         </details>
         <details class="faq__item" data-reveal style="--d:.2s">
-          <summary>Ce buget minim de reclame este necesar?<span class="faq__icon" aria-hidden="true"></span></summary>
-          <p>Bugetul de reclame se stabilește împreună, în funcție de obiective, industrie și stadiul brandului. Recomandăm un buget de testare care să permită optimizarea campaniilor și obținerea unor date relevante, înainte de scalare.</p>
+          <summary>De ce atât de multe reclame în fiecare lună?<span class="faq__icon" aria-hidden="true"></span></summary>
+          <p>Din 10 reclame testate, doar 1-2 merg cu adevărat. Ca să găsești 3-4 bune, trebuie să testezi multe. Cu 5 reclame pe lună nu testezi — ghicești.</p>
         </details>
         <details class="faq__item" data-reveal style="--d:.25s">
-          <summary>Cum începem colaborarea?<span class="faq__icon" aria-hidden="true"></span></summary>
-          <p>Colaborarea începe cu un audit gratuit și un call scurt, în care analizăm brandul, reclamele și website-ul. În urma acestui pas stabilim dacă există potrivire și propunem o strategie clară pentru următoarele luni.</p>
+          <summary>Filmați voi sau folosiți clipuri de-a gata?<span class="faq__icon" aria-hidden="true"></span></summary>
+          <p>Filmăm noi. Cu actori reali, cu scenariu scris de noi, cu montaj făcut de noi. Asta e diferența dintre o reclamă și o postare.</p>
+        </details>
+        <details class="faq__item" data-reveal style="--d:.3s">
+          <summary>Lucrați cu orice fel de business?<span class="faq__icon" aria-hidden="true"></span></summary>
+          <p>Nu. Doar magazine online.</p>
         </details>
       </div>
     </section>
 
-    <!-- ── Contact ───────────────────────────────────────────── -->
+    <!-- ── 8. Contact ────────────────────────────────────────── -->
     <section class="contact" id="contact">
       <h2 class="ghost ghost--xl" aria-label="Contact" data-reveal>Contact</h2>
 
       <div class="contact__panel" data-reveal>
         <div class="contact__info">
-          <h3>Vrei să colaborăm?</h3>
-          <p class="contact__links">
-            <a href="tel:+40728541017">+40 728 541 017</a>
-            <a href="mailto:office.ecomlab@gmail.com">office.ecomlab@gmail.com</a>
-          </p>
-          <p class="contact__note">Completează formularul si te vom contacta!</p>
+          <h3>Îți analizăm gratuit reclamele.</h3>
+          <p class="contact__note">Ne uităm la ultimele tale reclame și îți spunem, concret:</p>
+          <ul class="contact__list">
+            <li>care dintre ele nu mai aduc nimic, deși încă plătești pentru ele</li>
+            <li>de ce ți-au crescut costurile în ultimele luni</li>
+            <li>ce ai putea schimba, chiar dacă nu lucrezi cu noi</li>
+          </ul>
+          <p class="contact__promise"><strong>Gratuit. Fără prezentare de vânzare. Primești analiza în 3 zile.</strong></p>
         </div>
 
         <form class="contact__form" id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
           <input type="hidden" name="access_key" value="84e49df0-ad20-4c5c-bcd6-d8776a1a3275">
-          <input type="hidden" name="subject" value="Mesaj nou de pe site-ul Ecomlab">
+          <input type="hidden" name="subject" value="Cerere analiză gratuită — site Ecomlab">
           <input type="hidden" name="from_name" value="Formular Ecomlab">
           <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field">
 
           <div class="field">
-            <label for="f-name">Numele tău</label>
+            <label for="f-name">Nume</label>
             <input id="f-name" name="name" type="text" placeholder="Scrie aici numele" autocomplete="name" required>
             <p class="field__error" id="f-name-error" aria-live="polite"></p>
           </div>
           <div class="field">
-            <label for="f-email">Adresa de e-mail</label>
+            <label for="f-email">E-mail</label>
             <input id="f-email" name="email" type="email" placeholder="Scrie adresa de e-mail" autocomplete="email" required>
             <p class="field__error" id="f-email-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-phone">Telefon</label>
+            <input id="f-phone" name="phone" type="tel" placeholder="07xx xxx xxx" autocomplete="tel">
+            <p class="field__error" id="f-phone-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-shop">Adresa magazinului tău</label>
+            <input id="f-shop" name="shop" type="text" placeholder="www.magazinultau.ro (sau „încă nu am magazin”)">
+            <p class="field__error" id="f-shop-error" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-sales">Cât vinzi lunar?</label>
+            <select id="f-sales" name="sales">
+              <option value="" selected>Alege...</option>
+              <option>Încă nu am pornit</option>
+              <option>Sub 10.000 €</option>
+              <option>10.000–50.000 €</option>
+              <option>Peste 50.000 €</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-budget">Cât investești lunar în reclame?</label>
+            <select id="f-budget" name="budget">
+              <option value="" selected>Alege...</option>
+              <option>Nimic momentan</option>
+              <option>Sub 3.000 lei</option>
+              <option>3.000–10.000 lei</option>
+              <option>Peste 10.000 lei</option>
+            </select>
           </div>
           <div class="field">
             <label for="f-message">Cum te putem ajuta?</label>
@@ -348,25 +506,33 @@
   <footer class="footer">
     <div class="footer__marquee" aria-hidden="true">
       <div class="footer__marquee-track">
-        <span>office.ecomlab@gmail.com</span><i class="spark spark--dark"></i>
-        <span>office.ecomlab@gmail.com</span><i class="spark spark--dark"></i>
-        <span>office.ecomlab@gmail.com</span><i class="spark spark--dark"></i>
-        <span>office.ecomlab@gmail.com</span><i class="spark spark--dark"></i>
+        <span>contact@ecomlab.ro</span><i class="spark spark--dark"></i>
+        <span>contact@ecomlab.ro</span><i class="spark spark--dark"></i>
+        <span>contact@ecomlab.ro</span><i class="spark spark--dark"></i>
+        <span>contact@ecomlab.ro</span><i class="spark spark--dark"></i>
       </div>
     </div>
 
     <div class="footer__panel">
       <div class="footer__cols">
-        <nav class="footer__col" aria-label="Rețele sociale">
-          <p class="footer__label">Socializare</p>
-          <a href="#" rel="noopener">LinkedIn</a>
+        <div class="footer__col footer__col--brand">
+          <img src="assets/logo.svg" alt="Ecomlab" width="150" height="34" class="footer__logo" loading="lazy">
+          <p class="footer__tagline">Creștem vânzările magazinelor online.</p>
+        </div>
+        <nav class="footer__col" aria-label="Contact">
+          <p class="footer__label">Contact</p>
+          <a href="mailto:contact@ecomlab.ro">contact@ecomlab.ro</a>
+        </nav>
+        <nav class="footer__col" aria-label="Legături">
+          <p class="footer__label">Legături</p>
           <a href="#" rel="noopener">Instagram</a>
           <a href="#" rel="noopener">TikTok</a>
+          <a href="#" rel="noopener">LinkedIn</a>
         </nav>
         <nav class="footer__col" aria-label="Informații legale">
-          <p class="footer__label">Informatii legale</p>
-          <a href="#">Politica Confidentialitate</a>
-          <a href="#">Termeni si Conditii</a>
+          <p class="footer__label">Legal</p>
+          <a href="#">Politica de confidențialitate</a>
+          <a href="#">Termeni și condiții</a>
         </nav>
       </div>
 

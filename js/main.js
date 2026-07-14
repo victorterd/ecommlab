@@ -4,6 +4,28 @@
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ── Meniu mobil ─────────────────────────────────────────────── */
+  const navToggle = document.querySelector("[data-nav-toggle]");
+  const navLinks = document.getElementById("nav-links");
+  if (navToggle && navLinks) {
+    const close = () => {
+      navLinks.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Deschide meniul");
+    };
+    navToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(open));
+      navToggle.setAttribute("aria-label", open ? "Închide meniul" : "Deschide meniul");
+    });
+    navLinks.addEventListener("click", (e) => {
+      if (e.target.closest("a")) close();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  }
+
   /* ── Reveal on scroll ──────────────────────────────────────── */
   const revealEls = document.querySelectorAll("[data-reveal]");
   if (reducedMotion || !("IntersectionObserver" in window)) {
@@ -42,13 +64,13 @@
     .querySelectorAll(".marquee__track, .ribbon__track, .footer__marquee-track")
     .forEach(fillTrack);
 
-  /* ── Proiecte: sloturi pregătite pentru clipuri ──────────────
-     Adaugă data-video="assets/clips/nume.mp4" pe <figure class="project">
+  /* ── Clipuri: sloturi pregătite în grile ─────────────────────
+     Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project
      și clipul pornește automat (mut, în buclă) când intră în viewport. */
-  const projectClips = document.querySelectorAll(".project[data-video]");
-  projectClips.forEach((card) => {
+  document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");
     if (!src) return;
+    const placeholder = card.querySelector(".reel__soon");
     const poster = card.querySelector("img");
     const video = document.createElement("video");
     video.src = src;
@@ -61,6 +83,7 @@
       video.setAttribute("aria-label", poster.alt || "Clip proiect");
       poster.replaceWith(video);
     } else {
+      if (placeholder) placeholder.remove();
       card.appendChild(video);
     }
     if (reducedMotion) {
@@ -136,6 +159,10 @@
 
     const nameInput = form.querySelector("#f-name");
     const emailInput = form.querySelector("#f-email");
+    const phoneInput = form.querySelector("#f-phone");
+    const shopInput = form.querySelector("#f-shop");
+    const salesInput = form.querySelector("#f-sales");
+    const budgetInput = form.querySelector("#f-budget");
     const messageInput = form.querySelector("#f-message");
     const honeyInput = form.querySelector('[name="botcheck"]');
 
@@ -193,10 +220,14 @@
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
             access_key: "84e49df0-ad20-4c5c-bcd6-d8776a1a3275",
-            subject: "Mesaj nou de pe site-ul Ecomlab",
+            subject: "Cerere analiză gratuită — site Ecomlab",
             from_name: "Formular Ecomlab",
             name,
             email,
+            telefon: phoneInput ? phoneInput.value.trim() : "",
+            magazin: shopInput ? shopInput.value.trim() : "",
+            vanzari_lunare: salesInput ? salesInput.value : "",
+            buget_reclame: budgetInput ? budgetInput.value : "",
             message,
             botcheck: honeyInput ? honeyInput.value : "",
           }),
@@ -207,7 +238,7 @@
         form.reset();
         validators.forEach(({ input }) => setError(input, ""));
         if (fallback) fallback.hidden = true;
-        status.textContent = "Mulțumim! Mesajul a fost trimis — revenim în cel mai scurt timp.";
+        status.textContent = "Mulțumim! Am primit cererea — primești analiza în cel mult 3 zile.";
         status.classList.add("is-ok");
       } catch (error) {
         // Serviciul de email e indisponibil: nu pierdem mesajul — îl oferim
@@ -215,8 +246,10 @@
         status.textContent =
           "Serviciul de trimitere e momentan indisponibil. Mesajul tău e păstrat mai jos — trimite-l cu un click:";
         status.classList.add("is-err");
-        const subject = encodeURIComponent("Mesaj de pe site-ul Ecomlab");
-        const bodyText = encodeURIComponent(`Nume: ${name}\nEmail: ${email}\n\n${message}`);
+        const subject = encodeURIComponent("Cerere analiză gratuită — site Ecomlab");
+        const bodyText = encodeURIComponent(
+          `Nume: ${name}\nEmail: ${email}\nTelefon: ${phoneInput ? phoneInput.value.trim() : ""}\nMagazin: ${shopInput ? shopInput.value.trim() : ""}\nVânzări lunare: ${salesInput ? salesInput.value : ""}\nBuget reclame: ${budgetInput ? budgetInput.value : ""}\n\n${message}`
+        );
         if (fallbackMail) {
           fallbackMail.href = `mailto:office.ecomlab@gmail.com?subject=${subject}&body=${bodyText}`;
         }
