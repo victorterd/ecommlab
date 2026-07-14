@@ -384,9 +384,10 @@ button { font: inherit; }
 
 .reel-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: clamp(0.8rem, 1.6vw, 1.25rem);
-  margin-top: 1.75rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
+  max-width: 900px;
+  margin: 1.75rem auto 0;
 }
 
 .reel {
@@ -446,8 +447,8 @@ button { font: inherit; }
 
 .shot-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: clamp(0.8rem, 1.6vw, 1.25rem);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.75rem);
   margin-top: 1.75rem;
 }
 
