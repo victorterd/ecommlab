@@ -329,6 +329,9 @@ button { font: inherit; }
 
 .ghost--xl { font-size: clamp(4rem, 14.5vw, 15rem); }
 
+/* pentru titluri lungi care altfel ies din pagină */
+.ghost--fit { font-size: clamp(2.6rem, 10.8vw, 10.5rem); }
+
 .section-lead {
   max-width: 56ch;
   margin: 0 auto;
@@ -437,9 +440,9 @@ button { font: inherit; }
 }
 
 .project img {
-  aspect-ratio: 1 / 1;
+  /* dimensiunea/proporția originală a capturii, fără crop */
   width: 100%;
-  object-fit: cover;
+  height: auto;
   border-radius: var(--radius-card);
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
