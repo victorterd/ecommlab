@@ -12,18 +12,18 @@ js/main.js        — interacțiuni (reveal, marquee, slider, formular)
 assets/           — imagini, logo-uri, video, fonturi
 ```
 
-## Cum adaugi clipurile la Proiecte
+## Cum adaugi clipuri la „Reclame video”
 
-Fiecare proiect din secțiunea „Proiecte recente” e un `<figure class="project">`.
-Pune fișierul clipului în `assets/clips/` și adaugă atributul `data-video`:
+Pune fișierul în `assets/clips/` (ideal H.264, 720×1280, sub ~6MB) și adaugă în
+grila `.reel-grid` din `index.html`:
 
 ```html
-<figure class="project" data-video="assets/clips/thehive.mp4">
-  <img src="assets/project-thehive.webp" alt="..." ...>
-</figure>
+<figure class="reel" data-video="assets/clips/nume.mp4"></figure>
 ```
 
-Clipul pornește automat (mut, în buclă) când intră în viewport; imaginea existentă devine poster.
+Clipul pornește automat (fără sunet, în buclă) când intră în viewport și are
+controale native — vizitatorul poate porni sunetul sau opri redarea; pauza dată
+manual e respectată (nu repornește singur).
 
 ## Formular de contact
 

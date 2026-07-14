@@ -115,9 +115,11 @@
     .querySelectorAll(".marquee__track, .ribbon__track, .footer__marquee-track")
     .forEach(fillTrack);
 
-  /* ── Clipuri: sloturi pregătite în grile ─────────────────────
-     Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project
-     și clipul pornește automat (mut, în buclă) când intră în viewport. */
+  /* ── Clipuri: autoplay mut + controale pentru sunet/pauză ────
+     Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
+     Clipul pornește automat (fără sunet) când intră în viewport;
+     vizitatorul poate porni sunetul sau opri clipul din controale,
+     iar pauza dată manual e respectată. */
   document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");
     if (!src) return;
@@ -128,29 +130,45 @@
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
+    video.controls = true;
     video.preload = "metadata";
+    video.setAttribute("controlslist", "nodownload");
     if (poster) {
       video.poster = poster.currentSrc || poster.src;
       video.setAttribute("aria-label", poster.alt || "Clip proiect");
       poster.replaceWith(video);
     } else {
       if (placeholder) placeholder.remove();
+      video.setAttribute("aria-label", "Reclamă video Ecomlab");
       card.appendChild(video);
     }
-    if (reducedMotion) {
-      video.controls = true;
-    } else if ("IntersectionObserver" in window) {
-      const cio = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) video.play().catch(() => {});
-            else video.pause();
-          });
-        },
-        { threshold: 0.3 }
-      );
-      cio.observe(video);
-    }
+
+    if (reducedMotion || !("IntersectionObserver" in window)) return;
+
+    let ioPausing = false;
+    let userPaused = false;
+    video.addEventListener("pause", () => {
+      if (!ioPausing) userPaused = true;
+    });
+    video.addEventListener("play", () => {
+      userPaused = false;
+    });
+
+    const cio = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!userPaused) video.play().catch(() => {});
+          } else if (!video.paused) {
+            ioPausing = true;
+            video.pause();
+            ioPausing = false;
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    cio.observe(video);
   });
 
   /* ── Slider testimoniale ─────────────────────────────────────── */
