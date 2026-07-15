@@ -360,8 +360,10 @@ button { font: inherit; }
 .media-block__title {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.65rem;
   font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  text-align: center;
 }
 
 .media-block__title svg { color: var(--green); flex: none; }
