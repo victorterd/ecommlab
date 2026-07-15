@@ -478,6 +478,7 @@ button { font: inherit; }
 
 .project__caption {
   padding: 0.9rem 0.25rem 0;
+  text-align: center;
   font-size: 0.98rem;
   color: var(--muted);
 }
