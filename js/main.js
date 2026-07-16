@@ -79,18 +79,13 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  /* ── Clipuri: autoplay mut; pe mobil, buton play/pauză cu sunet ─
+  /* ── Clipuri: autoplay mut; pe mobil, play -> player normal ────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
      Clipul pornește automat, fără sunet, când intră în viewport, pe
      orice dispozitiv, și se oprește când iese din ecran. Pe mobil
-     apare un buton central: dacă e pe pauză, redă cu sunet (oprind
-     sunetul altui clip redat); dacă redă, îl pune pe pauză. Iconița
-     urmează starea reală a clipului (evenimentele play/pause). */
-  const ICON_PLAY =
-    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7-11-7z" fill="currentColor"/></svg>';
-  const ICON_PAUSE =
-    '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="7" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>';
-
+     apare un buton central de play; la atingere, clipul primește
+     sunet, butonul dispare definitiv, iar clipul devine un player
+     video normal, cu controale native (pauză, volum, derulare). */
   const allClipVideos = [];
   document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");
@@ -117,38 +112,33 @@
     }
     allClipVideos.push(video);
 
-    // Iconița urmează sunetul, nu doar redarea: clipurile mute (chiar
-    // dacă redau ambiental) arată mereu „play” — pauza apare doar
-    // când clipul chiar are sunet pornit.
+    // Odată ce un clip primește sunet, oprește orice alt clip cu sunet
+    // pornit — indiferent dacă redarea a fost reluată din butonul propriu
+    // sau din controalele native (ambele declanșează evenimentul "play").
+    video.addEventListener("play", () => {
+      if (video.muted) return;
+      allClipVideos.forEach((v) => {
+        if (v !== video && !v.muted) {
+          v.muted = true;
+          v.pause();
+        }
+      });
+    });
+
     const playBtn = document.createElement("button");
     playBtn.type = "button";
     playBtn.className = "reel__play";
-    const syncIcon = () => {
-      const active = !video.muted && !video.paused;
-      playBtn.innerHTML = active ? ICON_PAUSE : ICON_PLAY;
-      playBtn.setAttribute("aria-label", active ? "Pauzează" : "Redă cu sunet");
-    };
-    syncIcon();
-    video.addEventListener("play", syncIcon);
-    video.addEventListener("pause", syncIcon);
-    video.addEventListener("volumechange", syncIcon);
+    playBtn.setAttribute("aria-label", "Redă cu sunet");
+    playBtn.innerHTML =
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7-11-7z" fill="currentColor"/></svg>';
     playBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       video.dataset.userControlled = "true";
-      if (video.muted) {
-        allClipVideos.forEach((v) => {
-          if (v !== video && !v.muted) {
-            v.muted = true;
-            v.pause();
-          }
-        });
-        video.muted = false;
-        video.play().catch(() => {});
-      } else if (video.paused) {
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
+      video.muted = false;
+      video.controls = true;
+      video.setAttribute("controlslist", "nodownload");
+      playBtn.remove();
+      video.play().catch(() => {});
     });
     card.appendChild(playBtn);
 

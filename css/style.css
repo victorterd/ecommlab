@@ -1416,7 +1416,11 @@ button { font: inherit; }
   /* Pe mobil: hero doar cu text, fără imagini inline */
   .hero__title { font-size: clamp(2.1rem, 10vw, 2.9rem); max-width: 14ch; }
   .hero__chip { display: none; }
-  .hero__sub { font-size: 1.05rem; }
+  /* dimensionat ca subtitlul să încapă pe 2 rânduri (nu 3) pe telefoane 360-430px */
+  .hero__sub { font-size: 13.5px; }
+
+  /* dimensionat ca linia de sub titlurile de secțiune să încapă pe 1 rând */
+  .section-lead { font-size: 14.5px; }
 
   .reel-grid { grid-template-columns: repeat(2, 1fr); }
   .shot-grid { grid-template-columns: repeat(2, 1fr); }
