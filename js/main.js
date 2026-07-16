@@ -79,11 +79,13 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  /* ── Clipuri: autoplay mut, în buclă ──────────────────────────
+  /* ── Clipuri: autoplay mut; pe mobil, buton de play cu sunet ───
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
-     Clipul pornește automat, fără sunet, când intră în viewport
-     (desktop și mobil deopotrivă) și se oprește când iese din ecran.
-     Fără controale, fără buton de sunet — doar clipul. */
+     Clipul pornește automat, fără sunet, când intră în viewport, pe
+     orice dispozitiv, și se oprește când iese din ecran. Pe mobil
+     apare un buton central de play — la atingere, clipul pornește
+     cu sunet (și oprește sunetul oricărui alt clip redat). */
+  const unmutedVideos = [];
   document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");
     if (!src) return;
@@ -107,6 +109,29 @@
       video.setAttribute("aria-label", "Reclamă video Ecomlab");
       card.appendChild(video);
     }
+
+    const playBtn = document.createElement("button");
+    playBtn.type = "button";
+    playBtn.className = "reel__play";
+    playBtn.setAttribute("aria-label", "Pornește cu sunet");
+    playBtn.innerHTML =
+      '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14l11-7-11-7z" fill="currentColor"/></svg>';
+    playBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      unmutedVideos.forEach((v) => {
+        if (v !== video) {
+          v.muted = true;
+          v.pause();
+        }
+      });
+      video.muted = false;
+      video.play().catch(() => {});
+      if (!unmutedVideos.includes(video)) unmutedVideos.push(video);
+    });
+    video.addEventListener("volumechange", () => {
+      playBtn.hidden = !video.muted;
+    });
+    card.appendChild(playBtn);
 
     if (reducedMotion) return;
 
