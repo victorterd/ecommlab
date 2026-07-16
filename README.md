@@ -22,9 +22,13 @@ grila `.reel-grid` din `index.html`:
 ```
 
 Clipul pornește automat, fără sunet, când intră în viewport (desktop și mobil
-deopotrivă) și se oprește când iese din ecran — fără controale, fără buton de
-sunet. Alternează clipurile noi cu cele vechi în grilă, ca să nu fie două la
-rând din același set.
+deopotrivă) și se oprește când iese din ecran. Pe mobil (≤640px) apare un buton
+central play/pauză: cât timp clipul e mut, arată „play” — atins, îi dă sunet
+(oprind sunetul oricărui alt clip redat); cât timp are sunet, butonul devine
+„pauză”. Odată atins, clipul respectiv nu mai e gestionat automat de scroll —
+rămâne pe pauză până e atins din nou. Pe desktop nu apare niciun buton.
+Alternează clipurile noi cu cele vechi în grilă, ca să nu fie două la rând din
+același set.
 
 ## Formular de contact
 
