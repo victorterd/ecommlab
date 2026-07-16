@@ -18,12 +18,13 @@ Pune fișierul în `assets/clips/` (ideal H.264, 720×1280, sub ~6MB) și adaug�
 grila `.reel-grid` din `index.html`:
 
 ```html
-<figure class="reel" data-video="assets/clips/nume.mp4"></figure>
+<figure class="reel" data-video="assets/clips/nume.mp4" data-poster="assets/clips/nume-poster.webp"></figure>
 ```
 
-Clipul stă pe poster (generează unul cu ffmpeg și pune-l în `data-poster`) și
-pornește doar la play — cu sunet. Rulează un singur clip odată, se oprește când
-iese din ecran, iar butonul rotund din colț comută sunetul.
+Clipul pornește automat, fără sunet, când intră în viewport (desktop și mobil
+deopotrivă) și se oprește când iese din ecran — fără controale, fără buton de
+sunet. Alternează clipurile noi cu cele vechi în grilă, ca să nu fie două la
+rând din același set.
 
 ## Formular de contact
 

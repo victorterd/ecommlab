@@ -79,12 +79,11 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  /* ── Clipuri: video normal, cu sunet la play ─────────────────
+  /* ── Clipuri: autoplay mut, în buclă ──────────────────────────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
-     Clipul stă pe poster și pornește DOAR când apasă vizitatorul
-     play — cu sunet. Rulează un singur clip odată, iar la scroll
-     în afara ecranului se oprește. */
-  const allClipVideos = [];
+     Clipul pornește automat, fără sunet, când intră în viewport
+     (desktop și mobil deopotrivă) și se oprește când iese din ecran.
+     Fără controale, fără buton de sunet — doar clipul. */
   document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");
     if (!src) return;
@@ -92,11 +91,10 @@
     const poster = card.querySelector("img");
     const video = document.createElement("video");
     video.src = src;
+    video.muted = true;
     video.loop = true;
     video.playsInline = true;
-    video.controls = true;
     video.preload = "metadata";
-    video.setAttribute("controlslist", "nodownload");
     if (card.getAttribute("data-poster")) {
       video.poster = card.getAttribute("data-poster");
     }
@@ -110,49 +108,21 @@
       card.appendChild(video);
     }
 
-    // Buton propriu de sunet — controalele native își ascund volumul
-    // pe playere înguste (mobil), așa că oferim mereu unul vizibil.
-    const ICON_MUTED =
-      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6.5 9H3v6h3.5L11 19V5z" fill="currentColor"/><path d="m16 9.5 5 5m0-5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
-    const ICON_SOUND =
-      '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M11 5 6.5 9H3v6h3.5L11 19V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+    if (reducedMotion) return;
 
-    const soundBtn = document.createElement("button");
-    soundBtn.type = "button";
-    soundBtn.className = "reel__sound";
-    const syncSound = () => {
-      soundBtn.innerHTML = video.muted ? ICON_MUTED : ICON_SOUND;
-      soundBtn.setAttribute("aria-label", video.muted ? "Pornește sunetul" : "Oprește sunetul");
-    };
-    syncSound();
-    soundBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      video.muted = !video.muted;
-      if (!video.muted && video.paused) video.play().catch(() => {});
-    });
-    video.addEventListener("volumechange", syncSound);
-    card.appendChild(soundBtn);
-
-    allClipVideos.push(video);
-
-    // un singur clip rulează odată
-    video.addEventListener("play", () => {
-      allClipVideos.forEach((other) => {
-        if (other !== video && !other.paused) other.pause();
-      });
-    });
-
-    // ieșit din ecran = pauză
     if ("IntersectionObserver" in window) {
       const cio = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!entry.isIntersecting && !video.paused) video.pause();
+            if (entry.isIntersecting) video.play().catch(() => {});
+            else video.pause();
           });
         },
-        { threshold: 0.2 }
+        { threshold: 0.3 }
       );
       cio.observe(video);
+    } else {
+      video.play().catch(() => {});
     }
   });
 
