@@ -79,13 +79,13 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
-  /* ── Clipuri: autoplay mut; pe mobil, play -> player normal ────
+  /* ── Clipuri: autoplay mut; la play -> player normal ───────────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
      Clipul pornește automat, fără sunet, când intră în viewport, pe
-     orice dispozitiv, și se oprește când iese din ecran. Pe mobil
-     apare un buton central de play; la atingere, clipul primește
-     sunet, butonul dispare definitiv, iar clipul devine un player
-     video normal, cu controale native (pauză, volum, derulare). */
+     orice dispozitiv, și se oprește când iese din ecran. Apare un
+     buton central de play; la atingere, clipul primește sunet,
+     butonul dispare definitiv, iar clipul devine un player video
+     normal, cu controale native (pauză, volum, derulare). */
   const allClipVideos = [];
   document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");

@@ -22,14 +22,14 @@ grila `.reel-grid` din `index.html`:
 ```
 
 Clipul pornește automat, fără sunet, când intră în viewport (desktop și mobil
-deopotrivă) și se oprește când iese din ecran. Pe mobil (≤640px) apare un buton
-central de play; la atingere, clipul primește sunet, butonul dispare definitiv,
-iar clipul devine un player video normal, cu controale native ale browserului
-(pauză, volum, derulare) — la fel ca orice video obișnuit. Pornirea unui clip
-cu sunet oprește automat orice alt clip care avea deja sunet, indiferent dacă a
-fost pornit din butonul propriu sau din controalele native. Pe desktop nu apare
-niciun buton. Alternează clipurile noi cu cele vechi în grilă, ca să nu fie
-două la rând din același set.
+deopotrivă) și se oprește când iese din ecran. Apare un buton central de play,
+pe orice dispozitiv; la atingere/click, clipul primește sunet, butonul dispare
+definitiv, iar clipul devine un player video normal, cu controale native ale
+browserului (pauză, volum, derulare) — la fel ca orice video obișnuit. Pornirea
+unui clip cu sunet oprește automat orice alt clip care avea deja sunet,
+indiferent dacă a fost pornit din butonul propriu sau din controalele native.
+Alternează clipurile noi cu cele vechi în grilă, ca să nu fie două la rând din
+același set.
 
 ## Formular de contact
 

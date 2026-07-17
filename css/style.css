@@ -395,9 +395,9 @@ button { font: inherit; }
 
 .reel video { width: 100%; height: 100%; object-fit: cover; }
 
-/* Doar pe mobil: buton central play/pauză, cu sunet la redare */
+/* Buton central play, cu sunet la redare */
 .reel__play {
-  display: none;
+  display: flex;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -418,10 +418,6 @@ button { font: inherit; }
 }
 
 .reel__play:active { transform: translate(-50%, -50%) scale(0.94); }
-
-@media (max-width: 640px) {
-  .reel__play { display: flex; }
-}
 
 .reel__soon {
   display: flex;
