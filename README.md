@@ -91,4 +91,3 @@ linkurile `https://wa.me/40728541017?text=...` din `index.html`.
 - Linkurile sociale din footer (LinkedIn / Instagram / TikTok) sunt `#` momentan.
 - Testimonialele 2 și 3 (The Hive, Piky) sunt placeholder — înlocuiește-le cu citate reale
   (caută `PLACEHOLDER` în `index.html`).
-- Primul articol de blog e de adăugat (vezi „Cum adaugi un articol de blog” mai sus).
