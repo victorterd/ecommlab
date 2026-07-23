@@ -6,10 +6,14 @@ Site static (HTML + CSS + JS, fără build tools). Deschide `index.html` sau gă
 
 ```
 index.html        — pagina completă (toate secțiunile)
+blog.html         — lista de articole
+blog/*.html       — câte o pagină per articol
 css/fonts.css     — fonturi self-hosted (Cal Sans + Hanken Grotesk)
 css/style.css     — design system + stiluri
+css/blog.css      — stiluri specifice blogului (listă + articol)
 js/main.js        — interacțiuni (reveal, marquee, slider, formular)
 assets/           — imagini, logo-uri, video, fonturi
+assets/blog/      — imaginile de copertă ale articolelor
 ```
 
 ## Cum adaugi clipuri la „Reclame video”
@@ -30,6 +34,37 @@ unui clip cu sunet oprește automat orice alt clip care avea deja sunet,
 indiferent dacă a fost pornit din butonul propriu sau din controalele native.
 Alternează clipurile noi cu cele vechi în grilă, ca să nu fie două la rând din
 același set.
+
+## Cum adaugi un articol de blog
+
+1. Pune imaginea de copertă în `assets/blog/` (orice dimensiune — e decupată automat
+   la 16:9, dimensiunea standard folosită de toate articolele; ideal o sursă lată,
+   ex. 1600×900).
+2. Copiază `blog/sablon-articol.html` într-un fișier nou, ex. `blog/numele-articolului.html`.
+3. În fișierul nou, înlocuiește titlul (`<title>`, `og:title`, `<h1>`), descrierea
+   (`meta description`, `og:description`), data, imaginea din `.article__cover` și
+   conținutul din `.article__body`. Șterge `<meta name="robots" content="noindex, nofollow">`
+   (era acolo doar ca șablonul să nu apară în Google).
+4. Adaugă un card corespunzător în grila `.blog-grid` din `blog.html` (șterge
+   `<p class="blog-empty">` dacă e primul articol adăugat):
+
+```html
+<a class="blog-card" href="blog/numele-articolului.html">
+  <div class="blog-card__image">
+    <img src="assets/blog/nume-imagine.webp" alt="Descriere scurtă" width="1600" height="900" loading="lazy">
+  </div>
+  <div class="blog-card__body">
+    <p class="blog-card__date">23 iulie 2026</p>
+    <h2 class="blog-card__title">Titlul articolului</h2>
+    <p class="blog-card__excerpt">1-2 propoziții care rezumă articolul.</p>
+    <span class="blog-card__link">Citește articolul
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+  </div>
+</a>
+```
+
+Articolele noi le adaugi la începutul grilei, ca să apară primele.
 
 ## Formular de contact
 
@@ -54,6 +89,6 @@ linkurile `https://wa.me/40728541017?text=...` din `index.html`.
 ## De completat ulterior
 
 - Linkurile sociale din footer (LinkedIn / Instagram / TikTok) sunt `#` momentan.
-- Paginile „Politica Confidentialitate” și „Termeni si Conditii” sunt `#` momentan.
 - Testimonialele 2 și 3 (The Hive, Piky) sunt placeholder — înlocuiește-le cu citate reale
   (caută `PLACEHOLDER` în `index.html`).
+- Primul articol de blog e de adăugat (vezi „Cum adaugi un articol de blog” mai sus).

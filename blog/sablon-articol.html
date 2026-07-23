@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Titlul articolului — Blog Ecomlab</title>
+  <meta name="description" content="Descrierea scurtă a articolului, 1-2 propoziții, pentru Google și pentru share pe rețele.">
+  <meta property="og:title" content="Titlul articolului — Blog Ecomlab">
+  <meta property="og:description" content="Descrierea scurtă a articolului, 1-2 propoziții, pentru Google și pentru share pe rețele.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://ecomlab.ro/assets/blog/nume-imagine.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon-180.png">
+  <link rel="preload" href="../assets/fonts/calsans-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-300-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/blog.css">
+</head>
+<body>
+
+  <!-- ── Meniu fix ─────────────────────────────────────────────── -->
+  <header class="nav" data-nav>
+    <a class="nav__brand" href="../index.html" aria-label="Ecomlab — pagina principală">
+      <img src="../assets/logo.svg" alt="Ecomlab" width="132" height="30">
+    </a>
+
+    <nav class="nav__links" id="nav-links" aria-label="Navigație principală">
+      <a href="../index.html#proiecte">Proiecte</a>
+      <a href="../index.html#servicii">Servicii</a>
+      <a href="../index.html#cum-lucram">Cum lucrăm</a>
+      <a href="../index.html#rezultate">Rezultate</a>
+      <a href="../index.html#pachete">Pachete</a>
+      <a href="../index.html#contact">Contact</a>
+      <a class="btn btn--primary nav__cta-mobile" href="../index.html#contact">Vreau analiza gratuită</a>
+    </nav>
+
+    <a class="btn btn--primary nav__cta" href="../index.html#contact">Vreau analiza gratuită</a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Deschide meniul" data-nav-toggle>
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <article class="article">
+      <a class="article__back" href="../blog.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Înapoi la blog
+      </a>
+
+      <p class="article__meta">23 iulie 2026</p>
+      <h1 class="article__title">Titlul articolului aici</h1>
+
+      <figure class="article__cover">
+        <img src="../assets/blog/nume-imagine.webp" alt="Descriere scurtă a imaginii" width="1600" height="900">
+      </figure>
+
+      <div class="article__body">
+        <p><strong>Acesta e un șablon de articol</strong>, nu conținut publicat. Șterge acest paragraf și
+          scrie conținutul real aici. Structura de mai jos (H2, listă, citat) e opțională — păstrează
+          doar ce ai nevoie pentru articolul respectiv.</p>
+
+        <h2>Un subtitlu de secțiune</h2>
+        <p>Paragraf normal de text. Poți folosi <strong>text îngroșat</strong> sau
+          <a href="../index.html#contact">linkuri către site</a> oriunde e nevoie.</p>
+
+        <ul>
+          <li>Punct de listă unu</li>
+          <li>Punct de listă doi</li>
+          <li>Punct de listă trei</li>
+        </ul>
+
+        <blockquote>Un citat sau o idee de evidențiat poate arăta așa.</blockquote>
+
+        <h3>Un subtitlu mai mic</h3>
+        <p>Alt paragraf de încheiere.</p>
+      </div>
+    </article>
+  </main>
+
+  <!-- ── Footer ────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer__marquee" aria-hidden="true">
+      <div class="footer__marquee-track">
+        <div class="mq"><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i></div>
+        <div class="mq" aria-hidden="true"><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i></div>
+      </div>
+    </div>
+
+    <div class="footer__panel">
+      <div class="footer__cols">
+        <div class="footer__col footer__col--brand">
+          <img src="../assets/logo.svg" alt="Ecomlab" width="150" height="34" class="footer__logo" loading="lazy">
+          <p class="footer__tagline">Creștem vânzările magazinelor online.</p>
+        </div>
+        <nav class="footer__col" aria-label="Contact">
+          <p class="footer__label">Contact</p>
+          <a href="mailto:contact@ecomlab.ro">contact@ecomlab.ro</a>
+        </nav>
+        <nav class="footer__col" aria-label="Legături">
+          <p class="footer__label">Legături</p>
+          <a href="../blog.html">Blog</a>
+          <a href="#" rel="noopener">Instagram</a>
+          <a href="#" rel="noopener">TikTok</a>
+          <a href="#" rel="noopener">LinkedIn</a>
+        </nav>
+        <nav class="footer__col" aria-label="Informații legale">
+          <p class="footer__label">Legal</p>
+          <a href="../politica-confidentialitate.html">Politica de confidențialitate</a>
+          <a href="../termeni-si-conditii.html">Termeni și condiții</a>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© <span data-year>2026</span> Ecomlab. Toate drepturile rezervate</p>
+        <a class="footer__top" href="#top">Back to top
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5m0 0-6 6m6-6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <img class="footer__wordmark" src="../assets/wordmark-white.png" alt="" loading="lazy" width="2715" height="519">
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
