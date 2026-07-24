@@ -66,6 +66,15 @@ același set.
 
 Articolele noi le adaugi la începutul grilei, ca să apară primele.
 
+Adaugă și un `<url>` nou pentru articol în `sitemap.xml`.
+
+## SEO: robots.txt și sitemap.xml
+
+`robots.txt` permite indexarea întregului site și trimite spre `sitemap.xml`.
+`sitemap.xml` listează paginile publice (acasă, blog, articole, pagini legale) —
+actualizează-l când adaugi o pagină nouă sau un articol nou. Pagina șablon
+(`blog/sablon-articol.html`) nu apare în sitemap și are `noindex, nofollow`.
+
 ## Formular de contact
 
 Formularul trimite prin **Web3Forms** (client-side, merge pe Vercel sau orice hosting
