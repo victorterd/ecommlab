@@ -79,6 +79,26 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
+  /* ── WhatsApp sticky: apare după ce treci de secțiunea cu logo-uri ── */
+  const waSticky = document.querySelector(".wa-sticky");
+  const clientsSection = document.querySelector(".clients");
+  if (waSticky && clientsSection) {
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      waSticky.classList.add("is-visible");
+    } else {
+      const waIo = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const scrolledPast = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+            waSticky.classList.toggle("is-visible", scrolledPast);
+          });
+        },
+        { threshold: 0 }
+      );
+      waIo.observe(clientsSection);
+    }
+  }
+
   /* ── Clipuri: autoplay mut; la play -> player normal ───────────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
      Clipul pornește automat, fără sunet, când intră în viewport, pe

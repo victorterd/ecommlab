@@ -93,8 +93,10 @@ Dacă serviciul nu răspunde, vizitatorul primește automat linkuri precompletat
 ## Butonul WhatsApp sticky
 
 Elementul `.wa-sticky` din `index.html` (poza + numele lui Victor Prodan) e fixat jos,
-pe mijlocul ecranului, vizibil tot timpul cât utilizatorul dă scroll — pe orice
-dispozitiv, inclusiv mobil. Deschide WhatsApp la +40 728 541 017 cu mesaj precompletat — schimbă numărul, poza
+pe mijlocul ecranului — pe orice dispozitiv, inclusiv mobil. Apare abia după ce
+utilizatorul trece de secțiunea cu logo-uri clienți (`.clients`), gestionat de un
+IntersectionObserver în `js/main.js`; dacă revine sus, dispare din nou. Deschide
+WhatsApp la +40 728 541 017 cu mesaj precompletat — schimbă numărul, poza
 (`assets/victor-avatar.webp`), numele sau mesajul direct în `index.html`.
 
 ## De completat ulterior

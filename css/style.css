@@ -1297,11 +1297,12 @@ button { font: inherit; }
 }
 
 /* ── WhatsApp sticky ───────────────────────────────────────────── */
+/* Ascuns până treci de secțiunea cu logo-uri clienți (vezi js: .is-visible) */
 .wa-sticky {
   position: fixed;
   left: 50%;
   bottom: clamp(0.75rem, 2vw, 1.5rem);
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(16px);
   z-index: 80;
   display: flex;
   align-items: center;
@@ -1312,10 +1313,18 @@ button { font: inherit; }
   text-decoration: none;
   border-radius: 999px;
   box-shadow: 0 14px 34px -14px var(--green-soft);
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.25s var(--ease-out), opacity 0.35s var(--ease-out);
 }
 
-.wa-sticky:hover {
+.wa-sticky.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.wa-sticky.is-visible:hover {
   transform: translateX(-50%) translateY(-4px);
   box-shadow: 0 20px 40px -14px var(--green-soft);
 }
@@ -1534,4 +1543,6 @@ button { font: inherit; }
   .footer__marquee-track { animation: none; }
 
   .btn, .slider__btn, .project img, .service::before, .step, .step::before, .step::after { transition: none; }
+
+  .wa-sticky { transition: none; }
 }
