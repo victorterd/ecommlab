@@ -1299,9 +1299,9 @@ button { font: inherit; }
 /* ── WhatsApp sticky ───────────────────────────────────────────── */
 .wa-sticky {
   position: fixed;
-  top: 50%;
-  right: clamp(0.75rem, 2vw, 1.5rem);
-  transform: translateY(-50%);
+  left: 50%;
+  bottom: clamp(0.75rem, 2vw, 1.5rem);
+  transform: translateX(-50%);
   z-index: 80;
   display: flex;
   align-items: center;
@@ -1316,7 +1316,7 @@ button { font: inherit; }
 }
 
 .wa-sticky:hover {
-  transform: translateY(-50%) translateX(-4px);
+  transform: translateX(-50%) translateY(-4px);
   box-shadow: 0 20px 40px -14px var(--green-soft);
 }
 
@@ -1351,36 +1351,13 @@ button { font: inherit; }
   color: var(--ink);
 }
 
-@media (max-width: 640px) {
-  .wa-sticky {
-    position: fixed;
-    padding: 0;
-    gap: 0;
-    box-shadow: none;
-    background: none;
-  }
-
-  .wa-sticky__avatar {
-    width: 54px;
-    height: 54px;
-    box-shadow: 0 10px 26px -12px rgba(0, 0, 0, 0.45);
-  }
-
-  .wa-sticky__text { display: none; }
-
-  .wa-sticky__icon {
-    display: flex;
-    position: absolute;
-    right: -4px;
-    bottom: -4px;
-    width: 26px;
-    height: 26px;
-    background: var(--green);
-    color: var(--ink);
-    border: 2px solid #fff;
-  }
-
-  .wa-sticky__icon svg { width: 13px; height: 13px; }
+@media (max-width: 400px) {
+  .wa-sticky { gap: 0.55rem; padding: 0.4rem 0.9rem 0.4rem 0.4rem; }
+  .wa-sticky__avatar { width: 44px; height: 44px; }
+  .wa-sticky__text { font-size: 0.78rem; }
+  .wa-sticky__text strong { font-size: 0.9rem; }
+  .wa-sticky__icon { width: 28px; height: 28px; }
+  .wa-sticky__icon svg { width: 15px; height: 15px; }
 }
 
 /* ── Popup cookies ─────────────────────────────────────────────── */
