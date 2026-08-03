@@ -1349,15 +1349,18 @@ button { font: inherit; }
   border-radius: 50%;
   background: #fff;
   color: var(--ink);
+  overflow: hidden;
 }
+
+.wa-sticky__icon svg { flex: none; width: 16px; height: 16px; }
 
 @media (max-width: 400px) {
   .wa-sticky { gap: 0.55rem; padding: 0.4rem 0.9rem 0.4rem 0.4rem; }
   .wa-sticky__avatar { width: 44px; height: 44px; }
   .wa-sticky__text { font-size: 0.78rem; }
   .wa-sticky__text strong { font-size: 0.9rem; }
-  .wa-sticky__icon { width: 28px; height: 28px; }
-  .wa-sticky__icon svg { width: 15px; height: 15px; }
+  .wa-sticky__icon { width: 26px; height: 26px; }
+  .wa-sticky__icon svg { width: 13px; height: 13px; }
 }
 
 /* ── Popup cookies ─────────────────────────────────────────────── */
