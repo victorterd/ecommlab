@@ -90,10 +90,13 @@ Dacă serviciul nu răspunde, vizitatorul primește automat linkuri precompletat
 > pe domeniul de producție al proiectului (ex. `ecommlab.vercel.app` sau domeniul
 > propriu), care se actualizează la fiecare push.
 
-## Butonul „Programează o întâlnire”
+## Butonul WhatsApp sticky
 
-Deschide WhatsApp la +40 728 541 017 cu mesaj precompletat. Îl poți schimba editând
-linkurile `https://wa.me/40728541017?text=...` din `index.html`.
+Elementul `.wa-sticky` din `index.html` (poza + numele lui Victor Prodan) e fixat pe
+partea dreaptă, pe mijlocul ecranului, vizibil tot timpul cât utilizatorul dă scroll.
+Pe mobil (≤640px) se restrânge la doar avatarul, cu un mic badge WhatsApp suprapus.
+Deschide WhatsApp la +40 728 541 017 cu mesaj precompletat — schimbă numărul, poza
+(`assets/victor-avatar.webp`), numele sau mesajul direct în `index.html`.
 
 ## De completat ulterior
 
