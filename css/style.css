@@ -181,99 +181,6 @@ button { font: inherit; }
 .nav__toggle[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
 .nav__toggle[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
-/* ── Hero ──────────────────────────────────────────────────────── */
-.hero {
-  position: relative;
-  max-width: 1440px;
-  margin-inline: auto;
-  padding: calc(var(--nav-h) + clamp(2.5rem, 6vh, 5rem)) var(--gutter) clamp(4rem, 8vw, 6rem);
-  overflow: hidden;
-}
-
-.hero__glow {
-  position: absolute;
-  z-index: 0;
-  width: 46vw;
-  max-width: 640px;
-  pointer-events: none;
-  user-select: none;
-}
-
-.hero__glow--1 { top: -14%; left: -10%; }
-.hero__glow--2 { top: 2%; right: -14%; width: 34vw; max-width: 480px; opacity: 0.7; }
-
-.hero__title {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-size: clamp(2.3rem, 5.56vw, 80px);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-}
-
-.hero__title em { font-style: normal; color: var(--green); }
-
-.hero__line { display: block; }
-
-.hero__line--underline { position: relative; display: inline-block; }
-
-.hero__underline {
-  position: absolute;
-  left: 0;
-  bottom: -0.24em;
-  width: 100%;
-  height: 0.3em;
-}
-
-.hero__trusted {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(0.9rem, 2vw, 1.75rem);
-  margin-top: clamp(2rem, 4vw, 3rem);
-}
-
-.hero__trusted-label {
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--muted);
-  white-space: nowrap;
-}
-
-.hero__trusted-logos {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.hero__trusted-logos img { width: auto; }
-
-.hero__clips {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(0.8rem, 1.6vw, 1.25rem);
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-}
-
-.hero__cta {
-  position: relative;
-  z-index: 1;
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  text-align: center;
-}
-
-.hero__note {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: var(--muted-2);
-}
-
 /* ── Logo-uri clienți ──────────────────────────────────────────── */
 .clients { padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(2rem, 4vw, 3rem); }
 
@@ -1684,3 +1591,13 @@ button { font: inherit; }
 }
 
 .hero__title em { font-style: normal; color: var(--green); }
+
+.hero__underline-wrap { position: relative; display: inline-block; }
+
+.hero__underline {
+  position: absolute;
+  left: 0;
+  bottom: -0.24em;
+  width: 100%;
+  height: 0.3em;
+}
