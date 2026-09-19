@@ -1672,5 +1672,5 @@ button { font: inherit; }
     padding: 133px 24px 0;
   }
 
-  .hero__title { font-size: clamp(2.2rem, 9vw, 80px); }
+  .hero__title { font-size: clamp(20px, 6.7vw, 80px); }
 }
