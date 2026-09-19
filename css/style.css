@@ -1605,3 +1605,67 @@ button { font: inherit; }
 
   .wa-sticky { transition: none; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   Ecomlab — redesign 2 (pagina principală, de la zero)
+   Sablon fix, lățime 1440 — nu se folosesc pentru sablon.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Navbar ────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  width: 1440px;
+  margin-inline: auto;
+}
+
+.navbar__inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 47px 188px 0;
+}
+
+.navbar__logo { grid-column: 1; justify-self: start; display: inline-flex; }
+
+.navbar__links {
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.navbar__links a {
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  transition: background-color 0.2s;
+}
+
+.navbar__links a:hover { background: rgba(255, 255, 255, 0.08); }
+
+.navbar__cta {
+  grid-column: 3;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--on-light);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.navbar__cta:hover { background: #24ec15; }
