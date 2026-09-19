@@ -1649,6 +1649,14 @@ button { font: inherit; }
   to { stroke-dashoffset: 0; }
 }
 
+.hero__subtitle {
+  margin-top: 41px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #C7C7C7;
+  text-align: center;
+}
+
 /* ── Responsive (redesign 2) ─────────────────────────────────────── */
 @media (max-width: 1080px) {
   .navbar { width: 100%; }
@@ -1691,6 +1699,8 @@ button { font: inherit; }
   }
 
   .hero__title { font-size: clamp(20px, 6.7vw, 80px); }
+
+  .hero__subtitle { font-size: clamp(13px, 4.1vw, 24px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
