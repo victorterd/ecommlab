@@ -79,6 +79,65 @@
     revealEls.forEach((el) => io.observe(el));
   }
 
+  /* ── Marquee logo-uri: drag pentru derulare manuală ────────────
+     Auto-scroll-ul rămâne 100% CSS (fix, fără JS); JS intervine doar
+     cât timp utilizatorul chiar trage, ca să nu reapară bug-urile de
+     lățimi calculate dinamic de dinainte. */
+  document.querySelectorAll(".marquee").forEach((wrap) => {
+    const track = wrap.querySelector(".marquee__track");
+    const group = wrap.querySelector(".mq");
+    if (!track || !group) return;
+
+    let dragging = false;
+    let startX = 0;
+    let startOffset = 0;
+    let groupWidth = 0;
+
+    const currentX = () => {
+      const m = getComputedStyle(track).transform;
+      if (m === "none") return 0;
+      const parts = m.match(/matrix\(([^)]+)\)/);
+      return parts ? parseFloat(parts[1].split(",")[4]) : 0;
+    };
+
+    const wrapOffset = (x) => {
+      if (!groupWidth) return x;
+      let w = x % groupWidth;
+      if (w > 0) w -= groupWidth;
+      return w;
+    };
+
+    wrap.addEventListener("pointerdown", (e) => {
+      dragging = true;
+      groupWidth = group.getBoundingClientRect().width;
+      startX = e.clientX;
+      startOffset = currentX();
+      track.style.animationPlayState = "paused";
+      track.style.transform = `translateX(${startOffset}px)`;
+      wrap.classList.add("is-dragging");
+      wrap.setPointerCapture(e.pointerId);
+    });
+
+    wrap.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      track.style.transform = `translateX(${wrapOffset(startOffset + (e.clientX - startX))}px)`;
+    });
+
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      wrap.classList.remove("is-dragging");
+      const duration = parseFloat(getComputedStyle(track).animationDuration) || 45;
+      const progress = groupWidth ? -currentX() / groupWidth : 0;
+      track.style.transform = "";
+      track.style.animationDelay = `-${progress * duration}s`;
+      track.style.animationPlayState = "running";
+    };
+
+    wrap.addEventListener("pointerup", endDrag);
+    wrap.addEventListener("pointercancel", endDrag);
+  });
+
   /* ── WhatsApp sticky: apare după ce treci de secțiunea cu logo-uri ── */
   const waSticky = document.querySelector(".wa-sticky");
   const clientsSection = document.querySelector(".clients");
