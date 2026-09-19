@@ -6,3 +6,12 @@
   font-display: swap;
   src: url(../assets/fonts/satoshi-variable.woff2) format('woff2');
 }
+
+/* syne — doar pentru h1 (variabil, greutăți 400–800) */
+@font-face {
+  font-family: 'Syne';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url(../assets/fonts/syne-variable.woff2) format('woff2');
+}
