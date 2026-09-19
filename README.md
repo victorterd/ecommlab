@@ -8,7 +8,7 @@ Site static (HTML + CSS + JS, fără build tools). Deschide `index.html` sau gă
 index.html        — pagina completă (toate secțiunile)
 blog.html         — lista de articole
 blog/*.html       — câte o pagină per articol
-css/fonts.css     — fonturi self-hosted (Cal Sans + Hanken Grotesk)
+css/fonts.css     — font self-hosted (Satoshi, variabil, greutăți 300–900)
 css/style.css     — design system + stiluri
 css/blog.css      — stiluri specifice blogului (listă + articol)
 js/main.js        — interacțiuni (reveal, marquee, slider, formular)

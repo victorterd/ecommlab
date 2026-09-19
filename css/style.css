@@ -1,6 +1,6 @@
 /* ════════════════════════════════════════════════════════════════
    Ecomlab — design system
-   Verde brand #1DDA0F · Ink #131313 · Cal Sans / Inter
+   Verde brand #1DDA0F · Ink #131313 · Satoshi
    ════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -15,8 +15,8 @@
   --muted-2: #9ca0a6;
   --dark-panel: #0d0d0d;
 
-  --font-display: "Cal Sans", "Inter", sans-serif;
-  --font-body: "Inter", "Segoe UI", sans-serif;
+  --font-display: "Satoshi", sans-serif;
+  --font-body: "Satoshi", sans-serif;
 
   --radius-card: 28px;
   --radius-panel: 36px;
