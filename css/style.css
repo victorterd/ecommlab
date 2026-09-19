@@ -1669,3 +1669,18 @@ button { font: inherit; }
 }
 
 .navbar__cta:hover { background: #24ec15; }
+
+/* ── Hero ──────────────────────────────────────────────────────── */
+.hero {
+  width: 1440px;
+  margin-inline: auto;
+  padding: 156px 188px 0;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: 80px;
+  line-height: 1.1;
+}
+
+.hero__title em { font-style: normal; color: var(--green); }
