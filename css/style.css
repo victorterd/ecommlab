@@ -1625,10 +1625,21 @@ button { font: inherit; }
 
 .hero__underline {
   position: absolute;
-  left: 0;
+  left: 50%;
   bottom: -0.24em;
-  width: 100%;
+  width: 85%;
   height: 0.3em;
+  transform: translateX(-50%);
+}
+
+.hero__underline path {
+  stroke-dasharray: 650;
+  stroke-dashoffset: 650;
+  animation: hero-underline-draw 0.9s var(--ease-out) 0.3s forwards;
+}
+
+@keyframes hero-underline-draw {
+  to { stroke-dashoffset: 0; }
 }
 
 /* ── Responsive (redesign 2) ─────────────────────────────────────── */
@@ -1673,4 +1684,8 @@ button { font: inherit; }
   }
 
   .hero__title { font-size: clamp(20px, 6.7vw, 80px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__underline path { animation: none; stroke-dashoffset: 0; }
 }
