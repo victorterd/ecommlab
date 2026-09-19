@@ -18,7 +18,7 @@
   <link rel="preload" href="assets/fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/syne-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css?v=3">
-  <link rel="stylesheet" href="css/style.css?v=13">
+  <link rel="stylesheet" href="css/style.css?v=14">
 </head>
 <body>
 
@@ -29,14 +29,19 @@
         <img src="assets/logo-white.svg" alt="Ecomlab" width="165" height="25">
       </a>
 
-      <nav class="navbar__links" aria-label="Navigație principală">
+      <nav class="navbar__links" id="nav-links" aria-label="Navigație principală">
         <a href="#top">Acasă</a>
         <a href="#proiecte">Proiecte</a>
         <a href="#servicii">Servicii</a>
         <a href="#pachete">Pachete</a>
+        <a class="navbar__cta navbar__cta--mobile" href="#contact">Contact</a>
       </nav>
 
       <a class="navbar__cta" href="#contact">Contact</a>
+
+      <button class="navbar__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Deschide meniul" data-nav-toggle>
+        <span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -46,7 +51,7 @@
         <span class="hero__underline-wrap">
           magazinele online
           <svg class="hero__underline" viewBox="0 0 620 24" fill="none" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M4 15C130 3 340 2 616 17" stroke="#1DDA0F" stroke-width="7" stroke-linecap="round"/>
+            <path d="M4 15C130 3 340 2 616 17" stroke="#1DDA0F" stroke-width="7" stroke-linecap="butt"/>
           </svg>
         </span>
       </h1>

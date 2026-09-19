@@ -1577,6 +1577,35 @@ button { font: inherit; }
 
 .navbar__cta:hover { background: #24ec15; }
 
+.navbar__cta--mobile { display: none; }
+
+.navbar__toggle {
+  display: none;
+  grid-column: 3;
+  justify-self: end;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 44px;
+  height: 44px;
+  padding: 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.navbar__toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.navbar__toggle[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+.navbar__toggle[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
 /* ── Hero ──────────────────────────────────────────────────────── */
 .hero {
   width: 1440px;
@@ -1600,4 +1629,48 @@ button { font: inherit; }
   bottom: -0.24em;
   width: 100%;
   height: 0.3em;
+}
+
+/* ── Responsive (redesign 2) ─────────────────────────────────────── */
+@media (max-width: 1080px) {
+  .navbar { width: 100%; }
+
+  .navbar__inner { padding: 24px 24px 0; }
+
+  .navbar__links {
+    position: fixed;
+    top: 78px;
+    left: 50%;
+    width: min(360px, calc(100% - 32px));
+    grid-column: auto;
+    justify-self: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin: 0;
+    padding: 20px 22px 24px;
+    background: #121212;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px -30px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  }
+
+  .navbar__links.is-open { opacity: 1; transform: translateX(-50%); pointer-events: auto; }
+
+  .navbar__links a { width: 100%; font-size: 16px; padding-block: 10px; }
+
+  .navbar__cta { display: none; }
+  .navbar__cta--mobile { display: inline-flex; width: 100%; margin-top: 8px; }
+  .navbar__toggle { display: flex; }
+
+  .hero {
+    width: 100%;
+    padding: 133px 24px 0;
+  }
+
+  .hero__title { font-size: clamp(2.2rem, 9vw, 80px); }
 }
