@@ -258,14 +258,6 @@ button { font: inherit; }
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-.hero__clips img {
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-  border-radius: 18px;
-  background: var(--paper-soft);
-}
-
 .hero__cta {
   position: relative;
   z-index: 1;
