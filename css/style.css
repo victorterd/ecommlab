@@ -239,6 +239,7 @@ button { font: inherit; }
   display: flex;
   width: max-content;
   animation: marquee 45s linear infinite;
+  will-change: transform;
 }
 
 .marquee__track img { height: clamp(34px, 4.6vw, 50px); width: auto; }
@@ -280,6 +281,7 @@ button { font: inherit; }
   display: flex;
   width: max-content;
   animation: marquee 40s linear infinite;
+  will-change: transform;
 }
 
 .ribbon__track--reverse { animation-direction: reverse; }
@@ -1206,6 +1208,7 @@ button { font: inherit; }
   display: flex;
   width: max-content;
   animation: marquee 40s linear infinite;
+  will-change: transform;
 }
 
 .footer__marquee-track span {
