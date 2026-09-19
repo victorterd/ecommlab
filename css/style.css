@@ -1653,6 +1653,7 @@ button { font: inherit; }
   margin-top: 41px;
   font-size: 24px;
   font-weight: 600;
+  line-height: 30px;
   color: #C7C7C7;
   text-align: center;
 }
