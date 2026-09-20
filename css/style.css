@@ -1609,7 +1609,8 @@ button { font: inherit; }
   width: 1440px;
   margin-inline: auto;
   padding: 156px 188px 0;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   text-align: center;
 }
 
