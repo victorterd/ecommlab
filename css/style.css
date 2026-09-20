@@ -1621,7 +1621,7 @@ button { font: inherit; }
   user-select: none;
   opacity: 0;
   animation: hero-glow-in 1.4s var(--ease-out) forwards,
-             hero-glow-float 15s ease-in-out infinite;
+             hero-glow-float 10s ease-in-out infinite;
 }
 
 .hero__glow--1 {
@@ -1636,7 +1636,7 @@ button { font: inherit; }
   --glow-opacity: 0.7;
   --float-x: -24px;
   --float-y: 20px;
-  animation-duration: 1.4s, 12s;
+  animation-duration: 1.4s, 8s;
   animation-delay: 0.2s, 1.6s;
 }
 
