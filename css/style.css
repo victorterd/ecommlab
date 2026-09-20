@@ -1620,15 +1620,34 @@ button { font: inherit; }
   pointer-events: none;
   user-select: none;
   opacity: 0;
-  animation: hero-glow-in 1.4s var(--ease-out) forwards;
+  animation: hero-glow-in 1.4s var(--ease-out) forwards,
+             hero-glow-float 15s ease-in-out infinite;
 }
 
-.hero__glow--1 { top: -14%; left: -10%; width: 640px; --glow-opacity: 1; }
-.hero__glow--2 { top: 2%; right: -14%; width: 480px; --glow-opacity: 0.7; animation-delay: 0.2s; }
+.hero__glow--1 {
+  top: -14%; left: -10%; width: 640px;
+  --glow-opacity: 1;
+  --float-x: 28px;
+  --float-y: -22px;
+  animation-delay: 0s, 1.4s;
+}
+.hero__glow--2 {
+  top: 2%; right: -14%; width: 480px;
+  --glow-opacity: 0.7;
+  --float-x: -24px;
+  --float-y: 20px;
+  animation-duration: 1.4s, 12s;
+  animation-delay: 0.2s, 1.6s;
+}
 
 @keyframes hero-glow-in {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: var(--glow-opacity, 1); transform: scale(1); }
+  from { opacity: 0; scale: 0.9; }
+  to { opacity: var(--glow-opacity, 1); scale: 1; }
+}
+
+@keyframes hero-glow-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: var(--float-x, 24px) var(--float-y, -18px); }
 }
 
 .hero__title {
@@ -1799,5 +1818,5 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .hero__underline path { animation: none; stroke-dashoffset: 0; }
   .hero__title { animation: none; opacity: 1; transform: none; }
-  .hero__glow { animation: none; opacity: var(--glow-opacity, 1); transform: none; }
+  .hero__glow { animation: none; opacity: var(--glow-opacity, 1); scale: none; translate: none; }
 }
