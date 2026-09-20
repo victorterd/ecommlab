@@ -1608,7 +1608,7 @@ button { font: inherit; }
   position: relative;
   width: 1440px;
   margin-inline: auto;
-  padding: 156px 188px 0;
+  padding: 188px 188px 0;
   overflow-x: clip;
   overflow-y: visible;
   text-align: center;
@@ -1690,7 +1690,7 @@ button { font: inherit; }
 .hero__subtitle {
   position: relative;
   z-index: 1;
-  margin-top: 41px;
+  margin-top: 56px;
   font-size: 24px;
   font-weight: 500;
   line-height: 30px;
@@ -1704,7 +1704,7 @@ button { font: inherit; }
   display: flex;
   align-items: center;
   gap: 40px;
-  margin-top: 75px;
+  margin-top: 100px;
   text-align: left;
 }
 
