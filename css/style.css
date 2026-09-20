@@ -1605,13 +1605,34 @@ button { font: inherit; }
 
 /* ── Hero ──────────────────────────────────────────────────────── */
 .hero {
+  position: relative;
   width: 1440px;
   margin-inline: auto;
   padding: 156px 188px 0;
+  overflow: hidden;
   text-align: center;
 }
 
+.hero__glow {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  animation: hero-glow-in 1.4s var(--ease-out) forwards;
+}
+
+.hero__glow--1 { top: -14%; left: -10%; width: 640px; --glow-opacity: 1; }
+.hero__glow--2 { top: 2%; right: -14%; width: 480px; --glow-opacity: 0.7; animation-delay: 0.2s; }
+
+@keyframes hero-glow-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: var(--glow-opacity, 1); transform: scale(1); }
+}
+
 .hero__title {
+  position: relative;
+  z-index: 1;
   font-size: 80px;
   line-height: 1.1;
   opacity: 0;
@@ -1647,6 +1668,8 @@ button { font: inherit; }
 }
 
 .hero__subtitle {
+  position: relative;
+  z-index: 1;
   margin-top: 41px;
   font-size: 24px;
   font-weight: 500;
@@ -1656,6 +1679,8 @@ button { font: inherit; }
 }
 
 .hero__trusted {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   gap: 40px;
@@ -1735,4 +1760,5 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .hero__underline path { animation: none; stroke-dashoffset: 0; }
   .hero__title { animation: none; opacity: 1; transform: none; }
+  .hero__glow { animation: none; opacity: var(--glow-opacity, 1); transform: none; }
 }
