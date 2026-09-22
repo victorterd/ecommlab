@@ -1848,6 +1848,7 @@ button { font: inherit; }
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+  .portfolio__grid--2 { grid-template-columns: 1fr; }
   .portfolio__grid { margin-top: calc(clamp(56px, 26vw, 188px) * -0.319); }
   .portfolio__grid--3,
   .portfolio__grid--2 { margin-top: calc(clamp(56px, 18vw, 188px) * -0.319); }
