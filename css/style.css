@@ -1863,9 +1863,9 @@ button { font: inherit; }
     gap: 16px;
   }
   .portfolio__grid--2 { grid-template-columns: 1fr; }
-  .portfolio__grid { margin-top: calc(clamp(56px, 26vw, 188px) * -0.319); }
+  .portfolio__grid { margin-top: calc(clamp(56px, 26vw, 188px) * -0.35); }
   .portfolio__grid--3,
-  .portfolio__grid--2 { margin-top: calc(clamp(56px, 18vw, 188px) * -0.319); }
+  .portfolio__grid--2 { margin-top: calc(clamp(56px, 18vw, 188px) * -0.35); }
 
   .services { width: 100%; padding: 115px 24px 100px; }
   .services__title { font-size: clamp(56px, 15vw, 188px); }
