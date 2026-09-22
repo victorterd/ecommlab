@@ -26,6 +26,17 @@
     });
   }
 
+  /* ── Navbar: fundal cu blur la scroll ──────────────────────────── */
+  const navbar = document.querySelector(".navbar");
+  if (navbar) {
+    const NAVBAR_SCROLL_THRESHOLD = 8;
+    const onNavbarScroll = () => {
+      navbar.classList.toggle("is-scrolled", window.scrollY > NAVBAR_SCROLL_THRESHOLD);
+    };
+    onNavbarScroll();
+    window.addEventListener("scroll", onNavbarScroll, { passive: true });
+  }
+
   /* ── Smooth scroll cu easing pentru ancore ───────────────────── */
   if (!reducedMotion) {
     // dezactivăm smooth-ul nativ ca să nu se suprapună cu animația noastră
