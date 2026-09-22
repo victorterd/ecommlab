@@ -1709,20 +1709,12 @@ button { font: inherit; }
 .services {
   width: 1440px;
   margin-inline: auto;
-  padding: 65px 188px 140px;
-}
-
-.services__kicker {
-  margin: 0;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--muted);
+  padding: 100px 188px 140px;
 }
 
 .services__title {
   display: block;
-  margin: 12px 0 0;
+  margin: 0;
   text-align: center;
   font-family: 'Syne', var(--font-display);
   font-weight: 700;
@@ -1875,7 +1867,7 @@ button { font: inherit; }
   .portfolio__grid--3,
   .portfolio__grid--2 { margin-top: calc(clamp(56px, 18vw, 188px) * -0.319); }
 
-  .services { width: 100%; padding: 80px 24px 100px; }
+  .services { width: 100%; padding: 115px 24px 100px; }
   .services__title { font-size: clamp(56px, 15vw, 188px); }
   .services__list { margin-top: 40px; }
   .services__item {
