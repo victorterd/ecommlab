@@ -458,82 +458,8 @@ button { font: inherit; }
   padding: clamp(3rem, 6vw, 5rem) var(--gutter);
 }
 
-/* ── Ce facem ──────────────────────────────────────────────────── */
-.services {
-  padding: clamp(4rem, 8vw, 7rem) 0 clamp(5rem, 9vw, 8rem);
-  overflow: hidden;
-}
-
-.services .ghost { margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
-
-.services__list {
-  max-width: var(--container);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-  border-top: 1px solid var(--line);
-}
-
-.service {
-  position: relative;
-  display: grid;
-  grid-template-columns: 4.5rem 1.1fr 1.3fr 3rem;
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  padding: clamp(1.6rem, 3vw, 2.4rem) clamp(0.5rem, 1.5vw, 1.5rem);
-  border-bottom: 1px solid var(--line);
-  transition: background-color 0.3s var(--ease-out);
-}
-
-.service::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--green);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.35s var(--ease-out);
-  z-index: 0;
-}
-
-.service:hover::before { transform: scaleY(1); }
-
-.service > * { position: relative; z-index: 1; }
-
-.service__index {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 1rem;
-  color: var(--muted-2);
-  transition: color 0.3s;
-}
-
-.service__name {
-  font-size: clamp(1.5rem, 3vw, 2.3rem);
-  font-weight: 600;
-  letter-spacing: -0.005em;
-  line-height: 1.12;
-}
-
-.service__desc {
-  color: var(--muted);
-  max-width: 46ch;
-  transition: color 0.3s;
-}
-
-.service__arrow {
-  justify-self: end;
-  color: var(--ink);
-  transform: translateY(4px);
-  opacity: 0.35;
-  transition: transform 0.3s var(--ease-out), opacity 0.3s;
-}
-
-.service:hover .service__name,
-.service:hover .service__index,
-.service:hover .service__desc,
-.service:hover .service__arrow { color: var(--on-light); }
-
-.service:hover .service__arrow { transform: translate(3px, -1px); opacity: 1; }
+/* Secțiunea "Ce facem" a fost complet reconstruită — vezi regulile
+   .services__* de lângă finalul fișierului (redesign 2). */
 
 /* ── Cum lucrăm ────────────────────────────────────────────────── */
 .process {
@@ -1453,10 +1379,6 @@ button { font: inherit; }
 
   .process__grid { grid-template-columns: 1fr 1fr; }
 
-  .service { grid-template-columns: 3rem 1fr 2.5rem; }
-  .service__desc { grid-column: 2; grid-row: 2; }
-  .service__arrow { grid-row: 1; grid-column: 3; }
-
   .testimonials__layout { grid-template-columns: 1fr; }
   .stats { flex-direction: row; flex-wrap: wrap; justify-content: space-between; }
   .stat { flex: 1 1 160px; }
@@ -1505,7 +1427,7 @@ button { font: inherit; }
   .ribbon__track,
   .footer__marquee-track { animation: none; }
 
-  .btn, .slider__btn, .project img, .service::before, .step, .step::before, .step::after { transition: none; }
+  .btn, .slider__btn, .project img, .step, .step::before, .step::after { transition: none; }
 
   .wa-sticky { transition: none; }
 }
@@ -1743,8 +1665,6 @@ button { font: inherit; }
   padding: 65px 188px 0;
 }
 
-.portfolio--last { padding-bottom: 140px; }
-
 .portfolio__title {
   display: block;
   margin: 0;
@@ -1784,6 +1704,109 @@ button { font: inherit; }
   object-fit: cover;
   display: block;
 }
+
+/* ── Servicii ("Ce facem") ────────────────────────────────────────── */
+.services {
+  width: 1440px;
+  margin-inline: auto;
+  padding: 65px 188px 140px;
+}
+
+.services__kicker {
+  margin: 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.services__title {
+  display: block;
+  margin: 12px 0 0;
+  text-align: center;
+  font-family: 'Syne', var(--font-display);
+  font-weight: 700;
+  font-size: 188px;
+  line-height: 1;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 4%, rgba(255, 255, 255, 0));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  user-select: none;
+}
+
+.services__list {
+  list-style: none;
+  margin: 65px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.services__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px 1.1fr 1.3fr 48px;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 8px;
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.3s var(--ease-out);
+}
+
+.services__item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s var(--ease-out);
+  z-index: 0;
+}
+
+.services__item:hover::before { transform: scaleY(1); }
+
+.services__item > * { position: relative; z-index: 1; }
+
+.services__index {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--muted-2);
+  transition: color 0.3s;
+}
+
+.services__name {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  transition: color 0.3s;
+}
+
+.services__desc {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--muted);
+  transition: color 0.3s;
+}
+
+.services__arrow {
+  justify-self: end;
+  color: var(--ink);
+  transform: translateY(4px);
+  opacity: 0.35;
+  transition: transform 0.3s var(--ease-out), opacity 0.3s;
+}
+
+.services__item:hover .services__name,
+.services__item:hover .services__index,
+.services__item:hover .services__desc,
+.services__item:hover .services__arrow { color: var(--on-light); }
+
+.services__item:hover .services__arrow { transform: translate(3px, -1px); opacity: 1; }
 
 /* ── Responsive (redesign 2) ─────────────────────────────────────── */
 @media (max-width: 1080px) {
@@ -1839,7 +1862,6 @@ button { font: inherit; }
   .hero__trusted-logos img { height: 26px; }
 
   .portfolio { width: 100%; padding: 80px 24px 0; }
-  .portfolio--last { padding-bottom: 100px; }
   .portfolio__title { font-size: clamp(56px, 26vw, 188px); }
   .portfolio__title--wide { font-size: clamp(56px, 18vw, 188px); }
   .portfolio__grid,
@@ -1852,6 +1874,18 @@ button { font: inherit; }
   .portfolio__grid { margin-top: calc(clamp(56px, 26vw, 188px) * -0.319); }
   .portfolio__grid--3,
   .portfolio__grid--2 { margin-top: calc(clamp(56px, 18vw, 188px) * -0.319); }
+
+  .services { width: 100%; padding: 80px 24px 100px; }
+  .services__title { font-size: clamp(56px, 15vw, 188px); }
+  .services__list { margin-top: 40px; }
+  .services__item {
+    grid-template-columns: 48px 1fr 40px;
+    gap: 10px 14px;
+    padding: 28px 4px;
+  }
+  .services__name { font-size: clamp(22px, 5.8vw, 32px); }
+  .services__desc { grid-column: 2; grid-row: 2; max-width: none; }
+  .services__arrow { grid-row: 1; grid-column: 3; }
 }
 
 @media (prefers-reduced-motion: reduce) {
