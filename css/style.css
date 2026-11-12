@@ -358,6 +358,16 @@ button { font: inherit; }
 
 .reel video { width: 100%; height: 100%; object-fit: cover; }
 
+/* object-fit: cover decupează cadrul 9:16 ca să umple grila; în fullscreen
+   containerul devine tot ecranul (lat), deci păstrăm "contain" ca să se
+   vadă clipul întreg, letterboxed, nu doar o felie mărită din centru.
+   Reguli separate, nu grupate cu virgulă: un singur pseudo-selector
+   nerecunoscut (ex. :-ms-fullscreen) ar invalida toată lista altfel. */
+.reel video:fullscreen { width: 100%; height: 100%; object-fit: contain; background: #000; }
+.reel video:-webkit-full-screen { width: 100%; height: 100%; object-fit: contain; background: #000; }
+.reel video:-moz-full-screen { width: 100%; height: 100%; object-fit: contain; background: #000; }
+.reel video:-ms-fullscreen { width: 100%; height: 100%; object-fit: contain; background: #000; }
+
 /* Buton central play, cu sunet la redare */
 .reel__play {
   display: flex;
