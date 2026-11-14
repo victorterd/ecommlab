@@ -17,10 +17,43 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
   <link rel="preload" href="assets/fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/syne-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <script>
+    /* rulează înainte de prima afișare: activează animațiile și, o dată pe
+       sesiune, intro-ul. Plasă de siguranță: dacă home.js nu pornește,
+       pagina se afișează imediat, fără animații. */
+    (function () {
+      var d = document.documentElement;
+      d.classList.add("js");
+      try {
+        if (!location.hash && !sessionStorage.getItem("ecl-intro") &&
+            !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          d.classList.add("is-intro");
+        }
+      } catch (e) {}
+      var rescue = function () {
+        if (!d.classList.contains("is-home-ready")) d.classList.add("no-anim");
+        d.classList.remove("is-intro", "intro-exit");
+      };
+      // scripturile „defer” rulează înainte de DOMContentLoaded: dacă home.js
+      // n-a pornit până atunci, nu mai pornește
+      document.addEventListener("DOMContentLoaded", function () {
+        if (!d.classList.contains("is-home-ready")) rescue();
+        setTimeout(rescue, 6000);
+      });
+    })();
+  </script>
   <link rel="stylesheet" href="css/fonts.css?v=3">
   <link rel="stylesheet" href="css/style.css?v=52">
+  <link rel="stylesheet" href="css/home.css?v=1">
 </head>
 <body>
+
+  <!-- ── Intro (o dată pe sesiune) ─────────────────────────────── -->
+  <div class="intro" hidden aria-hidden="true">
+    <img class="intro__logo" src="assets/logo-white.svg" alt="" width="165" height="25">
+    <div class="intro__bar"><span class="intro__bar-fill"></span></div>
+    <span class="intro__count" data-intro-count>0</span>
+  </div>
 
   <!-- ── Navbar ────────────────────────────────────────────────── -->
   <header class="navbar">
@@ -37,7 +70,7 @@
         <a class="navbar__cta navbar__cta--mobile" href="#contact">Contact</a>
       </nav>
 
-      <a class="navbar__cta" href="#contact">Contact</a>
+      <a class="navbar__cta" href="#contact" data-magnetic>Contact</a>
 
       <button class="navbar__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Deschide meniul" data-nav-toggle>
         <span></span><span></span>
@@ -50,13 +83,9 @@
       <img class="hero__glow hero__glow--1" src="assets/glow-1.webp" alt="" aria-hidden="true" loading="eager">
       <img class="hero__glow hero__glow--2" src="assets/glow-2.webp" alt="" aria-hidden="true" loading="eager">
 
-      <h1 class="hero__title">Agenție <em>creativă</em> pentru<br>
-        <span class="hero__underline-wrap">
-          magazinele online
-          <svg class="hero__underline" viewBox="0 0 620 24" fill="none" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M4 15C130 3 340 2 616 17" stroke="#1DDA0F" stroke-width="7" stroke-linecap="butt"/>
-          </svg>
-        </span>
+      <h1 class="hero__title">
+        <span class="hero__line"><span class="hero__line-inner">Agenție <em>creativă</em> pentru</span></span>
+        <span class="hero__line"><span class="hero__line-inner"><span class="hero__underline-wrap">magazinele online<svg class="hero__underline" viewBox="0 0 620 24" fill="none" preserveAspectRatio="none" aria-hidden="true"><path d="M4 15C130 3 340 2 616 17" stroke="#1DDA0F" stroke-width="7" stroke-linecap="butt"/></svg></span></span></span>
       </h1>
 
       <p class="hero__subtitle">Reclame care aduc profit. Design care vinde.<br>Pentru magazine online care vor să crească!</p>
@@ -74,76 +103,98 @@
     </section>
 
     <section class="portfolio" id="proiecte">
-      <h2 class="portfolio__title">Video</h2>
-      <div class="portfolio__grid">
-        <figure class="reel" data-video="assets/clips/clip-29.mp4" data-poster="assets/clips/clip-29-poster.webp"></figure>
-        <figure class="reel" data-video="assets/clips/clip-4.mp4" data-poster="assets/clips/clip-4-poster.webp"></figure>
-        <figure class="reel" data-video="assets/clips/clip-1.mp4" data-poster="assets/clips/clip-1-poster.webp"></figure>
-        <figure class="reel" data-video="assets/clips/clip-4-2.mp4" data-poster="assets/clips/clip-4-2-poster.webp"></figure>
-        <figure class="reel" data-video="assets/clips/clip-7.mp4" data-poster="assets/clips/clip-7-poster.webp"></figure>
-        <figure class="reel" data-video="assets/clips/creativ-3.mp4" data-poster="assets/clips/creativ-3-poster.webp"></figure>
-        <figure class="reel" data-video="assets/clips/clip-2.mp4" data-poster="assets/clips/clip-2-poster.webp"></figure>
-        <figure class="reel" data-video="assets/clips/clip-3-2.mp4" data-poster="assets/clips/clip-3-2-poster.webp"></figure>
+      <h2 class="portfolio__title" data-anim="title">Video</h2>
+      <div class="portfolio__grid" data-stagger="0.08">
+        <figure class="reel" data-anim data-video="assets/clips/clip-29.mp4" data-poster="assets/clips/clip-29-poster.webp"></figure>
+        <figure class="reel" data-anim data-video="assets/clips/clip-4.mp4" data-poster="assets/clips/clip-4-poster.webp"></figure>
+        <figure class="reel" data-anim data-video="assets/clips/clip-1.mp4" data-poster="assets/clips/clip-1-poster.webp"></figure>
+        <figure class="reel" data-anim data-video="assets/clips/clip-4-2.mp4" data-poster="assets/clips/clip-4-2-poster.webp"></figure>
+        <figure class="reel" data-anim data-video="assets/clips/clip-7.mp4" data-poster="assets/clips/clip-7-poster.webp"></figure>
+        <figure class="reel" data-anim data-video="assets/clips/creativ-3.mp4" data-poster="assets/clips/creativ-3-poster.webp"></figure>
+        <figure class="reel" data-anim data-video="assets/clips/clip-2.mp4" data-poster="assets/clips/clip-2-poster.webp"></figure>
+        <figure class="reel" data-anim data-video="assets/clips/clip-3-2.mp4" data-poster="assets/clips/clip-3-2-poster.webp"></figure>
       </div>
     </section>
 
     <section class="portfolio" id="grafica">
-      <h2 class="portfolio__title portfolio__title--wide">Grafica</h2>
-      <div class="portfolio__grid portfolio__grid--3">
-        <figure class="portfolio__shot"><img src="assets/ads/static-1.webp" alt="Reclamă VitaRise – Whey Protein" loading="lazy"></figure>
-        <figure class="portfolio__shot"><img src="assets/ads/static-2.webp" alt="Reclamă VitaRise – Whey Protein certificat bio" loading="lazy"></figure>
-        <figure class="portfolio__shot"><img src="assets/ads/static-4.webp" alt="Reclamă colagen – Ten sănătos" loading="lazy"></figure>
-        <figure class="portfolio__shot"><img src="assets/ads/static-7.webp" alt="Reclamă Osmotica – cap de duș cu 3 funcții" loading="lazy"></figure>
-        <figure class="portfolio__shot"><img src="assets/ads/static-8.webp" alt="Reclamă Osmotica – cap de duș cu filtru" loading="lazy"></figure>
-        <figure class="portfolio__shot"><img src="assets/ads/static-10.webp" alt="Reclamă mop, cu testimonial de client" loading="lazy"></figure>
+      <h2 class="portfolio__title portfolio__title--wide" data-anim="title">Grafica</h2>
+      <div class="portfolio__grid portfolio__grid--3" data-stagger="0.08">
+        <button class="portfolio__shot" type="button" data-anim data-lightbox aria-haspopup="dialog"><img src="assets/ads/static-1.webp" alt="Reclamă VitaRise – Whey Protein" loading="lazy"></button>
+        <button class="portfolio__shot" type="button" data-anim data-lightbox aria-haspopup="dialog"><img src="assets/ads/static-2.webp" alt="Reclamă VitaRise – Whey Protein certificat bio" loading="lazy"></button>
+        <button class="portfolio__shot" type="button" data-anim data-lightbox aria-haspopup="dialog"><img src="assets/ads/static-4.webp" alt="Reclamă colagen – Ten sănătos" loading="lazy"></button>
+        <button class="portfolio__shot" type="button" data-anim data-lightbox aria-haspopup="dialog"><img src="assets/ads/static-7.webp" alt="Reclamă Osmotica – cap de duș cu 3 funcții" loading="lazy"></button>
+        <button class="portfolio__shot" type="button" data-anim data-lightbox aria-haspopup="dialog"><img src="assets/ads/static-8.webp" alt="Reclamă Osmotica – cap de duș cu filtru" loading="lazy"></button>
+        <button class="portfolio__shot" type="button" data-anim data-lightbox aria-haspopup="dialog"><img src="assets/ads/static-10.webp" alt="Reclamă mop, cu testimonial de client" loading="lazy"></button>
       </div>
     </section>
 
     <section class="portfolio" id="website">
-      <h2 class="portfolio__title portfolio__title--wide">Website</h2>
-      <div class="portfolio__grid portfolio__grid--2">
-        <a class="portfolio__shot" href="https://the-hive.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-thehive.webp" alt="Website The Hive" loading="lazy"></a>
-        <a class="portfolio__shot" href="https://racebox.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-racebox.webp" alt="Website Racebox" loading="lazy"></a>
-        <a class="portfolio__shot" href="https://jakiterra.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-jakiterra.webp" alt="Website Jaki Terra" loading="lazy"></a>
-        <a class="portfolio__shot" href="https://beargrills.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-beargrills.webp" alt="Website Bear Grills" loading="lazy"></a>
+      <h2 class="portfolio__title portfolio__title--wide" data-anim="title">Website</h2>
+      <div class="portfolio__grid portfolio__grid--2" data-stagger="0.1">
+        <a class="portfolio__shot" data-anim href="https://the-hive.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-thehive.webp" alt="Website The Hive" loading="lazy"><span class="portfolio__tag">the-hive.ro<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <a class="portfolio__shot" data-anim href="https://racebox.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-racebox.webp" alt="Website Racebox" loading="lazy"><span class="portfolio__tag">racebox.ro<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <a class="portfolio__shot" data-anim href="https://jakiterra.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-jakiterra.webp" alt="Website Jaki Terra" loading="lazy"><span class="portfolio__tag">jakiterra.ro<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        <a class="portfolio__shot" data-anim href="https://beargrills.ro" target="_blank" rel="noopener noreferrer"><img src="assets/project-beargrills.webp" alt="Website Bear Grills" loading="lazy"><span class="portfolio__tag">beargrills.ro<svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       </div>
     </section>
 
-    <section class="services" id="servicii">
-      <h2 class="services__title">Ce facem</h2>
+    <!-- ── Benzi diagonale: viteza urmează scroll-ul ─────────────── -->
+    <div class="ribbons" aria-hidden="true">
+      <div class="ribbon ribbon--green">
+        <div class="ribbon__track">
+          <div class="mq"><span>Reclame Video</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i></div>
+          <div class="mq"><span>Reclame Video</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i></div>
+        </div>
+      </div>
+      <div class="ribbon ribbon--black">
+        <div class="ribbon__track ribbon__track--reverse">
+          <div class="mq"><span>Vânzări Crescute</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Web Design</span><i class="spark"></i></div>
+          <div class="mq"><span>Vânzări Crescute</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Web Design</span><i class="spark"></i><span>Vânzări Crescute</span><i class="spark"></i><span>6 Ani Experiență</span><i class="spark"></i><span>500+ Reclame Filmate</span><i class="spark"></i><span>Brand Design</span><i class="spark"></i><span>Reclame Video</span><i class="spark"></i><span>Web Design</span><i class="spark"></i></div>
+        </div>
+      </div>
+    </div>
 
-      <ol class="services__list" role="list">
-        <li class="services__item">
+    <section class="services" id="servicii">
+      <h2 class="services__title" data-anim="title">Ce facem</h2>
+
+      <ol class="services__list" role="list" data-stagger="0.07">
+        <li class="services__item" data-anim>
+          <a class="services__link" href="#contact" aria-label="Cere o ofertă: Reclame video și foto"></a>
           <span class="services__index">01</span>
           <h3 class="services__name">Reclame video și foto</h3>
           <p class="services__desc">Filmăm, montăm și scriem reclame gândite pentru un singur lucru: să aducă vânzări. Cu actori reali, nu cu clipuri luate de pe internet. Testăm continuu, ca să știm sigur ce merge.</p>
           <svg class="services__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
-        <li class="services__item">
+        <li class="services__item" data-anim>
+          <a class="services__link" href="#contact" aria-label="Cere o ofertă: Branding"></a>
           <span class="services__index">02</span>
           <h3 class="services__name">Branding</h3>
           <p class="services__desc">Logo, culori, mesaj, poziționare. Ca omul să simtă că are de-a face cu un brand serios, nu cu un magazin oarecare.</p>
           <svg class="services__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
-        <li class="services__item">
+        <li class="services__item" data-anim>
+          <a class="services__link" href="#contact" aria-label="Cere o ofertă: Site și pagini de produs"></a>
           <span class="services__index">03</span>
           <h3 class="services__name">Site și pagini de produs</h3>
           <p class="services__desc">Site rapid și clar, construit ca omul să ajungă ușor la butonul de comandă. Fără pași inutili.</p>
           <svg class="services__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
-        <li class="services__item">
+        <li class="services__item" data-anim>
+          <a class="services__link" href="#contact" aria-label="Cere o ofertă: Campanii pe Facebook, Instagram și TikTok"></a>
           <span class="services__index">04</span>
           <h3 class="services__name">Campanii pe Facebook, Instagram și TikTok</h3>
           <p class="services__desc">Setăm și administrăm campaniile. Mutăm bugetul zilnic spre ce vinde.</p>
           <svg class="services__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
-        <li class="services__item">
+        <li class="services__item" data-anim>
+          <a class="services__link" href="#contact" aria-label="Cere o ofertă: E-mail marketing"></a>
           <span class="services__index">05</span>
           <h3 class="services__name">E-mail marketing</h3>
           <p class="services__desc">Mesaje automate care îi aduc înapoi pe cei care au vizitat, dar n-au cumpărat.</p>
           <svg class="services__arrow" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
-        <li class="services__item">
+        <li class="services__item" data-anim>
+          <a class="services__link" href="#contact" aria-label="Cere o ofertă: Strategie"></a>
           <span class="services__index">06</span>
           <h3 class="services__name">Strategie</h3>
           <p class="services__desc">Un plan clar pe 90 de zile. Ce facem, în ce ordine și de ce.</p>
@@ -153,10 +204,10 @@
     </section>
 
     <section class="packages" id="pachete">
-      <h2 class="packages__title">Pachete</h2>
+      <h2 class="packages__title" data-anim="title">Pachete</h2>
 
-      <div class="packages__grid">
-        <article class="packages__card">
+      <div class="packages__grid" data-stagger="0.12">
+        <article class="packages__card" data-anim>
           <h3 class="packages__name">Test</h3>
           <p class="packages__tagline">Testează ce funcționează.</p>
           <p class="packages__desc">Un pachet creat pentru magazinele online care vor să testeze rapid mai multe abordări creative și să descopere ce mesaje funcționează cel mai bine pentru produsul lor.</p>
@@ -172,7 +223,7 @@
           <a class="packages__cta" href="#contact">Vreau pachetul Test</a>
         </article>
 
-        <article class="packages__card packages__card--featured">
+        <article class="packages__card packages__card--featured" data-anim>
           <span class="packages__badge">Recomandat</span>
           <h3 class="packages__name">Grow</h3>
           <p class="packages__tagline">Mai mult conținut. Mai multe teste. Mai mult potențial de creștere.</p>
@@ -189,7 +240,7 @@
           <a class="packages__cta packages__cta--primary" href="#contact">Vreau pachetul Grow</a>
         </article>
 
-        <article class="packages__card">
+        <article class="packages__card" data-anim>
           <h3 class="packages__name">Custom</h3>
           <p class="packages__tagline">Un pachet croit exact pe nevoile tale.</p>
           <p class="packages__desc">Ai nevoie de volum mai mare, mai multe piețe sau o combinație diferită de servicii? Construim un pachet la comandă, potrivit exact cu ce vinzi și cât de repede vrei să crești.</p>
@@ -208,9 +259,9 @@
     </section>
 
     <section class="contact" id="contact">
-      <h2 class="contact__title">Contact</h2>
+      <h2 class="contact__title" data-anim="title">Contact</h2>
 
-      <div class="contact__panel">
+      <div class="contact__panel" data-anim>
         <div class="contact__info">
           <h3 class="contact__heading">Îți analizăm gratuit reclamele.</h3>
           <p class="contact__note">Ne uităm la ultimele tale reclame și îți spunem, concret:</p>
@@ -320,6 +371,10 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=4" defer></script>
+  <div class="grain" aria-hidden="true"></div>
+
+  <script src="js/main.js?v=5" defer></script>
+  <script src="js/vendor/lenis.min.js" defer></script>
+  <script src="js/home.js?v=1" defer></script>
 </body>
 </html>

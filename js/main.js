@@ -58,6 +58,19 @@
           : target.getBoundingClientRect().top + startY - NAV_OFFSET;
       const dist = endY - startY;
       const duration = Math.min(1300, Math.max(550, Math.abs(dist) * 0.45));
+
+      // pe pagina principală, cu scroll fluid (Lenis) activ, animația o face
+      // Lenis — altfel cele două s-ar bate cap în cap
+      const lenis = window.ecomlabLenis;
+      if (lenis) {
+        lenis.scrollTo(endY, {
+          duration: duration / 1000,
+          easing: easeOutQuart,
+          onComplete: () => history.replaceState(null, "", link.getAttribute("href")),
+        });
+        return;
+      }
+
       let start = null;
 
       const tick = (ts) => {
