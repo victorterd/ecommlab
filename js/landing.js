@@ -29,25 +29,85 @@
     });
   });
 
-  /* ── Evantaiul din hero se deschide la scroll ──────────────────── */
-  const fan = document.querySelector("[data-fan]");
-  if (fan && !reducedMotion) {
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      const p = Math.min(1, Math.max(0, window.scrollY / 600));
-      fan.style.setProperty("--spread", (1 + p * 0.9).toFixed(3));
+  /* ── Hero: player tip „story” cu clipurile reale ───────────────── */
+  const story = document.querySelector("[data-story]");
+  if (story) {
+    const CLIPS = ["clip-29", "clip-4", "clip-1", "clip-4-2", "clip-7", "creativ-3", "clip-2", "clip-3-2"];
+    const video = story.querySelector(".story__video");
+    const barsWrap = story.querySelector("[data-story-bars]");
+    const count = story.querySelector("[data-story-count]");
+    const soundBtn = story.querySelector("[data-story-sound]");
+    const soundLabel = story.querySelector("[data-story-sound-label]");
+    const peeks = [story.querySelector(".story__peek--1"), story.querySelector(".story__peek--2")];
+    const bars = CLIPS.map(() => {
+      const bar = document.createElement("span");
+      bar.className = "story__bar";
+      bar.appendChild(document.createElement("i"));
+      barsWrap.appendChild(bar);
+      return bar;
+    });
+    let index = 0;
+    let inView = true;
+    const src = (name) => `assets/clips/${name}.mp4`;
+    const poster = (name) => `assets/clips/${name}-poster.webp`;
+
+    const paintBars = () => {
+      bars.forEach((bar, i) => {
+        const p = i < index ? 1 : i > index ? 0 : video.duration ? video.currentTime / video.duration : 0;
+        bar.style.setProperty("--p", p.toFixed(3));
+      });
     };
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(update);
-        }
-      },
-      { passive: true }
-    );
+
+    const load = (i) => {
+      index = (i + CLIPS.length) % CLIPS.length;
+      video.classList.add("is-switching");
+      video.poster = poster(CLIPS[index]);
+      video.src = src(CLIPS[index]);
+      peeks.forEach((img, k) => {
+        if (img) img.src = poster(CLIPS[(index + k + 1) % CLIPS.length]);
+      });
+      count.textContent = `${String(index + 1).padStart(2, "0")} / ${String(CLIPS.length).padStart(2, "0")}`;
+      paintBars();
+      if (inView && !reducedMotion) video.play().catch(() => {});
+    };
+
+    video.addEventListener("playing", () => video.classList.remove("is-switching"));
+    video.addEventListener("loadeddata", () => video.classList.remove("is-switching"));
+    video.addEventListener("timeupdate", paintBars);
+    video.addEventListener("ended", () => load(index + 1));
+
+    story.querySelector("[data-story-next]").addEventListener("click", () => load(index + 1));
+    story.querySelector("[data-story-prev]").addEventListener("click", () => load(index - 1));
+    peeks.forEach((img, k) => img && img.addEventListener("click", () => load(index + k + 1)));
+
+    soundBtn.addEventListener("click", () => {
+      video.muted = !video.muted;
+      soundBtn.setAttribute("aria-pressed", String(!video.muted));
+      soundLabel.textContent = video.muted ? "Pornește sunetul" : "Oprește sunetul";
+      if (!video.muted) {
+        // un singur clip cu sunet pe pagină
+        document.querySelectorAll("video").forEach((v) => {
+          if (v !== video && !v.muted) { v.muted = true; v.pause(); }
+        });
+        video.play().catch(() => {});
+      }
+    });
+
+    // pe mouse: pauză cât timp ții cursorul pe clip
+    if (finePointer) {
+      story.querySelector(".story__phone").addEventListener("mouseenter", () => video.pause());
+      story.querySelector(".story__phone").addEventListener("mouseleave", () => inView && video.play().catch(() => {}));
+    }
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView && !reducedMotion) video.play().catch(() => {});
+        else video.pause();
+      }, { threshold: 0.25 }).observe(story);
+    }
+
+    load(0);
   }
 
   /* ── Video decorativ din bento: pornește doar când e în ecran ──── */
