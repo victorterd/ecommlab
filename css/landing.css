@@ -1479,6 +1479,65 @@ em {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* ── Buton fix WhatsApp ───────────────────────────────────────── */
+.wa-float {
+  position: fixed;
+  z-index: 80;
+  right: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 22px 7px 7px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  animation: wa-in 0.9s var(--ease) 0.8s both;
+  transition: transform 0.5s var(--ease), background-color 0.3s;
+}
+
+.wa-float:hover { transform: translateY(-3px); background: #262626; }
+
+.wa-float__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+}
+
+/* puls discret, ca să atragă privirea */
+.wa-float__icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  animation: wa-pulse 2.4s ease-out infinite;
+}
+
+@keyframes wa-in { from { opacity: 0; transform: translateY(30px); } }
+@keyframes wa-pulse { 70%, 100% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); } }
+
+/* cu meniul de mobil deschis, butonul nu stă peste el */
+body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
+
+@media (max-width: 860px) {
+  .wa-float { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); font-size: 14px; padding-right: 18px; }
+  .wa-float__icon { width: 40px; height: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-float, .wa-float__icon::after { animation: none; }
+}
+
 /* ── Tabletă ──────────────────────────────────────────────────── */
 @media (max-width: 1100px) {
   .navbar__links { gap: 22px; }
