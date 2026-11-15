@@ -16,41 +16,42 @@
   <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
   <link rel="preload" href="assets/fonts/satoshi-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/syne-variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/fonts.css?v=3">
-  <link rel="stylesheet" href="css/style.css?v=52">
-  <link rel="stylesheet" href="css/blog.css?v=2">
+  <script>document.documentElement.classList.add("js");</script>
+  <link rel="stylesheet" href="css/fonts.css?v=4">
+  <link rel="stylesheet" href="css/landing.css?v=5">
+  <link rel="stylesheet" href="css/pages.css?v=1">
 </head>
-<body>
+<body id="top">
 
   <!-- ── Meniu fix ─────────────────────────────────────────────── -->
-  <header class="nav" data-nav>
-    <a class="nav__brand" href="index.html" aria-label="Ecomlab — pagina principală">
-      <img src="assets/logo-white.svg" alt="Ecomlab" width="132" height="30">
-    </a>
-
-    <nav class="nav__links" id="nav-links" aria-label="Navigație principală">
-      <a href="index.html">Acasă</a>
-      <a href="index.html#proiecte">Proiecte</a>
-      <a href="index.html#servicii">Servicii</a>
-      <a href="index.html#pachete">Pachete</a>
-      <a class="btn btn--primary nav__cta-mobile" href="index.html#contact">Contact</a>
-    </nav>
-
-    <a class="btn btn--primary nav__cta" href="index.html#contact">Contact</a>
-
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Deschide meniul" data-nav-toggle>
-      <span></span><span></span>
-    </button>
+  <header class="navbar">
+    <div class="navbar__bar">
+      <a class="navbar__logo" href="index.html" aria-label="Ecomlab — pagina principală">
+        <img src="assets/logo-dark.svg" alt="Ecomlab" width="132" height="20">
+      </a>
+      <nav class="navbar__links" id="nav-links" aria-label="Navigație principală">
+        <a href="index.html#lucrari">Lucrări</a>
+        <a href="index.html#studii">Studii de caz</a>
+        <a href="index.html#servicii">Servicii</a>
+        <a href="index.html#pachete">Pachete</a>
+        <a href="blog.html" aria-current="page">Blog</a>
+        <a class="navbar__links-cta" href="index.html#contact">Analiză gratuită</a>
+      </nav>
+      <a class="btn btn--dark navbar__cta" href="index.html#contact">Analiză gratuită <span class="btn__dot" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      <button class="navbar__toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Deschide meniul" data-nav-toggle>
+        <span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main>
+  <main class="page">
+    <div class="wrap">
     <!-- ── Blog ──────────────────────────────────────────────────── -->
-    <section class="blog-hero">
-      <p class="kicker" data-reveal>(Blog)</p>
-      <h1 class="blog-hero__title" data-reveal>Blog</h1>
-      <p class="section-lead" data-reveal>Ghiduri, studii de caz și ce am învățat din reclamele care chiar vând.</p>
-    </section>
+    <header class="page-head">
+      <p class="mono page-head__kicker" data-reveal>(Blog)</p>
+      <h1 class="page-title" data-reveal style="--d:.05s">Ce am învățat din <em>reclamele care vând</em>.</h1>
+      <p class="page-lead" data-reveal style="--d:.1s">Ghiduri, studii de caz și lecții din campaniile pe care le facem pentru magazine online.</p>
+    </header>
 
     <div class="blog-grid">
       <a class="blog-card" href="blog/reclame-home-deco-care-vand.html">
@@ -67,49 +68,40 @@
         </div>
       </a>
     </div>
+    </div>
   </main>
 
   <!-- ── Footer ────────────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="footer__marquee" aria-hidden="true">
-      <div class="footer__marquee-track">
-        <div class="mq"><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i></div>
-        <div class="mq" aria-hidden="true"><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i><span>contact@ecomlab.ro</span><i class="spark spark--dark"></i></div>
+  <footer class="footer dark">
+    <div class="wrap">
+      <div class="footer__top">
+        <p class="footer__cta">Hai să facem reclame <em>care vând</em>.</p>
+        <a class="btn btn--green btn--lg" href="index.html#contact">Începem cu analiza <span class="btn__dot" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7m0 0H9m8 0v8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       </div>
-    </div>
-
-    <div class="footer__panel">
       <div class="footer__cols">
-        <div class="footer__col footer__col--brand">
-          <img src="assets/logo-white.svg" alt="Ecomlab" width="150" height="34" class="footer__logo" loading="lazy">
-          <p class="footer__tagline">Creștem vânzările magazinelor online.</p>
-        </div>
-        <nav class="footer__col" aria-label="Contact">
-          <p class="footer__label">Contact</p>
+        <div>
+          <p class="mono footer__label">Contact</p>
           <a href="mailto:contact@ecomlab.ro">contact@ecomlab.ro</a>
-        </nav>
-        <nav class="footer__col" aria-label="Legături">
-          <p class="footer__label">Legături</p>
+          <a href="tel:+40728541017">0728 541 017</a>
+        </div>
+        <nav aria-label="Pagini">
+          <p class="mono footer__label">Pagini</p>
+          <a href="index.html#lucrari">Lucrări</a>
+          <a href="index.html#studii">Studii de caz</a>
+          <a href="index.html#pachete">Pachete</a>
           <a href="blog.html">Blog</a>
-          <a href="#" rel="noopener">Instagram</a>
-          <a href="#" rel="noopener">TikTok</a>
-          <a href="#" rel="noopener">LinkedIn</a>
         </nav>
-        <nav class="footer__col" aria-label="Informații legale">
-          <p class="footer__label">Legal</p>
+        <nav aria-label="Informații legale">
+          <p class="mono footer__label">Legal</p>
           <a href="politica-confidentialitate.html">Politica de confidențialitate</a>
           <a href="termeni-si-conditii.html">Termeni și condiții</a>
         </nav>
       </div>
-
+      <img class="footer__wordmark" src="assets/wordmark-white.png" alt="" loading="lazy" width="2715" height="519">
       <div class="footer__bottom">
         <p>© <span data-year>2026</span> Ecomlab. Toate drepturile rezervate</p>
-        <a class="footer__top" href="#top">Back to top
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5m0 0-6 6m6-6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <a href="#top">Înapoi sus ↑</a>
       </div>
-
-      <img class="footer__wordmark" src="assets/wordmark-white.png" alt="" loading="lazy" width="2715" height="519">
     </div>
   </footer>
 

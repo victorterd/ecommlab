@@ -1,4 +1,4 @@
-/* satoshi — font unic pentru tot site-ul (variabil, greutăți 300–900) */
+/* satoshi — fontul principal (variabil, greutăți 300–900) */
 @font-face {
   font-family: 'Satoshi';
   font-style: normal;
@@ -7,14 +7,6 @@
   src: url(../assets/fonts/satoshi-variable.woff2) format('woff2');
 }
 
-/* syne — doar pentru h1 (variabil, greutăți 400–800) */
-@font-face {
-  font-family: 'Syne';
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url(../assets/fonts/syne-variable.woff2) format('woff2');
-}
 
 /* instrument serif italic — accente în titluri (pagina principală) */
 @font-face {

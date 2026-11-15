@@ -1,0 +1,323 @@
+/* ════════════════════════════════════════════════════════════════
+   Ecomlab — blog, articole și pagini legale, în stilul landing-ului.
+   Se încarcă după landing.css (care aduce culorile, fonturile,
+   meniul, butoanele și footer-ul).
+   ════════════════════════════════════════════════════════════════ */
+
+.page { padding: 150px 0 120px; }
+
+.page-head { max-width: 980px; }
+
+.page-head__kicker { color: var(--muted); }
+
+.page-title {
+  margin-top: 18px;
+  font-weight: 800;
+  font-size: clamp(44px, 7vw, 104px);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+.page-title em { letter-spacing: -0.02em; }
+
+.page-lead {
+  max-width: 620px;
+  margin-top: 26px;
+  font-size: clamp(17px, 1.4vw, 20px);
+  color: var(--muted);
+}
+
+/* ── Blog: listă de articole ──────────────────────────────────── */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 70px;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 30px 70px -50px rgba(0, 0, 0, 0.4);
+  transition: transform 0.8s var(--ease);
+}
+
+.blog-card:hover { transform: translateY(-6px); }
+
+.blog-card__image {
+  margin: 10px 10px 0;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.blog-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+
+.blog-card:hover .blog-card__image img { transform: scale(1.05); }
+
+.blog-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 24px 26px;
+}
+
+.blog-card__date {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.blog-card__title {
+  font-weight: 800;
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.blog-card__excerpt { font-size: 15px; color: var(--muted); }
+
+.blog-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 6px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--green);
+}
+
+.blog-card__link svg { transition: transform 0.5s var(--ease); }
+.blog-card:hover .blog-card__link svg { transform: translateX(4px); }
+
+/* ── Articol ──────────────────────────────────────────────────── */
+.article {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.article__back,
+.legal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.article__back:hover,
+.legal-back:hover { background: #fff; }
+
+.article__meta {
+  margin-top: 34px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.article__title {
+  margin-top: 16px;
+  font-weight: 800;
+  font-size: clamp(38px, 5.4vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.article__cover {
+  margin: 44px -6vw 0;
+  border-radius: 30px;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.article__cover img { width: 100%; height: auto; }
+
+/* text lung: articole + pagini legale */
+.article__body,
+.legal {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+.article__body { margin-top: 56px; }
+
+.article__body > * + *,
+.legal > * + * { margin-top: 18px; }
+
+.article__body h2,
+.legal h2 {
+  margin-top: 54px;
+  font-weight: 800;
+  font-size: clamp(26px, 2.8vw, 36px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.article__body h3,
+.legal h3 {
+  margin-top: 36px;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.article__body strong,
+.legal strong { font-weight: 700; color: var(--ink); }
+
+.article__body a,
+.legal a {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.article__body ul,
+.article__body ol,
+.legal ul,
+.legal ol { display: grid; gap: 10px; }
+
+.article__body li,
+.legal li {
+  position: relative;
+  padding-left: 28px;
+}
+
+.article__body li::before,
+.legal li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 13px;
+  height: 13px;
+  background: var(--green);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.article__body blockquote {
+  padding: 22px 26px;
+  border-radius: 20px;
+  background: #fff;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.article__body img { border-radius: 20px; }
+
+/* chemare la acțiune la finalul articolului */
+.article-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 980px;
+  margin: 90px auto 0;
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: 32px;
+  background: var(--green);
+}
+
+.article-cta__title {
+  max-width: 560px;
+  font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+/* ── Pagini legale ────────────────────────────────────────────── */
+.legal {
+  max-width: 820px;
+  margin-inline: auto;
+}
+
+.legal__kicker {
+  margin-top: 34px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.legal .legal__title {
+  margin-top: 14px;
+  font-weight: 800;
+  font-size: clamp(38px, 5.4vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: var(--ink);
+}
+
+.legal__updated {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.legal .legal__intro { margin-top: 30px; font-size: 20px; color: var(--ink); }
+
+.legal__box {
+  padding: 26px 28px;
+  border-radius: 24px;
+  background: #fff;
+}
+
+.legal__box p + p { margin-top: 4px; }
+
+.legal__foot {
+  margin-top: 60px !important;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ── Mobil ────────────────────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 860px) {
+  .page { padding: 120px 0 80px; }
+  .blog-grid { grid-template-columns: 1fr; margin-top: 44px; }
+  .article__cover { margin-inline: 0; border-radius: 22px; }
+  .article__body, .legal { font-size: 17px; }
+  .article-cta { margin-top: 64px; border-radius: 26px; }
+  .article-cta .btn { width: 100%; }
+}
+
+/* butonul de întoarcere nu e link din text: fără subliniere */
+.legal .legal-back { text-decoration: none; }
