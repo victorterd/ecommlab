@@ -30,9 +30,20 @@
   const navbar = document.querySelector(".navbar");
   if (navbar) {
     const NAVBAR_SCROLL_THRESHOLD = 8;
+    const HIDE_AFTER = 400; // px de la începutul paginii
+    let lastY = window.scrollY;
     const onNavbarScroll = () => {
-      navbar.classList.toggle("is-scrolled", window.scrollY > NAVBAR_SCROLL_THRESHOLD);
+      const y = window.scrollY;
+      navbar.classList.toggle("is-scrolled", y > NAVBAR_SCROLL_THRESHOLD);
+      // se ascunde când cobori, reapare imediat ce urci
+      const menuOpen = navLinks && navLinks.classList.contains("is-open");
+      if (Math.abs(y - lastY) > 6) {
+        navbar.classList.toggle("is-hidden", !menuOpen && y > lastY && y > HIDE_AFTER);
+        lastY = y;
+      }
     };
+    // la focus pe un link din meniu (tastatură), meniul trebuie să fie vizibil
+    navbar.addEventListener("focusin", () => navbar.classList.remove("is-hidden"));
     onNavbarScroll();
     window.addEventListener("scroll", onNavbarScroll, { passive: true });
   }
