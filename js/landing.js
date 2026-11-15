@@ -51,12 +51,31 @@
     const src = (name) => `assets/clips/${name}.mp4`;
     const poster = (name) => `assets/clips/${name}-poster.webp`;
 
+    // fiecare clip rulează 4 secunde, apoi trece la următorul
+    const SLIDE_SECONDS = 4;
+    const limit = () => Math.min(SLIDE_SECONDS, video.duration || SLIDE_SECONDS);
+
     const paintBars = () => {
       bars.forEach((bar, i) => {
-        const p = i < index ? 1 : i > index ? 0 : video.duration ? video.currentTime / video.duration : 0;
+        const p = i < index ? 1 : i > index ? 0 : Math.min(1, video.currentTime / limit());
         bar.style.setProperty("--p", p.toFixed(3));
       });
     };
+
+    // bara de progres se desenează pe fiecare cadru cât rulează clipul
+    let raf = 0;
+    const tick = () => {
+      raf = 0;
+      paintBars();
+      if (video.currentTime >= limit() - 0.02) {
+        load(index + 1);
+        return;
+      }
+      if (!video.paused) raf = requestAnimationFrame(tick);
+    };
+    video.addEventListener("play", () => {
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
 
     const load = (i) => {
       index = (i + CLIPS.length) % CLIPS.length;
@@ -74,7 +93,7 @@
     video.addEventListener("playing", () => video.classList.remove("is-switching"));
     video.addEventListener("loadeddata", () => video.classList.remove("is-switching"));
     video.addEventListener("timeupdate", paintBars);
-    video.addEventListener("ended", () => load(index + 1));
+    video.loop = true;
 
     story.querySelector("[data-story-next]").addEventListener("click", () => load(index + 1));
     story.querySelector("[data-story-prev]").addEventListener("click", () => load(index - 1));
@@ -218,16 +237,41 @@
       layout();
     };
 
-    document.querySelector("[data-deck-next]")?.addEventListener("click", () => next(1));
-    document.querySelector("[data-deck-prev]")?.addEventListener("click", prev);
-
-    // tragere cu mouse-ul sau degetul
+    // se schimbă singure la 4 secunde; după o interacțiune, așteaptă
+    // 10 secunde de liniște înainte să reia
     let startX = 0;
     let dx = 0;
     let dragging = null;
+    const AUTO_MS = 4000;
+    const IDLE_MS = 10000;
+    let deckInView = false;
+    let hovering = false;
+    let resumeAt = 0;
+    const touched = () => { resumeAt = Date.now() + IDLE_MS; };
+    if (!reducedMotion) {
+      setInterval(() => {
+        if (!deckInView || hovering || dragging || document.hidden || Date.now() < resumeAt) return;
+        next(1);
+      }, AUTO_MS);
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => { deckInView = entry.isIntersecting; }, { threshold: 0.4 }).observe(deck);
+      } else {
+        deckInView = true;
+      }
+      if (finePointer) {
+        deck.addEventListener("mouseenter", () => { hovering = true; });
+        deck.addEventListener("mouseleave", () => { hovering = false; });
+      }
+    }
+
+    document.querySelector("[data-deck-next]")?.addEventListener("click", () => { touched(); next(1); });
+    document.querySelector("[data-deck-prev]")?.addEventListener("click", () => { touched(); prev(); });
+
+    // tragere cu mouse-ul sau degetul
     deck.addEventListener("pointerdown", (e) => {
       const top = cards[order[0]];
       if (!top.contains(e.target) || busy) return;
+      touched();
       dragging = top;
       startX = e.clientX;
       dx = 0;

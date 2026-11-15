@@ -576,24 +576,24 @@ em {
 
 .clients__label { color: var(--muted); margin-bottom: 34px; }
 
-.marquee {
+/* bandă simplă, doar CSS: fără tragere cu degetul (care pe telefon
+   oprea și repornea animația dintr-un alt punct, cu salt vizibil) */
+.logos {
   overflow: hidden;
-  cursor: grab;
-  touch-action: pan-y;
-  user-select: none;
+  pointer-events: none;
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
-.marquee.is-dragging { cursor: grabbing; }
-
-.marquee__track {
+.logos__track {
   display: flex;
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: logos 40s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.mq {
+.logos__group {
   flex: none;
   display: flex;
   align-items: center;
@@ -601,18 +601,15 @@ em {
   padding-right: 80px;
 }
 
-.mq img {
+.logos__group img {
+  flex: none;
   width: auto;
   height: 34px;
-  -webkit-user-drag: none;
+  opacity: 0.55;
   filter: grayscale(1);
-  opacity: 0.7;
-  transition: filter 0.4s, opacity 0.4s;
 }
 
-.mq img:hover { filter: none; opacity: 1; }
-
-@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes logos { to { transform: translate3d(-50%, 0, 0); } }
 
 /* ── Titluri de secțiune ──────────────────────────────────────── */
 .section-head {
@@ -1510,8 +1507,10 @@ em {
   .post { flex: 0 0 84%; scroll-snap-align: center; }
 
   .clients { padding: 110px 0 50px; }
-  .mq { gap: 48px; padding-right: 48px; }
-  .mq img { height: 26px; }
+  .logos { mask-image: none; -webkit-mask-image: none; }
+  .logos__track { animation-duration: 28s; }
+  .logos__group { gap: 44px; padding-right: 44px; }
+  .logos__group img { height: 26px; filter: none; opacity: 0.6; }
 
   .section-head { grid-template-columns: 1fr; margin-bottom: 36px; }
   .section-head__lead { justify-self: start; }
@@ -1566,7 +1565,7 @@ em {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
-  .chip__dot, .marquee__track { animation: none; }
+  .chip__dot, .logos__track { animation: none; }
   .js .panel.is-active { animation: none; }
   .card, .post, .reel video, .post__media img, .site img, .case__media img { transition: none; }
 }
