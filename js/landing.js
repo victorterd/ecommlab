@@ -1,0 +1,293 @@
+/* Ecomlab — interacțiuni pentru landing (doar index.html).
+   main.js se ocupă de meniu, clipuri, apariții, ancore și formular. */
+(() => {
+  "use strict";
+
+  const root = document.documentElement;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  /* ── Scroll fluid pe desktop (Lenis) ───────────────────────────── */
+  let lenis = null;
+  if (!reducedMotion && finePointer && typeof window.Lenis === "function") {
+    lenis = new window.Lenis({ lerp: 0.1, autoRaf: true });
+    window.ecomlabLenis = lenis;
+    const onFullscreen = () => {
+      if (document.fullscreenElement || document.webkitFullscreenElement) lenis.stop();
+      else lenis.start();
+    };
+    document.addEventListener("fullscreenchange", onFullscreen);
+    document.addEventListener("webkitfullscreenchange", onFullscreen);
+  }
+
+  /* ── Clipuri: click oriunde pe clip = play cu sunet ────────────── */
+  document.querySelectorAll(".reel").forEach((reel) => {
+    reel.addEventListener("click", (e) => {
+      if (e.target.closest(".reel__play")) return;
+      const playBtn = reel.querySelector(".reel__play");
+      if (playBtn) playBtn.click();
+    });
+  });
+
+  /* ── Evantaiul din hero se deschide la scroll ──────────────────── */
+  const fan = document.querySelector("[data-fan]");
+  if (fan && !reducedMotion) {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const p = Math.min(1, Math.max(0, window.scrollY / 600));
+      fan.style.setProperty("--spread", (1 + p * 0.9).toFixed(3));
+    };
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  /* ── Video decorativ din bento: pornește doar când e în ecran ──── */
+  const autoVideos = document.querySelectorAll("video[data-autoplay]");
+  if (autoVideos.length && !reducedMotion && "IntersectionObserver" in window) {
+    const vio = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.play().catch(() => {});
+        else entry.target.pause();
+      });
+    });
+    autoVideos.forEach((v) => vio.observe(v));
+  }
+
+  /* ── Tab-uri: Video / Grafică / Website ────────────────────────── */
+  const tablist = document.querySelector("[data-tabs]");
+  if (tablist) {
+    const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+    const select = (tab, focus) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute("aria-controls"));
+        if (panel) panel.classList.toggle("is-active", on);
+        // clipurile din panourile ascunse nu mai rulează
+        if (!on && panel) panel.querySelectorAll("video").forEach((v) => v.pause());
+      });
+      if (focus) tab.focus();
+      if (lenis) lenis.resize();
+    };
+    tabs.forEach((tab, i) => {
+      tab.tabIndex = i === 0 ? 0 : -1;
+      tab.addEventListener("click", () => select(tab, false));
+      tab.addEventListener("keydown", (e) => {
+        const dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!dir) return;
+        e.preventDefault();
+        select(tabs[(i + dir + tabs.length) % tabs.length], true);
+      });
+    });
+  }
+
+  /* ── Cifre care urcă la apariție ───────────────────────────────── */
+  const counters = document.querySelectorAll("[data-count]");
+  if (counters.length && !reducedMotion && "IntersectionObserver" in window) {
+    const cio = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          cio.unobserve(entry.target);
+          const el = entry.target;
+          const end = parseFloat(el.dataset.count);
+          const suffix = el.dataset.suffix || "";
+          const start = performance.now();
+          const DURATION = 1600;
+          const step = (now) => {
+            const t = Math.min(1, (now - start) / DURATION);
+            const eased = 1 - Math.pow(1 - t, 4);
+            el.textContent = `${Math.round(end * eased)}${suffix}`;
+            if (t < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      },
+      { threshold: 0.6 }
+    );
+    counters.forEach((el) => cio.observe(el));
+  }
+
+  /* ── Testimoniale: pachet de cărți (trage sau apasă) ───────────── */
+  const deck = document.querySelector("[data-deck]");
+  if (deck) {
+    const cards = Array.from(deck.children);
+    const current = document.querySelector("[data-deck-current]");
+    let order = cards.map((_, i) => i); // order[0] = cartea de sus
+    let busy = false;
+
+    const layout = () => {
+      order.forEach((cardIndex, pos) => {
+        const card = cards[cardIndex];
+        card.style.setProperty("--i", String(pos));
+        card.style.setProperty("--x", "0px");
+        card.style.setProperty("--rot", "0deg");
+        card.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
+      });
+      if (current) current.textContent = String(order[0] + 1).padStart(2, "0");
+    };
+
+    // aruncă cartea de sus într-o parte, apoi o pune la fundul pachetului
+    const next = (dir = 1) => {
+      if (busy) return;
+      busy = true;
+      const top = cards[order[0]];
+      top.style.setProperty("--x", `${dir * 120}%`);
+      top.style.setProperty("--rot", `${dir * 18}deg`);
+      setTimeout(() => {
+        order = order.slice(1).concat(order[0]);
+        layout();
+        busy = false;
+      }, reducedMotion ? 0 : 320);
+    };
+
+    const prev = () => {
+      if (busy) return;
+      order = [order[order.length - 1]].concat(order.slice(0, -1));
+      layout();
+    };
+
+    document.querySelector("[data-deck-next]")?.addEventListener("click", () => next(1));
+    document.querySelector("[data-deck-prev]")?.addEventListener("click", prev);
+
+    // tragere cu mouse-ul sau degetul
+    let startX = 0;
+    let dx = 0;
+    let dragging = null;
+    deck.addEventListener("pointerdown", (e) => {
+      const top = cards[order[0]];
+      if (!top.contains(e.target) || busy) return;
+      dragging = top;
+      startX = e.clientX;
+      dx = 0;
+      top.classList.add("is-dragging");
+      top.setPointerCapture(e.pointerId);
+    });
+    deck.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      dx = e.clientX - startX;
+      dragging.style.setProperty("--x", `${dx}px`);
+      dragging.style.setProperty("--rot", `${dx / 18}deg`);
+    });
+    const end = () => {
+      if (!dragging) return;
+      dragging.classList.remove("is-dragging");
+      dragging = null;
+      if (Math.abs(dx) > 90) next(dx > 0 ? 1 : -1);
+      else layout();
+    };
+    deck.addEventListener("pointerup", end);
+    deck.addEventListener("pointercancel", end);
+
+    layout();
+  }
+
+  /* ── Lightbox pentru grafică ───────────────────────────────────── */
+  const shots = Array.from(document.querySelectorAll("[data-lightbox]"));
+  if (shots.length) {
+    const icon = (d) =>
+      `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="${d}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    const box = document.createElement("div");
+    box.className = "lightbox";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.setAttribute("aria-label", "Grafică — vizualizare mărită");
+    box.inert = true;
+    box.innerHTML =
+      `<button type="button" class="lightbox__btn lightbox__close" aria-label="Închide">${icon("M6 6l12 12M18 6 6 18")}</button>` +
+      `<button type="button" class="lightbox__btn lightbox__prev" aria-label="Imaginea anterioară">${icon("M15 18l-6-6 6-6")}</button>` +
+      `<figure class="lightbox__stage"><img class="lightbox__img" alt=""></figure>` +
+      `<button type="button" class="lightbox__btn lightbox__next" aria-label="Imaginea următoare">${icon("M9 18l6-6-6-6")}</button>` +
+      `<p class="lightbox__count" aria-live="polite"></p>`;
+    document.body.appendChild(box);
+
+    const img = box.querySelector(".lightbox__img");
+    const counter = box.querySelector(".lightbox__count");
+    const closeBtn = box.querySelector(".lightbox__close");
+    const buttons = Array.from(box.querySelectorAll("button"));
+    let index = 0;
+    let lastFocus = null;
+    let swapTimer = null;
+
+    const show = (i, animate) => {
+      index = (i + shots.length) % shots.length;
+      const source = shots[index].querySelector("img");
+      const apply = () => {
+        img.src = source.currentSrc || source.src;
+        img.alt = source.alt;
+        counter.textContent = `${index + 1} / ${shots.length}`;
+        img.classList.remove("is-swapping");
+      };
+      clearTimeout(swapTimer);
+      if (animate && !reducedMotion) {
+        img.classList.add("is-swapping");
+        swapTimer = setTimeout(apply, 160);
+      } else {
+        apply();
+      }
+    };
+
+    const isOpen = () => box.classList.contains("is-open");
+    const open = (i) => {
+      lastFocus = document.activeElement;
+      show(i, false);
+      box.inert = false;
+      box.classList.add("is-open");
+      root.style.overflow = "hidden";
+      if (lenis) lenis.stop();
+      closeBtn.focus({ preventScroll: true });
+    };
+    const close = () => {
+      if (!isOpen()) return;
+      box.classList.remove("is-open");
+      box.inert = true;
+      root.style.overflow = "";
+      if (lenis) lenis.start();
+      if (lastFocus) lastFocus.focus({ preventScroll: true });
+    };
+
+    shots.forEach((shot, i) => shot.addEventListener("click", () => open(i)));
+    closeBtn.addEventListener("click", close);
+    box.querySelector(".lightbox__prev").addEventListener("click", () => show(index - 1, true));
+    box.querySelector(".lightbox__next").addEventListener("click", () => show(index + 1, true));
+    box.addEventListener("click", (e) => {
+      if (e.target === box) close();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!isOpen()) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") show(index - 1, true);
+      else if (e.key === "ArrowRight") show(index + 1, true);
+      else if (e.key === "Tab") {
+        const pos = buttons.indexOf(document.activeElement);
+        e.preventDefault();
+        buttons[(pos + (e.shiftKey ? -1 : 1) + buttons.length) % buttons.length].focus();
+      }
+    });
+
+    let touchX = null;
+    box.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
+    box.addEventListener(
+      "touchend",
+      (e) => {
+        if (touchX === null) return;
+        const dxTouch = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dxTouch) > 45) show(index + (dxTouch < 0 ? 1 : -1), true);
+      },
+      { passive: true }
+    );
+  }
+})();
