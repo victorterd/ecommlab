@@ -51,8 +51,8 @@
     const src = (name) => `assets/clips/${name}.mp4`;
     const poster = (name) => `assets/clips/${name}-poster.webp`;
 
-    // fiecare clip rulează 4 secunde, apoi trece la următorul
-    const SLIDE_SECONDS = 4;
+    // fiecare clip rulează 7 secunde, apoi trece la următorul
+    const SLIDE_SECONDS = 7;
     const limit = () => Math.min(SLIDE_SECONDS, video.duration || SLIDE_SECONDS);
 
     const paintBars = () => {
