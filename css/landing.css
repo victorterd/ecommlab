@@ -652,6 +652,7 @@ em {
 .logos__group img {
   flex: none;
   width: auto;
+  max-width: none;
   height: 34px;
   opacity: 0.55;
   filter: grayscale(1);
@@ -1707,7 +1708,14 @@ body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
-  .chip__dot, .logos__track { animation: none; }
+  .chip__dot { animation: none; }
+
+  /* fără mișcare: logo-urile stau centrate pe rânduri, toate întregi,
+     în loc de o bandă oprită și tăiată la marginea ecranului */
+  .logos { mask-image: none; -webkit-mask-image: none; }
+  .logos__track { width: auto; justify-content: center; animation: none; }
+  .logos__group { flex: 1 1 auto; flex-wrap: wrap; justify-content: center; gap: 22px 44px; padding-inline: var(--gutter); }
+  .logos__group[aria-hidden="true"] { display: none; }
   .js .panel.is-active { animation: none; }
   .card, .post, .reel video, .post__media img, .site img, .case__media img { transition: none; }
 }
