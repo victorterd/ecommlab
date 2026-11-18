@@ -1016,35 +1016,6 @@ em {
 
 .case__media--solo .case__reel { width: min(62%, 300px); border-radius: 20px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.45); }
 
-.case__quote {
-  margin-top: 24px;
-  padding: 20px 22px;
-  border-radius: 18px;
-  background: var(--paper);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 22px;
-  line-height: 1.3;
-}
-
-.case__quote cite {
-  display: block;
-  margin-top: 12px;
-  font-family: var(--mono);
-  font-style: normal;
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.case__link {
-  display: inline-block;
-  margin-top: 22px;
-  font-weight: 700;
-  border-bottom: 2px solid var(--green);
-}
-
 /* ── Servicii (bento) ─────────────────────────────────────────── */
 .services { padding: 140px 0; border-radius: 48px; }
 
@@ -1715,7 +1686,6 @@ body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
   .case { grid-template-columns: 1fr; gap: 24px; border-radius: 28px; }
   .case--flip .case__media { order: 0; }
   .case__body, .case--flip .case__body { padding: 0 8px 12px; }
-  .case__quote { font-size: 19px; }
   .case__stats strong { font-size: 26px; }
   .case__stats--3 { grid-template-columns: 1fr 1fr; }
   .case__stats--3 > div:last-child { grid-column: 1 / -1; }
