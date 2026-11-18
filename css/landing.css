@@ -699,8 +699,8 @@ em {
 
 .review__photo {
   flex: none;
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   object-fit: cover;
   background: var(--paper-2);
