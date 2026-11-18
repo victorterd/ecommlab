@@ -342,7 +342,7 @@ em {
 
 /* ── Hero: text în stânga, player „story” în dreapta ───────────── */
 .hero {
-  padding: 150px 0 110px;
+  padding: 150px 0 60px;
   overflow-x: clip;
 }
 
@@ -618,7 +618,7 @@ em {
 
 /* ── Clienți ──────────────────────────────────────────────────── */
 .clients {
-  padding: 150px 0 70px;
+  padding: 40px 0 70px;
   text-align: center;
 }
 
@@ -1623,7 +1623,7 @@ body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
   body:has(.navbar__links.is-open) { overflow: hidden; }
   .navbar:has(.navbar__links.is-open) .navbar__logo { visibility: hidden; }
 
-  .hero { padding: 120px 0 70px; }
+  .hero { padding: 120px 0 40px; }
   .hero__grid { grid-template-columns: 1fr; gap: 56px; }
   .hero__chip { margin-bottom: 22px; font-size: 10px; }
   .hero__lead { margin-top: 20px; }
@@ -1649,7 +1649,7 @@ body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
   .feed::-webkit-scrollbar { display: none; }
   .post { flex: 0 0 84%; scroll-snap-align: center; }
 
-  .clients { padding: 110px 0 50px; }
+  .clients { padding: 30px 0 50px; }
   .logos { mask-image: none; -webkit-mask-image: none; }
   .logos__track { animation-duration: 28s; }
   .logos__group { gap: 44px; padding-right: 44px; }
