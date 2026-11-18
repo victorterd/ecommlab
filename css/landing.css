@@ -2,7 +2,7 @@
    Ecomlab — landing (doar index.html)
    Fundal hârtie caldă + secțiuni negre, verdele brandului ca accent,
    Satoshi strâns pentru titluri, Instrument Serif italic pentru
-   accente, Geist Mono pentru etichete mici.
+   accente, Instrument Sans pentru etichete mici.
    ════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -19,7 +19,7 @@
   --green-hover: #36E82A;
   --sans: "Satoshi", system-ui, sans-serif;
   --serif: "Instrument Serif", Georgia, serif;
-  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --mono: "Instrument Sans", "Satoshi", system-ui, sans-serif; /* etichete mici */
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
   --radius: 28px;
   --gutter: clamp(20px, 4vw, 56px);
