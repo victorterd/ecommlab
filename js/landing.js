@@ -129,18 +129,6 @@
     load(0);
   }
 
-  /* ── Video decorativ din bento: pornește doar când e în ecran ──── */
-  const autoVideos = document.querySelectorAll("video[data-autoplay]");
-  if (autoVideos.length && !reducedMotion && "IntersectionObserver" in window) {
-    const vio = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.play().catch(() => {});
-        else entry.target.pause();
-      });
-    });
-    autoVideos.forEach((v) => vio.observe(v));
-  }
-
   /* ── Tab-uri: Video / Grafică / Website ────────────────────────── */
   const tablist = document.querySelector("[data-tabs]");
   if (tablist) {

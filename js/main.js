@@ -193,13 +193,12 @@
     }
   }
 
-  /* ── Clipuri: autoplay mut; la play -> player normal ───────────
+  /* ── Clipuri: pornesc doar la click ────────────────────────────
      Adaugă data-video="assets/clips/nume.mp4" pe .reel sau .project.
-     Clipul pornește automat, fără sunet, când intră în viewport, pe
-     orice dispozitiv, și se oprește când iese din ecran. Apare un
-     buton central de play; la atingere, clipul primește sunet,
-     butonul dispare definitiv, iar clipul devine un player video
-     normal, cu controale native (pauză, volum, derulare). */
+     Se vede doar coperta (data-poster) cu un buton de play; clipul nu
+     se descarcă până nu apeși pe el, ca pagina să rămână ușoară. La
+     play primește sunet și controale native (pauză, volum, derulare),
+     iar când iese din ecran se oprește. */
   const allClipVideos = [];
   document.querySelectorAll(".reel[data-video], .project[data-video]").forEach((card) => {
     const src = card.getAttribute("data-video");
@@ -211,7 +210,7 @@
     video.muted = true;
     video.loop = true;
     video.playsInline = true;
-    video.preload = "metadata";
+    video.preload = "none";
     if (card.getAttribute("data-poster")) {
       video.poster = card.getAttribute("data-poster");
     }
@@ -256,24 +255,16 @@
     });
     card.appendChild(playBtn);
 
-    if (reducedMotion) return;
-
+    // clipul pornit de utilizator se oprește când iese din ecran
     if ("IntersectionObserver" in window) {
-      const cio = new IntersectionObserver(
+      new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              if (video.dataset.userControlled !== "true") video.play().catch(() => {});
-            } else {
-              video.pause();
-            }
+            if (!entry.isIntersecting && !video.paused) video.pause();
           });
         },
-        { threshold: 0.3 }
-      );
-      cio.observe(video);
-    } else {
-      video.play().catch(() => {});
+        { threshold: 0 }
+      ).observe(video);
     }
   });
 
