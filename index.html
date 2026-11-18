@@ -19,7 +19,7 @@
   <link rel="preload" href="assets/fonts/instrument-serif-latin-400-italic.woff2" as="font" type="font/woff2" crossorigin>
   <script>document.documentElement.classList.add("js");</script>
   <link rel="stylesheet" href="css/fonts.css?v=6">
-  <link rel="stylesheet" href="css/landing.css?v=30">
+  <link rel="stylesheet" href="css/landing.css?v=32">
 </head>
 <body>
 
@@ -360,36 +360,63 @@
       </div>
     </section>
 
-    <!-- ── Testimoniale: pachet de cărți ─────────────────────────── -->
-    <section class="voices" id="testimoniale">
-      <div class="wrap voices__grid">
-        <div class="voices__intro">
-          <p class="mono section-head__num">(04) Ce spun clienții</p>
-          <h2 class="section-title" data-reveal>Clienții <em>rămân</em>.<br>Iată de ce.</h2>
-          <p class="voices__hint">Trage cartea de sus sau apasă pe săgeată.</p>
-          <div class="voices__nav">
-            <button class="round-btn" type="button" data-deck-prev aria-label="Testimonialul anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <p class="mono voices__count"><span data-deck-current>01</span> / 03</p>
-            <button class="round-btn round-btn--dark" type="button" data-deck-next aria-label="Testimonialul următor"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
+    <!-- ── Anatomia unei reclame care vinde (interactiv) ────────── -->
+    <section class="anatomy" id="metoda">
+      <div class="wrap anatomy__grid">
+        <div class="anatomy__copy">
+          <p class="mono section-head__num">(04) Metoda</p>
+          <h2 class="section-title" data-reveal>Anatomia unei reclame <em>care vinde</em>.</h2>
+          <p class="anatomy__lead" data-reveal style="--d:.08s">Nicio reclamă bună nu iese din noroc. Fiecare clip pe care îl facem are aceeași structură, testată pe sute de reclame.</p>
+          <ol class="anatomy__steps" role="list" data-anatomy>
+            <li class="anatomy__step is-active">
+              <button type="button" class="anatomy__btn" aria-pressed="true" data-step="0">
+                <span class="anatomy__n">01</span>
+                <span class="anatomy__head"><strong>Hook-ul</strong><small>Primele 3 secunde</small></span>
+              </button>
+              <p class="anatomy__desc">O întrebare sau o imagine care oprește degetul din scroll. Aici: „Cu ce înlocuiești biscuiții și covrigeii?”</p>
+              <span class="anatomy__bar" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="anatomy__step">
+              <button type="button" class="anatomy__btn" aria-pressed="false" data-step="1">
+                <span class="anatomy__n">02</span>
+                <span class="anatomy__head"><strong>Problema</strong><small>Pe limba clientului</small></span>
+              </button>
+              <p class="anatomy__desc">Spunem ce îl deranjează pe om, în cuvintele lui, nu ce vrem noi să vindem.</p>
+              <span class="anatomy__bar" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="anatomy__step">
+              <button type="button" class="anatomy__btn" aria-pressed="false" data-step="2">
+                <span class="anatomy__n">03</span>
+                <span class="anatomy__head"><strong>Produsul în acțiune</strong><small>Folosit de oameni reali</small></span>
+              </button>
+              <p class="anatomy__desc">Îl arătăm în viața reală, în mâinile cuiva ca el, nu pe un fundal alb.</p>
+              <span class="anatomy__bar" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="anatomy__step">
+              <button type="button" class="anatomy__btn" aria-pressed="false" data-step="3">
+                <span class="anatomy__n">04</span>
+                <span class="anatomy__head"><strong>Dovada</strong><small>Motive să creadă</small></span>
+              </button>
+              <p class="anatomy__desc">Rezultate, recenzii, detalii concrete: tot ce transformă curiozitatea în încredere.</p>
+              <span class="anatomy__bar" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="anatomy__step">
+              <button type="button" class="anatomy__btn" aria-pressed="false" data-step="4">
+                <span class="anatomy__n">05</span>
+                <span class="anatomy__head"><strong>Îndemnul</strong><small>Un singur pas clar</small></span>
+              </button>
+              <p class="anatomy__desc">Ce face acum și de ce acum. Simplu, fără zece variante.</p>
+              <span class="anatomy__bar" aria-hidden="true"><i></i></span>
+            </li>
+          </ol>
         </div>
 
-        <div class="deck" data-deck aria-live="polite">
-          <blockquote class="card card--green">
-            <img class="card__logo" src="assets/clients/dingaraj.svg" alt="Din Garaj" height="28">
-            <p class="card__quote">„Nu a fost doar marketing. A fost un <em>upgrade real</em> de brand și vânzări.”</p>
-            <footer class="card__who"><strong>Mihnea Turloiu-Firica</strong><span>Fondator, dingaraj.ro</span></footer>
-          </blockquote>
-          <blockquote class="card card--paper">
-            <img class="card__logo" src="assets/clients/thehive.svg" alt="The Hive" height="28">
-            <p class="card__quote">„Reclamele și site-ul nou au transformat un produs local într-un brand care vinde <em>în toată țara</em>.”</p>
-            <footer class="card__who"><strong>Marc Bascarau</strong><span>Fondator, The Hive</span></footer>
-          </blockquote>
-          <blockquote class="card card--ink">
-            <img class="card__logo card__logo--invert" src="assets/clients/piky.svg" alt="Piky" height="28">
-            <p class="card__quote">„Execuție rapidă, comunicare clară și campanii care și-au atins targetul <em>lună de lună</em>.”</p>
-            <footer class="card__who"><strong>Alessia Nedelcu</strong><span>Fondator, PikyPet</span></footer>
-          </blockquote>
+        <div class="anatomy__stage" data-reveal style="--d:.1s">
+          <div class="anatomy__phone">
+            <figure class="reel anatomy__reel" data-video="assets/clips/clip-1.mp4" data-poster="assets/clips/clip-1-poster.webp"></figure>
+            <p class="anatomy__label" aria-live="polite"><span class="anatomy__label-n" data-anatomy-n>01</span><span data-anatomy-label>Hook-ul</span></p>
+          </div>
+          <p class="anatomy__caption">Biovicta · 150+ comenzi în 2 zile cu acest clip</p>
         </div>
       </div>
     </section>
@@ -556,6 +583,6 @@
 
   <script src="js/main.js?v=7" defer></script>
   <script src="js/vendor/lenis.min.js" defer></script>
-  <script src="js/landing.js?v=5" defer></script>
+  <script src="js/landing.js?v=6" defer></script>
 </body>
 </html>

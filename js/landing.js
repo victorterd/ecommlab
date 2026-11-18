@@ -186,103 +186,81 @@
     counters.forEach((el) => cio.observe(el));
   }
 
-  /* ── Testimoniale: pachet de cărți (trage sau apasă) ───────────── */
-  const deck = document.querySelector("[data-deck]");
-  if (deck) {
-    const cards = Array.from(deck.children);
-    const current = document.querySelector("[data-deck-current]");
-    let order = cards.map((_, i) => i); // order[0] = cartea de sus
-    let busy = false;
-
-    const layout = () => {
-      order.forEach((cardIndex, pos) => {
-        const card = cards[cardIndex];
-        card.style.setProperty("--i", String(pos));
-        card.style.setProperty("--x", "0px");
-        card.style.setProperty("--rot", "0deg");
-        card.setAttribute("aria-hidden", pos === 0 ? "false" : "true");
-      });
-      if (current) current.textContent = String(order[0] + 1).padStart(2, "0");
-    };
-
-    // aruncă cartea de sus într-o parte, apoi o pune la fundul pachetului
-    const next = (dir = 1) => {
-      if (busy) return;
-      busy = true;
-      const top = cards[order[0]];
-      top.style.setProperty("--x", `${dir * 120}%`);
-      top.style.setProperty("--rot", `${dir * 18}deg`);
-      setTimeout(() => {
-        order = order.slice(1).concat(order[0]);
-        layout();
-        busy = false;
-      }, reducedMotion ? 0 : 320);
-    };
-
-    const prev = () => {
-      if (busy) return;
-      order = [order[order.length - 1]].concat(order.slice(0, -1));
-      layout();
-    };
-
-    // se schimbă singure la 4 secunde; după o interacțiune, așteaptă
-    // 10 secunde de liniște înainte să reia
-    let startX = 0;
-    let dx = 0;
-    let dragging = null;
-    const AUTO_MS = 4000;
+  /* ── Anatomia unei reclame: pașii se aprind pe rând ────────────── */
+  const anatomy = document.querySelector("[data-anatomy]");
+  if (anatomy) {
+    const steps = Array.from(anatomy.querySelectorAll(".anatomy__step"));
+    const label = document.querySelector(".anatomy__label");
+    const labelText = document.querySelector("[data-anatomy-label]");
+    const labelN = document.querySelector("[data-anatomy-n]");
+    const STEP_MS = 4500; // cât stă aprins fiecare pas
     const IDLE_MS = 10000;
-    let deckInView = false;
+    anatomy.style.setProperty("--step-ms", `${STEP_MS}ms`);
+    let current = 0;
+    let inView = false;
     let hovering = false;
     let resumeAt = 0;
-    const touched = () => { resumeAt = Date.now() + IDLE_MS; };
-    if (!reducedMotion) {
-      setInterval(() => {
-        if (!deckInView || hovering || dragging || document.hidden || Date.now() < resumeAt) return;
-        next(1);
-      }, AUTO_MS);
-      if ("IntersectionObserver" in window) {
-        new IntersectionObserver(([entry]) => { deckInView = entry.isIntersecting; }, { threshold: 0.4 }).observe(deck);
-      } else {
-        deckInView = true;
-      }
-      if (finePointer) {
-        deck.addEventListener("mouseenter", () => { hovering = true; });
-        deck.addEventListener("mouseleave", () => { hovering = false; });
-      }
-    }
 
-    document.querySelector("[data-deck-next]")?.addEventListener("click", () => { touched(); next(1); });
-    document.querySelector("[data-deck-prev]")?.addEventListener("click", () => { touched(); prev(); });
-
-    // tragere cu mouse-ul sau degetul
-    deck.addEventListener("pointerdown", (e) => {
-      const top = cards[order[0]];
-      if (!top.contains(e.target) || busy) return;
-      touched();
-      dragging = top;
-      startX = e.clientX;
-      dx = 0;
-      top.classList.add("is-dragging");
-      top.setPointerCapture(e.pointerId);
-    });
-    deck.addEventListener("pointermove", (e) => {
-      if (!dragging) return;
-      dx = e.clientX - startX;
-      dragging.style.setProperty("--x", `${dx}px`);
-      dragging.style.setProperty("--rot", `${dx / 18}deg`);
-    });
-    const end = () => {
-      if (!dragging) return;
-      dragging.classList.remove("is-dragging");
-      dragging = null;
-      if (Math.abs(dx) > 90) next(dx > 0 ? 1 : -1);
-      else layout();
+    const select = (i) => {
+      current = (i + steps.length) % steps.length;
+      steps.forEach((step, k) => {
+        const on = k === current;
+        step.classList.toggle("is-active", on);
+        step.querySelector(".anatomy__btn").setAttribute("aria-pressed", String(on));
+        // repornește bara de progres
+        const bar = step.querySelector(".anatomy__bar i");
+        if (on && bar) {
+          bar.style.animation = "none";
+          void bar.offsetWidth;
+          bar.style.animation = "";
+        }
+      });
+      if (label) {
+        labelText.textContent = steps[current].querySelector("strong").textContent;
+        labelN.textContent = String(current + 1).padStart(2, "0");
+        // eticheta coboară pe clip odată cu pașii
+        label.style.top = `${14 + current * 15}%`;
+        label.classList.remove("is-swap");
+        void label.offsetWidth;
+        label.classList.add("is-swap");
+      }
     };
-    deck.addEventListener("pointerup", end);
-    deck.addEventListener("pointercancel", end);
 
-    layout();
+    steps.forEach((step, i) =>
+      step.querySelector(".anatomy__btn").addEventListener("click", () => {
+        resumeAt = Date.now() + IDLE_MS;
+        select(i);
+      })
+    );
+
+    // pasul următor vine când se umple bara; pauza oprește chiar bara
+    const paused = () => reducedMotion || !inView || hovering || document.hidden || Date.now() < resumeAt;
+    const update = () => anatomy.classList.toggle("is-paused", paused());
+    steps.forEach((step) =>
+      step.querySelector(".anatomy__bar i").addEventListener("animationend", () => {
+        if (step.classList.contains("is-active") && !paused()) select(current + 1);
+      })
+    );
+    steps.forEach((step) => step.querySelector(".anatomy__btn").addEventListener("click", () => {
+      update();
+      setTimeout(update, IDLE_MS + 50);
+    }));
+    document.addEventListener("visibilitychange", update);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        update();
+      }, { threshold: 0.35 }).observe(anatomy);
+    } else {
+      inView = true;
+    }
+    if (finePointer) {
+      anatomy.addEventListener("mouseenter", () => { hovering = true; update(); });
+      anatomy.addEventListener("mouseleave", () => { hovering = false; update(); });
+    }
+    update();
+
+    select(0);
   }
 
   /* ── Lightbox pentru grafică ───────────────────────────────────── */

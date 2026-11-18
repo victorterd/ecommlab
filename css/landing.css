@@ -738,8 +738,7 @@ em {
 }
 
 .section-title em { color: var(--green); letter-spacing: -0.02em; }
-.cases .section-title em,
-.voices .section-title em { color: var(--ink); }
+.cases .section-title em { color: var(--ink); }
 
 .section-head__lead {
   max-width: 460px;
@@ -1179,78 +1178,179 @@ em {
 
 .process__steps p { margin-top: 10px; font-size: 15px; color: rgba(255, 255, 255, 0.6); }
 
-/* ── Testimoniale: pachet de cărți ────────────────────────────── */
-.voices { padding: 150px 0; overflow: hidden; }
+/* ── Anatomia unei reclame care vinde ─────────────────────────── */
+.anatomy { padding: 150px 0; }
 
-.voices__grid {
+.anatomy__grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 60px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(40px, 6vw, 100px);
   align-items: center;
 }
 
-.voices__hint { margin-top: 26px; color: var(--muted); }
+.anatomy .section-title em { color: var(--ink); }
 
-.voices__nav {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  margin-top: 30px;
+.anatomy__lead {
+  max-width: 520px;
+  margin-top: 24px;
+  font-size: 17px;
+  color: var(--muted);
 }
 
-.voices__count { color: var(--muted); }
+.anatomy__steps {
+  margin-top: 44px;
+  border-top: 1px solid var(--line);
+}
 
-.deck {
+.anatomy__step {
   position: relative;
-  height: 470px;
-  touch-action: pan-y;
+  border-bottom: 1px solid var(--line);
 }
 
-.card {
-  position: absolute;
-  inset: 0;
+.anatomy__btn {
   display: flex;
-  flex-direction: column;
-  padding: clamp(28px, 3.5vw, 48px);
-  border-radius: 34px;
-  box-shadow: 0 40px 70px -40px rgba(0, 0, 0, 0.5);
-  user-select: none;
-  transform: translate3d(calc(var(--x, 0px) + var(--i, 0) * 26px), calc(var(--i, 0) * -14px), 0) rotate(calc(var(--i, 0) * 4deg + var(--rot, 0deg))) scale(calc(1 - var(--i, 0) * 0.05));
-  z-index: calc(10 - var(--i, 0));
-  transition: transform 0.8s var(--ease), opacity 0.5s;
-  cursor: grab;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 20px 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
 }
 
-.card.is-dragging { transition: none; cursor: grabbing; }
+.anatomy__n {
+  flex: none;
+  width: 38px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--muted);
+  transition: color 0.3s;
+}
 
-.card--green { background: var(--green); color: var(--ink); }
-.card--paper { background: #fff; color: var(--ink); }
-.card--ink { background: var(--ink); color: #fff; }
+.anatomy__head { display: grid; gap: 2px; }
 
-.card__logo { align-self: flex-start; width: auto; height: 28px; margin-bottom: auto; pointer-events: none; }
-.card__logo--invert { filter: invert(1) hue-rotate(180deg); }
-
-.card__quote {
-  margin-top: 40px;
-  font-weight: 700;
-  font-size: clamp(26px, 2.8vw, 40px);
-  line-height: 1.12;
+.anatomy__head strong {
+  font-weight: 800;
+  font-size: clamp(22px, 2.2vw, 30px);
+  line-height: 1.1;
   letter-spacing: -0.035em;
+  color: var(--muted);
+  transition: color 0.3s;
 }
 
-.card__quote em { font-size: 1.1em; }
+.anatomy__head small {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
-.card__who {
+.anatomy__btn:hover .anatomy__head strong { color: var(--ink); }
+
+.anatomy__step.is-active .anatomy__n { color: var(--green); }
+.anatomy__step.is-active .anatomy__head strong { color: var(--ink); }
+
+/* descrierea se deschide doar la pasul activ */
+.anatomy__desc {
   display: grid;
-  gap: 2px;
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid currentColor;
-  border-top-color: color-mix(in srgb, currentColor 20%, transparent);
+  max-width: 520px;
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 58px;
+  font-size: 16px;
+  color: var(--ink-2);
+  opacity: 0;
+  transition: max-height 0.6s var(--ease), opacity 0.4s, padding 0.6s var(--ease);
 }
 
-.card__who strong { font-weight: 700; }
-.card__who span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+.anatomy__step.is-active .anatomy__desc { max-height: 120px; padding-bottom: 22px; opacity: 1; }
+
+/* bară de progres pe pasul activ */
+.anatomy__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  overflow: hidden;
+}
+
+.anatomy__bar i {
+  display: block;
+  height: 100%;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.anatomy__step.is-active .anatomy__bar i { animation: anatomy-bar var(--step-ms, 4500ms) linear forwards; }
+.anatomy__steps.is-paused .anatomy__bar i { animation-play-state: paused; }
+
+@keyframes anatomy-bar { to { transform: scaleX(1); } }
+
+.anatomy__stage { justify-self: center; width: min(100%, 360px); }
+
+.anatomy__phone {
+  position: relative;
+  padding: 7px;
+  border-radius: 36px;
+  background: var(--ink);
+  box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.55);
+}
+
+.anatomy__reel { border-radius: 30px; }
+
+/* eticheta cu pasul activ, ca o adnotare peste clip */
+.anatomy__label {
+  position: absolute;
+  z-index: 3;
+  left: -34px;
+  top: 18%;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 10px;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 15px;
+  white-space: nowrap;
+  rotate: -4deg;
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  transition: top 0.7s var(--ease);
+}
+
+.anatomy__label-n {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--green);
+  font-size: 12px;
+}
+
+.anatomy__label.is-swap { animation: label-pop 0.5s var(--ease); }
+@keyframes label-pop { from { opacity: 0; scale: 0.85; } }
+
+.anatomy__caption {
+  margin-top: 18px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
 /* ── Pachete ──────────────────────────────────────────────────── */
 .packages { padding: 140px 0; border-radius: 48px 48px 0 0; }
@@ -1781,9 +1881,14 @@ body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
   .process__steps { grid-template-columns: 1fr; }
   .process__steps li, .process__steps li + li { padding: 24px 0; border-left: 0; border-bottom: 1px solid var(--line-dark); }
 
-  .voices { padding: 100px 0; }
-  .voices__grid { grid-template-columns: 1fr; gap: 50px; }
-  .deck { height: 440px; margin-inline: 8px; }
+
+  .anatomy { padding: 100px 0; }
+  .anatomy__grid { grid-template-columns: 1fr; gap: 50px; }
+  .anatomy__btn { gap: 14px; padding: 16px 0; }
+  .anatomy__n { width: 30px; font-size: 26px; }
+  .anatomy__desc { padding-left: 44px; font-size: 15px; }
+  .anatomy__stage { width: min(78%, 320px); }
+  .anatomy__label { left: -22px; font-size: 13px; }
 
   .plans { grid-template-columns: 1fr; }
 
@@ -1814,5 +1919,5 @@ body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
   .logos__group { flex: 1 1 auto; flex-wrap: wrap; justify-content: center; gap: 22px 44px; padding-inline: var(--gutter); }
   .logos__group[aria-hidden="true"] { display: none; }
   .js .panel.is-active { animation: none; }
-  .card, .post, .reel video, .post__media img, .site img, .case__media img { transition: none; }
+  .post, .reel video, .post__media img, .site img, .case__media img { transition: none; }
 }
