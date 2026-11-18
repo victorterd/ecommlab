@@ -669,21 +669,23 @@ em {
 /* ghilimele mari, în italic verde */
 .review__text {
   position: relative;
-  padding-top: 34px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 21px;
-  line-height: 1.35;
+  padding-top: 38px;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 .review__text::before {
   content: "\201C";
   position: absolute;
-  top: -14px;
+  top: -6px;
   left: -2px;
-  font-family: var(--serif);
-  font-size: 72px;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 56px;
   line-height: 1;
   color: var(--green);
 }
@@ -1748,7 +1750,7 @@ body:has(.navbar__links.is-open) .wa-float { opacity: 0; pointer-events: none; }
   .reviews__grid { display: block; }
   .review, .review:first-child, .review:last-child, .review:nth-child(odd) { padding: 28px 0; border-left: 0; }
   .review + .review { border-top: 1px solid var(--line); border-left: 0; }
-  .review__text { font-size: 20px; }
+  .review__text { font-size: 17px; }
   .logos { mask-image: none; -webkit-mask-image: none; }
   .logos__track { animation-duration: 28s; }
   .logos__group { gap: 44px; padding-right: 44px; }
