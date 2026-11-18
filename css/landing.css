@@ -1010,6 +1010,10 @@ em {
   background: radial-gradient(70% 60% at 50% 40%, #f7d9e3, var(--paper-2) 75%);
 }
 
+.case__logo.case__logo--lg { height: 44px; margin-bottom: 18px; }
+
+.case__media--warm { background: radial-gradient(70% 60% at 50% 40%, #f6e3c4, var(--paper-2) 75%); }
+
 .case__media--solo .case__reel { width: min(62%, 300px); border-radius: 20px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.45); }
 
 .case__quote {
